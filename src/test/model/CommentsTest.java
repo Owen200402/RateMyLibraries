@@ -40,6 +40,9 @@ public class CommentsTest {
         assertFalse(comments.remove(1, "gregor"));
         assertEquals(1, comments.getComments().size());
 
+        assertFalse(comments.remove(0, "gregor"));
+        assertEquals(1, comments.getComments().size());
+
         assertTrue(comments.remove(1, "owen04"));
         assertEquals(0, comments.getComments().size());
     }
