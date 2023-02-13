@@ -129,7 +129,7 @@ public class UISetUp {
     private void viewListOfComments() {
         while (true) {
             System.out.println("Enter `list` to view the list of libraries, `v` to view your comments, `q` to quit.");
-            var result = scanner.next();
+            String result = scanner.next();
 
             if (result.equals("v")) {
                 System.out.print("Please enter the password of your comments made earlier: ");
@@ -254,7 +254,7 @@ public class UISetUp {
 
     // EFFECTS: format the prompt cleanly for user's previous messages
     public void concatPromptForMessage(Map<Comment, String> comments) {
-        for (var comment : comments.entrySet()) {
+        for (Map.Entry<Comment, String> comment : comments.entrySet()) {
             System.out.println("@" + comment.getValue() + ": " + comment.getKey().getMessage());
         }
     }
