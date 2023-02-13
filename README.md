@@ -17,13 +17,13 @@ focus on when talking about library is what books they provide. However, most
 students come to the library to study rather than reaching the top of the shelves
 for careful research. From what I experienced this year as a first-year student, different
 studying space can yield completely different outcomes and concentration levels. Therefore,
-I am committed to create this software interface to minimize students' transition
-to the university of british columbia.
+I am committed to create this software interface to minimize obstacles students
+may have through their transition to the university of british columbia.
 
 
 #### As a *user*, you may do the following:
-- add comments and ratings for every library
-- remove comments and ratings for every library you commented before
-- give "like" to other comments and view list of other comments
-- select at least one criterion relevant to your comment in list of Criteria before submitting
-- deselect Criteria in list of Criteria
+- check out previous comments you made so far for each library with user's unique key linked to each comment
+- add comments with ratings for every library with their current date and time associated with their comments
+- remove comments with ratings for each library commented after key/password validation
+- view the list of libraries and list of comments inside the libraries
+- quit Rate My Library entirely
