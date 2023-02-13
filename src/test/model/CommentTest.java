@@ -25,4 +25,12 @@ class CommentTest {
         assertEquals(comment.getDate(), newDate);
         assertEquals(comment.getNumberBeingAdded(), 0);
     }
+
+    @Test
+    public void testToString() {
+        comment.setNumberBeingAdded(1);
+        assertEquals("User " + 1 + ". " + "Rating = " + 1.0 + "\n"
+                + " - Commented at " + newDate + " : " + "Great Environment"
+                , comment.toString());
+    }
 }
