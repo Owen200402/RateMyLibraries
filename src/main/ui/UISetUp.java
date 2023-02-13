@@ -91,12 +91,13 @@ public class UISetUp {
         addToLibraries(woodward, "Perfect for Arts students who have classes nearby that area. Also,, it is"
                 + "close to the bus loop and restaurants in university blvd. Best choice ever!", 5);
 
-        addToLibraries(bioMedBranch, null, 0);
+        addToLibraries(bioMedBranch, "Very new building, think they are still expanding it. Can' wait"
+                + " to see what it will look like after a couple of years!", 4.6);
     }
 
     // MODIFIES: this
     // EFFECTS: add messages to libraries and set default passwords
-    private void addToLibraries(Comments comments, String message, int rating) {
+    private void addToLibraries(Comments comments, String message, double rating) {
         Calendar calendar = new GregorianCalendar(2022, Calendar.FEBRUARY, 11);
         Date date = calendar.getTime();
         Comment comment = new Comment(message, rating, "owen04", date);
