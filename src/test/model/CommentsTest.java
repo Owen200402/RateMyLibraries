@@ -37,7 +37,7 @@ public class CommentsTest {
         Comment comment = new Comment("Great Environment", 1, "owen04", new Date());
         comments.add(comment);
 
-        assertFalse(comments.remove(0, "gregor"));
+        assertFalse(comments.remove(1, "gregor"));
         assertEquals(1, comments.getComments().size());
 
         assertTrue(comments.remove(1, "owen04"));
