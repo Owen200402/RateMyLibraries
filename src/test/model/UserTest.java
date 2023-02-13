@@ -18,7 +18,9 @@ public class UserTest {
         Comment c = new Comment("Great Environment", 1, "owen04", new Date());
         Comments comments = new Comments();
         comments.add(c);
-        user = new User(List.of(new Library(comments, "Asian Library", 1)));
+        List<Library> libraries = new ArrayList<>();
+        libraries.add(new Library(comments, "Asian Library", 1));
+        user = new User(libraries);
     }
 
     @Test
