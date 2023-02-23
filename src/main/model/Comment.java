@@ -2,6 +2,8 @@ package model;
 
 import java.util.Date;
 
+// Represents statistics of individual comments made by users
+
 public class Comment {
     private String message;
     private double rating;

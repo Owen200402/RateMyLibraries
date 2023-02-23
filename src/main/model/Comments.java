@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents user's comments, enabling users to write or remove them
+
 public class Comments {
     private List<Comment> comments;
 

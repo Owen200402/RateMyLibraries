@@ -7,6 +7,8 @@ import model.User;
 
 import java.util.*;
 
+// RateMyLibrary Application
+
 public class UISetUp {
     private Scanner scanner;
     private User user;
@@ -49,6 +51,7 @@ public class UISetUp {
     private void librarySetUp() {
         basicCommentsSetUp();
         asianL = new Library(this.asian, "Asian Library", 1);
+
         ikbL = new Library(this.ikb, "Irving K. Barber Learning Centre", 2);
         koernerL = new Library(this.koerner, "Koerner Library", 3);
         lawL = new Library(this.law, "Law Library", 4);

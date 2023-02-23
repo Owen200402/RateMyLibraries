@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// A User who can view list of comments they made
+
 public class User {
     private List<Library> libraryList;
 

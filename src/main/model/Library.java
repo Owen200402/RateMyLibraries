@@ -3,6 +3,8 @@ package model;
 import java.text.DecimalFormat;
 import java.util.List;
 
+// Represents a library system with comments associated
+
 public class Library {
     private Comments comments;
     private double overallRatingForCalculation;
