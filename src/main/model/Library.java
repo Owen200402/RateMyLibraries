@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistance.WriteEnable;
+
 import java.text.DecimalFormat;
 import java.util.List;
 
 // Represents a library system with comments associated
 
-public class Library {
+public class Library implements WriteEnable {
     private Comments comments;
     private double overallRatingForCalculation;
     private String overallRatingDisplayed;
@@ -57,5 +61,27 @@ public class Library {
 
     public String getName() {
         return name;
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("library", libraryInfoToJson());
+        calculateOverallRating();
+        json.put("rating", getRating());
+        return json;
+    }
+
+    // EFFECTS: returns things in this library as a JSON array
+    private JSONArray libraryInfoToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Comment c : comments.getComments()) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
     }
 }

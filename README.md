@@ -22,8 +22,10 @@ may have through their transition to the university of british columbia.
 
 
 #### As a *user*, you may do the following:
-- check out previous comments you made so far for each library with user's unique key linked to each comment
+- check out previous comments I made so far for each library with user's unique key linked to each comment
 - add comments with ratings for every library with their current date and time associated with their comments
 - remove comments with ratings for each library commented after key/password validation
 - view the list of libraries and list of comments inside the libraries
-- quit Rate My Library entirely
+- quit RateMyLibrary entirely
+- when I quit the application menu, I want to be reminded whether to save my comments as files inside RateMyLibrary.
+- when I start the application, I will be given the option to load my historical comments so everything is up-to-date.

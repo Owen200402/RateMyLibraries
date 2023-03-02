@@ -4,12 +4,20 @@ import model.Comment;
 import model.Library;
 import model.Comments;
 import model.User;
+import persistance.JsonReader;
+import persistance.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
-// RateMyLibrary Application
+// Rate My Library Application
 
 public class UISetUp {
+    private static final String JSON_STORE = "./data/libraries.json";
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
+
     private Scanner scanner;
     private User user;
 
@@ -19,6 +27,8 @@ public class UISetUp {
     private Comments law;
     private Comments woodward;
     private Comments bioMedBranch;
+
+    private model.System system;
 
     private Library asianL;
     private Library ikbL;
@@ -34,6 +44,9 @@ public class UISetUp {
     public UISetUp() {
         scanner = new Scanner(System.in);
         numberCommentPair = new HashMap<>();
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        system = new model.System();
         runSetup();
     }
 
@@ -64,6 +77,14 @@ public class UISetUp {
         numberCommentPair.put(4, lawL);
         numberCommentPair.put(5, woodwardL);
         numberCommentPair.put(6, bioMedBranchL);
+
+        system.add(asianL);
+        system.add(ikbL);
+        system.add(koernerL);
+        system.add(lawL);
+        system.add(woodwardL);
+        system.add(bioMedBranchL);
+
     }
 
     // MODIFIES: this
@@ -113,6 +134,7 @@ public class UISetUp {
         System.out.println();
         System.out.println("This is a platform to rate each library in UBC in order to "
                 + "provide freshmen and newcomers to UBC insightful ideas that might suit their learning styles.");
+        loadData();
     }
 
     // EFFECTS: helper method that wraps viewListOfComments() and viewAllMessagesPrompt()
@@ -123,6 +145,47 @@ public class UISetUp {
             operateAndAdd(result);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    // EFFECTS: asks user if they wish to load their data or not.
+    //     If yes, then load and publish all previously saved data to them.
+    //     If no, then do nothing.
+    private void loadData() {
+        while (true) {
+            System.out.println("Do you want to load all the previously made comments? Or maybe just want to test "
+                    + "the system with some scaffolds?");
+            System.out.println("Please enter either yes or no");
+            String decision = scanner.nextLine();
+            if (decision.equals("yes")) {
+                loadLibrary();
+                break;
+            } else if (decision.equals("no")) {
+                System.out.println("Sure! Let's play around!");
+                break;
+            } else {
+                System.out.println("Enter again?");
+            }
+        }
+    }
+
+    // EFFECTS: asks user if they wish to save and publish their comments before quitting
+    //      If yes, then save all previously typed data for them.
+    //      If no, then do nothing.
+    private void saveData() {
+        while (true) {
+            System.out.println("Do you want to save all the previously made comments before quitting?");
+            System.out.println("Please enter either yes or no");
+            String decision = scanner.next();
+            if (decision.equals("yes")) {
+                saveLibrary();
+                break;
+            } else if (decision.equals("no")) {
+                System.out.println("Sure! Thanks for sticking around!");
+                break;
+            } else {
+                System.out.println("Enter again?");
+            }
         }
     }
 
@@ -140,7 +203,6 @@ public class UISetUp {
                 String password = scanner.next();
                 Map<Comment, String> comments = user.viewPreviousCommented(password);
                 validComments(comments);
-
             } else if (result.equals("list")) {
                 displayLibraryList();
                 System.out.println("Want to check out every library's rating? Enter `yes` to proceed or `q` to quit.");
@@ -148,10 +210,11 @@ public class UISetUp {
                 if (result2.equals("yes")) {
                     return;
                 } else if (result2.equals("q")) {
-                    System.out.println("Thanks for contributing Rate My Libraries.");
+                    saveData();
                     System.exit(0);
                 }
             } else if (result.equals("q")) {
+                saveData();
                 System.exit(0);
             }
         }
@@ -199,6 +262,7 @@ public class UISetUp {
                 directBack();
                 break;
             } else if (answer.equals("q")) {
+                saveData();
                 System.exit(0);
             } else if (answer.equals("s")) {
                 viewListOfComments();
@@ -250,7 +314,7 @@ public class UISetUp {
         System.out.println("...... System is directing you to Home Page ......");
         Thread.sleep(800);
         System.out.println("Please wait.....");
-        Thread.sleep(3000);
+        Thread.sleep(2500);
         System.out.println();
         view();
     }
@@ -279,6 +343,47 @@ public class UISetUp {
         System.out.println("4. Law Library" + "                         Rating: " + lawL.getRating() + "/5.0");
         System.out.println("5. Woodward Library" + "                    Rating: " + woodwardL.getRating() + "/5.0");
         System.out.println("6. Biomedical Branch Library" + "           Rating: " + bioMedBranchL.getRating() + "/5.0");
+    }
+
+    // EFFECTS: saves the library to file
+    private void saveLibrary() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(system);
+//            jsonWriter.write(ikbL);
+//            jsonWriter.write(koernerL);
+//            jsonWriter.write(lawL);
+//            jsonWriter.write(woodwardL);
+//            jsonWriter.write(bioMedBranchL);
+
+            jsonWriter.close();
+            System.out.println("Saving complete!");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads libraries from file
+    private void loadLibrary() {
+        try {
+            model.System loadedInfo = jsonReader.read();
+            // TODO
+            // maybe I only need one json reader but I need to iterate over all of the libraries to store
+            // these data into my individual library.
+
+            for (Library lib: loadedInfo.getLibraries()) {
+                if (lib.getName().equals("Asian Library")) {
+                    this.asianL = lib;
+                } else if (lib.getName().equals("Irving K. Barber Learning Centre")) {
+                    this.ikbL = lib;
+                }
+            }
+
+            System.out.println("Loading complete!");
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 }
