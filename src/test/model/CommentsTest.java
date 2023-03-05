@@ -8,7 +8,6 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class CommentsTest {
     Comments comments;
 
@@ -25,7 +24,7 @@ public class CommentsTest {
     @Test
     public void testAdd() {
         assertEquals(0, comments.getComments().size());
-        Comment comment = new Comment("Great Environment", 1, "owen04", new Date());
+        Comment comment = new Comment("Great Environment", 1, "owen04", new Date().toString());
         comments.add(comment);
 
         assertEquals(1, comments.getComments().size());
@@ -34,7 +33,7 @@ public class CommentsTest {
 
     @Test
     public void testRemove() {
-        Comment comment = new Comment("Great Environment", 1, "owen04", new Date());
+        Comment comment = new Comment("Great Environment", 1, "owen04", new Date().toString());
         comments.add(comment);
 
         assertFalse(comments.remove(1, "gregor"));

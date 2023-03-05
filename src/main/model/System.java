@@ -14,6 +14,11 @@ public class System implements WriteEnable {
         libraries = new ArrayList<>();
     }
 
+    public System(Library library) {
+        libraries = new ArrayList<>();
+        libraries.add(library);
+    }
+
     // EFFECTS: adds libraries into the system
     public void add(Library lib) {
         libraries.add(lib);

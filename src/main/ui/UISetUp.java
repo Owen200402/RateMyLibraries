@@ -4,8 +4,8 @@ import model.Comment;
 import model.Library;
 import model.Comments;
 import model.User;
-import persistance.JsonReader;
-import persistance.JsonWriter;
+import persistance.Reader;
+import persistance.Writer;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,8 +15,8 @@ import java.util.*;
 
 public class UISetUp {
     private static final String JSON_STORE = "./data/libraries.json";
-    private final JsonWriter jsonWriter;
-    private final JsonReader jsonReader;
+    private final Writer writer;
+    private final Reader reader;
 
     private Scanner scanner;
     private User user;
@@ -44,8 +44,8 @@ public class UISetUp {
     public UISetUp() {
         scanner = new Scanner(System.in);
         numberCommentPair = new HashMap<>();
-        jsonReader = new JsonReader(JSON_STORE);
-        jsonWriter = new JsonWriter(JSON_STORE);
+        reader = new Reader(JSON_STORE);
+        writer = new Writer(JSON_STORE);
         system = new model.System();
         runSetup();
     }
@@ -54,13 +54,13 @@ public class UISetUp {
     // EFFECTS: main method to run the setup
     private void runSetup() {
         librarySetUp();
-        user = new User(Arrays.asList(asianL, ikbL, koernerL, lawL, woodwardL, bioMedBranchL));
         intro();
+        user = new User(Arrays.asList(asianL, ikbL, koernerL, lawL, woodwardL, bioMedBranchL));
         view();
     }
 
     // MODIFIES: this
-    // EFFECTS: set up numberCommentPair and library info
+    // EFFECTS: set up numberCommentPair and library info and add libraries into the system
     private void librarySetUp() {
         basicCommentsSetUp();
         asianL = new Library(this.asian, "Asian Library", 1);
@@ -123,7 +123,7 @@ public class UISetUp {
     // EFFECTS: add messages to libraries and set default passwords
     private void addToLibraries(Comments comments, String message, double rating) {
         Calendar calendar = new GregorianCalendar(2022, Calendar.FEBRUARY, 11);
-        Date date = calendar.getTime();
+        String date = calendar.getTime().toString();
         Comment comment = new Comment(message, rating, "owen04", date);
         comments.add(comment);
     }
@@ -159,6 +159,13 @@ public class UISetUp {
             String decision = scanner.nextLine();
             if (decision.equals("yes")) {
                 loadLibrary();
+                numberCommentPair.replace(1, asianL);
+                numberCommentPair.replace(2, ikbL);
+                numberCommentPair.replace(3, koernerL);
+                numberCommentPair.replace(4, lawL);
+                numberCommentPair.replace(5, woodwardL);
+                numberCommentPair.replace(6, bioMedBranchL);
+
                 break;
             } else if (decision.equals("no")) {
                 System.out.println("Sure! Let's play around!");
@@ -174,7 +181,7 @@ public class UISetUp {
     //      If no, then do nothing.
     private void saveData() {
         while (true) {
-            System.out.println("Do you want to save all the previously made comments before quitting?");
+            System.out.println("Do you want to save all the changes you made to Rate My Library before quitting?");
             System.out.println("Please enter either yes or no");
             String decision = scanner.next();
             if (decision.equals("yes")) {
@@ -240,7 +247,7 @@ public class UISetUp {
             System.out.println("---------------------");
             if (numberCommentPair.containsKey(number)) {
                 library = numberCommentPair.get(number);
-                for (Comment c : numberCommentPair.get(number).getListOfComments().getComments()) {
+                for (Comment c : library.getListOfComments().getComments()) {
                     System.out.println(c);
                 }
                 System.out.println("---------------------");
@@ -282,7 +289,7 @@ public class UISetUp {
         System.out.println("Enter a password linked to this comment so you can view or change it anytime: ");
         String password = scanner.next();
 
-        library.getListOfComments().add(new Comment(comment, rating, password, new Date()));
+        library.getListOfComments().add(new Comment(comment, rating, password, new Date().toString()));
         library.calculateOverallRating();
     }
 
@@ -348,15 +355,9 @@ public class UISetUp {
     // EFFECTS: saves the library to file
     private void saveLibrary() {
         try {
-            jsonWriter.open();
-            jsonWriter.write(system);
-//            jsonWriter.write(ikbL);
-//            jsonWriter.write(koernerL);
-//            jsonWriter.write(lawL);
-//            jsonWriter.write(woodwardL);
-//            jsonWriter.write(bioMedBranchL);
-
-            jsonWriter.close();
+            writer.open();
+            writer.write(system);
+            writer.close();
             System.out.println("Saving complete!");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
@@ -367,16 +368,21 @@ public class UISetUp {
     // EFFECTS: loads libraries from file
     private void loadLibrary() {
         try {
-            model.System loadedInfo = jsonReader.read();
-            // TODO
-            // maybe I only need one json reader but I need to iterate over all of the libraries to store
-            // these data into my individual library.
+            model.System loadedInfo = reader.read();
 
             for (Library lib: loadedInfo.getLibraries()) {
                 if (lib.getName().equals("Asian Library")) {
                     this.asianL = lib;
                 } else if (lib.getName().equals("Irving K. Barber Learning Centre")) {
                     this.ikbL = lib;
+                } else if (lib.getName().equals("Koerner Library")) {
+                    this.koernerL = lib;
+                } else if (lib.getName().equals("Law Library")) {
+                    this.lawL = lib;
+                } else if (lib.getName().equals("Woodward Library")) {
+                    this.woodwardL = lib;
+                } else if (lib.getName().equals("Biomedical Branch Library")) {
+                    this.bioMedBranchL = lib;
                 }
             }
 

@@ -6,22 +6,24 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-// Represents a writer that writes JSON representation of workroom to file
-public class JsonWriter {
+// Class sourced from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+// Including methods open(), write(), close(), and saveToFile()
+
+// Represents a writer that writes JSON representation of system to file
+public class Writer {
     private static final int TAB = 4;
     private PrintWriter writer;
-    private String destination;
+    private String to;
 
-    // EFFECTS: constructs writer to write to destination file
-    public JsonWriter(String destination) {
-        this.destination = destination;
+    // EFFECTS: constructs writer to write to "to" file
+    public Writer(String to) {
+        this.to = to;
     }
 
     // MODIFIES: this
-    // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
-    // be opened for writing
+    // EFFECTS: opens writer; throws FileNotFoundException if the "to" file cannot be opened
     public void open() throws FileNotFoundException {
-        writer = new PrintWriter(new File(destination));
+        writer = new PrintWriter(new File(to));
     }
 
     // MODIFIES: this

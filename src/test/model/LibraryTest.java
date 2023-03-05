@@ -12,7 +12,7 @@ public class LibraryTest {
 
     @BeforeEach
     public void setUp() {
-        Comment c = new Comment("Great Environment", 3, "owen04", new Date());
+        Comment c = new Comment("Great Environment", 3, "owen04", new Date().toString());
         Comments comments = new Comments();
         comments.add(c);
         library = new Library(comments, "Koerner", 4);
@@ -32,7 +32,8 @@ public class LibraryTest {
         assertEquals(0, library.getOverallRating());
         library.calculateOverallRating();
         assertEquals(3, library.getOverallRating());
-        library.getListOfComments().add(new Comment("Hey", 2.6, "owen04", new Date()));
+        library.getListOfComments().add(new Comment("Hey", 2.6, "owen04",
+                new Date().toString()));
         library.calculateOverallRating();
         assertEquals(2.8, library.getOverallRating());
         assertEquals("2.8", library.getRating());

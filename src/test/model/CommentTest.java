@@ -14,7 +14,7 @@ class CommentTest {
     @BeforeEach
     public void setUp() {
         newDate = new Date();
-        comment = new Comment("Great Environment", 1, "owen04", newDate);
+        comment = new Comment("Great Environment", 1, "owen04", newDate.toString());
     }
 
     @Test
@@ -22,7 +22,7 @@ class CommentTest {
         assertEquals(comment.getMessage(), "Great Environment");
         assertEquals(comment.getRating(), 1);
         assertEquals(comment.getPassword(), "owen04");
-        assertEquals(comment.getDate(), newDate);
+        assertEquals(comment.getDate(), newDate.toString());
         assertEquals(comment.getNumberBeingAdded(), 0);
     }
 

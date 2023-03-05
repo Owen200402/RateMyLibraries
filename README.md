@@ -29,3 +29,6 @@ may have through their transition to the university of british columbia.
 - quit RateMyLibrary entirely
 - when I quit the application menu, I want to be reminded whether to save my comments as files inside RateMyLibrary.
 - when I start the application, I will be given the option to load my historical comments so everything is up-to-date.
+
+## Citations:
+https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo

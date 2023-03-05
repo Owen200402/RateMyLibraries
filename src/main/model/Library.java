@@ -14,10 +14,10 @@ public class Library implements WriteEnable {
     private double overallRatingForCalculation;
     private String overallRatingDisplayed;
     private String name;
-    private int number;
+    private double number;
 
     // EFFECTS: construct and initialize a library object
-    public Library(Comments comments, String name, int number) {
+    public Library(Comments comments, String name, double number) {
         this.comments = comments;
         this.name = name;
         this.number = number;
@@ -43,7 +43,7 @@ public class Library implements WriteEnable {
         return overallRatingDisplayed;
     }
 
-    public int getNumber() {
+    public double getNumber() {
         return number;
     }
 

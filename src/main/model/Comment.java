@@ -11,11 +11,11 @@ public class Comment implements WriteEnable {
     private String message;
     private double rating;
     private String password;
-    private Date date;
+    private String date;
     private int numberBeingAdded;
 
     // EFFECTS: write default messages into the comments, and set rating
-    public Comment(String message, double rating, String password, Date date) {
+    public Comment(String message, double rating, String password, String date) {
         this.message = message;
         this.rating = rating;
         this.password = password;
@@ -34,7 +34,7 @@ public class Comment implements WriteEnable {
         return password;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class UserTest {
 
     @BeforeEach
     public void setUp() {
-        Comment c = new Comment("Great Environment", 1, "owen04", new Date());
+        Comment c = new Comment("Great Environment", 1, "owen04", new Date().toString());
         Comments comments = new Comments();
         comments.add(c);
         List<Library> libraries = new ArrayList<>();
