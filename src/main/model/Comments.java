@@ -50,7 +50,7 @@ public class Comments implements WriteEnable {
     }
 
     // EFFECTS: returns things in this workroom as a JSON array
-    private JSONArray commentsToJson() {
+    public JSONArray commentsToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Comment c : comments) {

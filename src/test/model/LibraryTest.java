@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LibraryTest {
     Library library;
+    Date date = new Date(20);
 
     @BeforeEach
     public void setUp() {
-        Comment c = new Comment("Great Environment", 3, "owen04", new Date().toString());
+        Comment c = new Comment("Great Environment", 3, "owen04", date.toString());
         Comments comments = new Comments();
         comments.add(c);
         library = new Library(comments, "Koerner", 4);
@@ -37,6 +39,15 @@ public class LibraryTest {
         library.calculateOverallRating();
         assertEquals(2.8, library.getOverallRating());
         assertEquals("2.8", library.getRating());
+    }
+
+    @Test
+    public void testToJson() {
+        JSONObject jsonObject = library.toJson();
+        assertEquals(3.0, library.getOverallRating());
+        assertEquals("Koerner", jsonObject.get("name"));
+        assertEquals(library.getRating(), jsonObject.get("rating"));
+        assertEquals(library.libraryInfoToJson().toString(), jsonObject.get("library").toString());
     }
 
 }

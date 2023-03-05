@@ -76,7 +76,7 @@ public class Library implements WriteEnable {
     }
 
     // EFFECTS: returns things in this library as a JSON array
-    private JSONArray libraryInfoToJson() {
+    public JSONArray libraryInfoToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Comment c : comments.getComments()) {

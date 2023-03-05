@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -44,5 +45,11 @@ public class CommentsTest {
 
         assertTrue(comments.remove(1, "owen04"));
         assertEquals(0, comments.getComments().size());
+    }
+
+    @Test
+    public void testToJson() {
+        JSONObject jsonObject = comments.toJson();
+        assertEquals(comments.commentsToJson().toString(), jsonObject.get("comments").toString());
     }
 }

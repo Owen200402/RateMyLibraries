@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,5 +33,14 @@ class CommentTest {
         assertEquals("User " + 1 + ". " + "Rating = " + 1.0 + "\n"
                 + " - Commented at " + newDate + " : " + "Great Environment"
                 , comment.toString());
+    }
+
+    @Test
+    public void testToJson() {
+        JSONObject jsonObject = comment.toJson();
+        assertEquals("Great Environment", jsonObject.get("message"));
+        assertEquals(1.0, jsonObject.get("rating"));
+        assertEquals("owen04", jsonObject.get("password"));
+        assertEquals(newDate.toString(), jsonObject.get("date").toString());
     }
 }
