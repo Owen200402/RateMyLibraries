@@ -10,13 +10,13 @@ import java.io.PrintWriter;
 // Including methods open(), write(), close(), and saveToFile()
 
 // Represents a writer that writes JSON representation of system to file
-public class Writer {
+public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
     private String to;
 
     // EFFECTS: constructs writer to write to "to" file
-    public Writer(String to) {
+    public JsonWriter(String to) {
         this.to = to;
     }
 

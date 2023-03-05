@@ -64,6 +64,7 @@ public class Library implements WriteEnable {
     }
 
 
+    // EFFECTS: returns a JSONObject with name library and rating in it
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

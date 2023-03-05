@@ -19,11 +19,11 @@ import java.util.stream.Stream;
 // and adapted methods: parseLibrary(), addSystem(), addLibraries(), addComments()
 
 // Represents a reader that reads workroom from JSON data stored in file
-public class Reader {
+public class JsonReader {
     private String source;
 
     // EFFECTS: constructs reader to read from source file
-    public Reader(String source) {
+    public JsonReader(String source) {
         this.source = source;
     }
 

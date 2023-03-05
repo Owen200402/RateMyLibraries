@@ -3,8 +3,6 @@ package model;
 import org.json.JSONObject;
 import persistance.WriteEnable;
 
-import java.util.Date;
-
 // Represents statistics of individual comments made by users
 
 public class Comment implements WriteEnable {
@@ -52,6 +50,7 @@ public class Comment implements WriteEnable {
                 + " - Commented at " + date + " : " + message;
     }
 
+    // EFFECTS: returns a JSONObject that contains message, rating, password and date in it
     @Override
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();

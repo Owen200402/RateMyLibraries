@@ -4,8 +4,8 @@ import model.Comment;
 import model.Library;
 import model.Comments;
 import model.User;
-import persistance.Reader;
-import persistance.Writer;
+import persistance.JsonReader;
+import persistance.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,8 +15,8 @@ import java.util.*;
 
 public class UISetUp {
     private static final String JSON_STORE = "./data/libraries.json";
-    private final Writer writer;
-    private final Reader reader;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
 
     private Scanner scanner;
     private User user;
@@ -44,8 +44,8 @@ public class UISetUp {
     public UISetUp() {
         scanner = new Scanner(System.in);
         numberCommentPair = new HashMap<>();
-        reader = new Reader(JSON_STORE);
-        writer = new Writer(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
         system = new model.System();
         runSetup();
     }
@@ -77,14 +77,6 @@ public class UISetUp {
         numberCommentPair.put(4, lawL);
         numberCommentPair.put(5, woodwardL);
         numberCommentPair.put(6, bioMedBranchL);
-
-        system.add(asianL);
-        system.add(ikbL);
-        system.add(koernerL);
-        system.add(lawL);
-        system.add(woodwardL);
-        system.add(bioMedBranchL);
-
     }
 
     // MODIFIES: this
@@ -134,7 +126,7 @@ public class UISetUp {
         System.out.println();
         System.out.println("This is a platform to rate each library in UBC in order to "
                 + "provide freshmen and newcomers to UBC insightful ideas that might suit their learning styles.");
-        loadData();
+        loadDataRequest();
     }
 
     // EFFECTS: helper method that wraps viewListOfComments() and viewAllMessagesPrompt()
@@ -151,7 +143,7 @@ public class UISetUp {
     // EFFECTS: asks user if they wish to load their data or not.
     //     If yes, then load and publish all previously saved data to them.
     //     If no, then do nothing.
-    private void loadData() {
+    private void loadDataRequest() {
         while (true) {
             System.out.println("Do you want to load all the previously made comments? Or maybe just want to test "
                     + "the system with some scaffolds?");
@@ -165,7 +157,6 @@ public class UISetUp {
                 numberCommentPair.replace(4, lawL);
                 numberCommentPair.replace(5, woodwardL);
                 numberCommentPair.replace(6, bioMedBranchL);
-
                 break;
             } else if (decision.equals("no")) {
                 System.out.println("Sure! Let's play around!");
@@ -285,7 +276,17 @@ public class UISetUp {
         String comment = scanner.next();
         comment += scanner.nextLine();
         System.out.println("Enter a rating (out of 5): ");
-        double rating = scanner.nextDouble();
+
+        double rating;
+        while (true) {
+            rating = scanner.nextDouble();
+            if (rating < 0 || rating > 5) {
+                System.out.println("Invalid Rating...Please enter again!");
+                continue;
+            }
+            break;
+        }
+
         System.out.println("Enter a password linked to this comment so you can view or change it anytime: ");
         String password = scanner.next();
 
@@ -355,9 +356,18 @@ public class UISetUp {
     // EFFECTS: saves the library to file
     private void saveLibrary() {
         try {
-            writer.open();
-            writer.write(system);
-            writer.close();
+//            system.getLibraries().add(ikbL);
+//            System.out.println(system.getLibraries().get(6).getListOfComments().getComments().size());
+            system.add(asianL);
+            system.add(ikbL);
+            system.add(koernerL);
+            system.add(lawL);
+            system.add(woodwardL);
+            system.add(bioMedBranchL);
+
+            jsonWriter.open();
+            jsonWriter.write(system);
+            jsonWriter.close();
             System.out.println("Saving complete!");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
@@ -368,7 +378,7 @@ public class UISetUp {
     // EFFECTS: loads libraries from file
     private void loadLibrary() {
         try {
-            model.System loadedInfo = reader.read();
+            model.System loadedInfo = jsonReader.read();
 
             for (Library lib: loadedInfo.getLibraries()) {
                 if (lib.getName().equals("Asian Library")) {
@@ -385,7 +395,6 @@ public class UISetUp {
                     this.bioMedBranchL = lib;
                 }
             }
-
             System.out.println("Loading complete!");
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);

@@ -14,11 +14,6 @@ public class System implements WriteEnable {
         libraries = new ArrayList<>();
     }
 
-    public System(Library library) {
-        libraries = new ArrayList<>();
-        libraries.add(library);
-    }
-
     // EFFECTS: adds libraries into the system
     public void add(Library lib) {
         libraries.add(lib);
@@ -28,6 +23,7 @@ public class System implements WriteEnable {
         return libraries;
     }
 
+    // EFFECTS: returns the parental level of JSONObject that is titled as "Rate My Library"
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -35,7 +31,7 @@ public class System implements WriteEnable {
         return json;
     }
 
-    // EFFECTS: returns things in this system as a JSON array
+    // EFFECTS: returns library in this system as a JSON array
     private JSONArray libraryInfoToJson() {
         JSONArray jsonArray = new JSONArray();
 
