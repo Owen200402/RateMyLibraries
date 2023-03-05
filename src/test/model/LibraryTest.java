@@ -10,12 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LibraryTest {
     Library library;
+    Comments comments;
     Date date = new Date(20);
 
     @BeforeEach
     public void setUp() {
         Comment c = new Comment("Great Environment", 3, "owen04", date.toString());
-        Comments comments = new Comments();
+        comments = new Comments();
         comments.add(c);
         library = new Library(comments, "Koerner", 4);
     }
@@ -48,6 +49,16 @@ public class LibraryTest {
         assertEquals("Koerner", jsonObject.get("name"));
         assertEquals(library.getRating(), jsonObject.get("rating"));
         assertEquals(library.libraryInfoToJson().toString(), jsonObject.get("library").toString());
+    }
+
+    @Test
+    public void testToJsonWithMultipleLibraries() {
+        Comment newComment = new Comment("Nice!", 5, "daniel", date.toString());
+        comments.add(newComment);
+
+        JSONObject jsonObject = library.toJson();
+
+        assertEquals(comments.commentsToJson().toString(), jsonObject.get("library").toString());
     }
 
 }

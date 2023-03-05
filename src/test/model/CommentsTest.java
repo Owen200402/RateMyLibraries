@@ -49,6 +49,20 @@ public class CommentsTest {
 
     @Test
     public void testToJson() {
+        Comment comment = new Comment("Great Environment", 1, "owen04", new Date().toString());
+        comments.add(comment);
+
+        JSONObject jsonObject = comments.toJson();
+        assertEquals(comments.commentsToJson().toString(), jsonObject.get("comments").toString());
+    }
+
+    @Test
+    public void testToJsonAddMultipleComments() {
+        Comment comment = new Comment("Great Environment", 1, "owen04", new Date().toString());
+        Comment comment2 = new Comment("Nice", 5, "Daniel", new Date().toString());
+        comments.add(comment);
+        comments.add(comment2);
+
         JSONObject jsonObject = comments.toJson();
         assertEquals(comments.commentsToJson().toString(), jsonObject.get("comments").toString());
     }
