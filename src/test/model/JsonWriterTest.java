@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // Including unmodified method testWriterInvalidFile()
 
 class JsonWriterTest {
+
     @Test
     void testWriterInvalidFile() {
         try {
@@ -54,13 +55,7 @@ class JsonWriterTest {
     void testWriterGeneralLibrary() {
         try {
             System system = new System();
-            Date date = new Date(20);
-            Comment c = new Comment("Great Environment", 3, "owen04", date.toString());
-            Comments comments = new Comments();
-            comments.add(c);
-            Library library = new Library(comments, "Koerner", 4);
-            system.add(library);
-
+            setUp(system);
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralLibrary.json");
             writer.open();
             writer.write(system);
@@ -81,5 +76,15 @@ class JsonWriterTest {
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
+    }
+
+    // EFFECTS: Helper method for setting up a system with on library
+    private void setUp(System system) {
+        Date date = new Date(20);
+        Comment c = new Comment("Great Environment", 3, "owen04", date.toString());
+        Comments comments = new Comments();
+        comments.add(c);
+        Library library = new Library(comments, "Koerner", 4);
+        system.add(library);
     }
 }
