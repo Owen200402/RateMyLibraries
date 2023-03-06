@@ -345,12 +345,18 @@ public class UISetUp {
         bioMedBranchL.calculateOverallRating();
 
         System.out.println("Here's the library list and ratings so far.");
-        System.out.println("1. Asian Library" + "                       Rating: " + asianL.getRatingDisplayed() + "/5.0");
-        System.out.println("2. Irving K. Barber Learning Centre" + "    Rating: " + ikbL.getRatingDisplayed() + "/5.0");
-        System.out.println("3. Koerner Library" + "                     Rating: " + koernerL.getRatingDisplayed() + "/5.0");
-        System.out.println("4. Law Library" + "                         Rating: " + lawL.getRatingDisplayed() + "/5.0");
-        System.out.println("5. Woodward Library" + "                    Rating: " + woodwardL.getRatingDisplayed() + "/5.0");
-        System.out.println("6. Biomedical Branch Library" + "           Rating: " + bioMedBranchL.getRatingDisplayed() + "/5.0");
+        System.out.println("1. Asian Library" + "                       Rating: "
+                + asianL.getRatingDisplayed() + "/5.0");
+        System.out.println("2. Irving K. Barber Learning Centre" + "    Rating: "
+                + ikbL.getRatingDisplayed() + "/5.0");
+        System.out.println("3. Koerner Library" + "                     Rating: "
+                + koernerL.getRatingDisplayed() + "/5.0");
+        System.out.println("4. Law Library" + "                         Rating: "
+                + lawL.getRatingDisplayed() + "/5.0");
+        System.out.println("5. Woodward Library" + "                    Rating: "
+                + woodwardL.getRatingDisplayed() + "/5.0");
+        System.out.println("6. Biomedical Branch Library" + "           Rating: "
+                + bioMedBranchL.getRatingDisplayed() + "/5.0");
     }
 
     // EFFECTS: saves the library to file
