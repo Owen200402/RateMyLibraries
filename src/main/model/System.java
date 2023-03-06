@@ -32,7 +32,7 @@ public class System implements WriteEnable {
     }
 
     // EFFECTS: returns library in this system as a JSON array
-    private JSONArray libraryInfoToJson() {
+    public JSONArray libraryInfoToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Library l : libraries) {

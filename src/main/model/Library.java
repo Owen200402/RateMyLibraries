@@ -36,7 +36,7 @@ public class Library implements WriteEnable {
         this.overallRatingForCalculation = count / (double) commentList.size();
     }
 
-    public String getRating() {
+    public String getRatingDisplayed() {
         DecimalFormat df = new DecimalFormat("#.#");
         this.overallRatingDisplayed = df.format(overallRatingForCalculation);
 
@@ -71,7 +71,7 @@ public class Library implements WriteEnable {
         json.put("name", name);
         json.put("library", libraryInfoToJson());
         calculateOverallRating();
-        json.put("rating", getRating());
+        json.put("rating", getRatingDisplayed());
         return json;
     }
 

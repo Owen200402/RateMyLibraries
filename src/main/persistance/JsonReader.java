@@ -60,7 +60,9 @@ public class JsonReader {
 
         for (Object json : jsonArray) {
             JSONObject jsonComment = (JSONObject) json;
-            sys.add(addLibraries(jsonComment));
+            Library obj = addLibraries(jsonComment);
+            obj.calculateOverallRating();
+            sys.add(obj);
         }
     }
 

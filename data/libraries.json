@@ -36,10 +36,16 @@
                 "password": "owen04",
                 "rating": 5,
                 "message": "Provides sport equipments and great hardware like i-mac! Great learning experience!"
+            },
+            {
+                "date": "Sun Mar 05 17:23:49 PST 2023",
+                "password": "Hello",
+                "rating": 0,
+                "message": "I love Jasper"
             }
         ],
         "name": "Irving K. Barber Learning Centre",
-        "rating": "4.5"
+        "rating": "3"
     },
     {
         "library": [

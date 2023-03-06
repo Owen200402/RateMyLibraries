@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-// Rate My Library Application
+// Rate My Library Application - Loading data from json and having a back-up original data can be used
 
 public class UISetUp {
     private static final String JSON_STORE = "./data/libraries.json";
@@ -345,19 +345,17 @@ public class UISetUp {
         bioMedBranchL.calculateOverallRating();
 
         System.out.println("Here's the library list and ratings so far.");
-        System.out.println("1. Asian Library" + "                       Rating: " + asianL.getRating() + "/5.0");
-        System.out.println("2. Irving K. Barber Learning Centre" + "    Rating: " + ikbL.getRating() + "/5.0");
-        System.out.println("3. Koerner Library" + "                     Rating: " + koernerL.getRating() + "/5.0");
-        System.out.println("4. Law Library" + "                         Rating: " + lawL.getRating() + "/5.0");
-        System.out.println("5. Woodward Library" + "                    Rating: " + woodwardL.getRating() + "/5.0");
-        System.out.println("6. Biomedical Branch Library" + "           Rating: " + bioMedBranchL.getRating() + "/5.0");
+        System.out.println("1. Asian Library" + "                       Rating: " + asianL.getRatingDisplayed() + "/5.0");
+        System.out.println("2. Irving K. Barber Learning Centre" + "    Rating: " + ikbL.getRatingDisplayed() + "/5.0");
+        System.out.println("3. Koerner Library" + "                     Rating: " + koernerL.getRatingDisplayed() + "/5.0");
+        System.out.println("4. Law Library" + "                         Rating: " + lawL.getRatingDisplayed() + "/5.0");
+        System.out.println("5. Woodward Library" + "                    Rating: " + woodwardL.getRatingDisplayed() + "/5.0");
+        System.out.println("6. Biomedical Branch Library" + "           Rating: " + bioMedBranchL.getRatingDisplayed() + "/5.0");
     }
 
     // EFFECTS: saves the library to file
     private void saveLibrary() {
         try {
-//            system.getLibraries().add(ikbL);
-//            System.out.println(system.getLibraries().get(6).getListOfComments().getComments().size());
             system.add(asianL);
             system.add(ikbL);
             system.add(koernerL);

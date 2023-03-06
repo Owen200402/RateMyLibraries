@@ -39,7 +39,7 @@ public class LibraryTest {
                 new Date().toString()));
         library.calculateOverallRating();
         assertEquals(2.8, library.getOverallRating());
-        assertEquals("2.8", library.getRating());
+        assertEquals("2.8", library.getRatingDisplayed());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class LibraryTest {
         JSONObject jsonObject = library.toJson();
         assertEquals(3.0, library.getOverallRating());
         assertEquals("Koerner", jsonObject.get("name"));
-        assertEquals(library.getRating(), jsonObject.get("rating"));
+        assertEquals(library.getRatingDisplayed(), jsonObject.get("rating"));
         assertEquals(library.libraryInfoToJson().toString(), jsonObject.get("library").toString());
     }
 
