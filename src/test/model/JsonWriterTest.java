@@ -10,6 +10,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Class sourced from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+// Including unmodified method testWriterInvalidFile()
+
 class JsonWriterTest {
     @Test
     void testWriterInvalidFile() {
@@ -24,7 +27,7 @@ class JsonWriterTest {
     }
 
     @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterEmptyLibrary() {
         try {
             System system = new System();
             Date date = new Date(20);
@@ -48,7 +51,7 @@ class JsonWriterTest {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralLibrary() {
         try {
             System system = new System();
             Date date = new Date(20);
