@@ -18,10 +18,16 @@
                 "password": "owen",
                 "rating": 4,
                 "message": "askjdhsad"
+            },
+            {
+                "date": "Sun Mar 05 18:57:42 PST 2023",
+                "password": "10",
+                "rating": 5,
+                "message": "I love the friendly people there. Everyone's quiet"
             }
         ],
         "name": "Asian Library",
-        "rating": "4.3"
+        "rating": "4.5"
     },
     {
         "library": [
@@ -66,14 +72,22 @@
         "rating": "1.5"
     },
     {
-        "library": [{
-            "date": "Fri Feb 11 00:00:00 PST 2022",
-            "password": "owen04",
-            "rating": 4,
-            "message": "Close to Rose Garden and most of my econ classes held in buchanan."
-        }],
+        "library": [
+            {
+                "date": "Fri Feb 11 00:00:00 PST 2022",
+                "password": "owen04",
+                "rating": 4,
+                "message": "Close to Rose Garden and most of my econ classes held in buchanan."
+            },
+            {
+                "date": "Sun Mar 05 18:46:07 PST 2023",
+                "password": "owen",
+                "rating": 1,
+                "message": "asdasd"
+            }
+        ],
         "name": "Law Library",
-        "rating": "4"
+        "rating": "2.5"
     },
     {
         "library": [

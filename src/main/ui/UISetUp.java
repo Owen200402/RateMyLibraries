@@ -19,6 +19,7 @@ public class UISetUp {
     private final JsonReader jsonReader;
 
     private Scanner scanner;
+
     private User user;
 
     private Comments asian;
@@ -39,6 +40,8 @@ public class UISetUp {
 
     private Map<Integer, Library> numberCommentPair;
 
+    private boolean loadedOrNot;
+
     // EFFECTS: initialize the scanner along with number and comment pair and set up the UI
     //          ; also runs the UI
     public UISetUp() {
@@ -47,6 +50,7 @@ public class UISetUp {
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
         system = new model.System();
+        loadedOrNot = false;
         runSetup();
     }
 
@@ -145,8 +149,9 @@ public class UISetUp {
     //     If no, then do nothing.
     private void loadDataRequest() {
         while (true) {
-            System.out.println("Do you want to load all the previously made comments? Or maybe just want to test "
+            System.out.println("Do you want to load all the previously made comments? Or just want to test "
                     + "the system with some scaffolds?");
+            System.out.println("----Note: If you don't load the system, you won't ba able to save all your data!");
             System.out.println("Please enter either yes or no");
             String decision = scanner.nextLine();
             if (decision.equals("yes")) {
@@ -157,6 +162,7 @@ public class UISetUp {
                 numberCommentPair.replace(4, lawL);
                 numberCommentPair.replace(5, woodwardL);
                 numberCommentPair.replace(6, bioMedBranchL);
+                loadedOrNot = true;
                 break;
             } else if (decision.equals("no")) {
                 System.out.println("Sure! Let's play around!");
@@ -203,16 +209,15 @@ public class UISetUp {
                 validComments(comments);
             } else if (result.equals("list")) {
                 displayLibraryList();
-                System.out.println("Want to check out every library's rating? Enter `yes` to proceed or `q` to quit.");
+                System.out.println("Want to check out library rating? Enter `yes` to proceed or others to go back.");
                 String result2 = scanner.next();
                 if (result2.equals("yes")) {
                     return;
-                } else if (result2.equals("q")) {
-                    saveData();
-                    System.exit(0);
                 }
             } else if (result.equals("q")) {
-                saveData();
+                if (loadedOrNot) {
+                    saveData();
+                }
                 System.exit(0);
             }
         }
@@ -260,7 +265,9 @@ public class UISetUp {
                 directBack();
                 break;
             } else if (answer.equals("q")) {
-                saveData();
+                if (loadedOrNot) {
+                    saveData();
+                }
                 System.exit(0);
             } else if (answer.equals("s")) {
                 viewListOfComments();
