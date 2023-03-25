@@ -14,6 +14,7 @@ public class Home implements ActionListener {
     private static final int IMAGE_WIDTH = 180;
     private static final int COMMENT_GAP = 20;
     private final JsonReader jsonReader = new JsonReader("./data/libraries.json");
+    private int trackCommentY = 20;
     private JFrame frame;
     private JPanel panelL;
     private JPanel panelR;
@@ -21,6 +22,7 @@ public class Home implements ActionListener {
     private JPanel titleAndDescriptionPanel;
     private JPanel subTitlePanel;
     private JPanel promptPanel;
+    private JLabel imageLabel;
     private JButton clickHereToView;
     private JSplitPane sl;
 
@@ -40,7 +42,10 @@ public class Home implements ActionListener {
 
     private void setFrame() {
         frame = new JFrame();
-        frame.setSize(1100, 500);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        frame.setSize(1140, 500); // 20px Border everywhere
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -55,19 +60,33 @@ public class Home implements ActionListener {
         panelL = new JPanel();
         panelL.setLayout(new BorderLayout());
         panelL.setPreferredSize(new Dimension(550, 500));
+        panelL.setMinimumSize(new Dimension(550, 500));
     }
 
     private void setRightPanel() {
         panelR = new JPanel();
-        panelR.setLayout(null);
+        panelR.setLayout(new FlowLayout(FlowLayout.CENTER));
         panelR.setBackground(Color.GRAY);
-        panelR.setPreferredSize(new Dimension(500, 500));
+
+        panelR.setPreferredSize(new Dimension(550, 500));
+
+        imageLabel = new JLabel();
+        ImageIcon imageIcon = new ImageIcon("./image/vancouver-vancouver-marina.gif");
+
+        Image image = imageIcon.getImage().getScaledInstance(550, 400,
+                Image.SCALE_DEFAULT);
+        ImageIcon inserted = new ImageIcon(image);
+
+        imageLabel.setIcon(inserted);
+        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        imageLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        panelR.add(imageLabel, BorderLayout.CENTER);
     }
 
     private void setScrollPane() {
         scrollPaneR = new JScrollPane(panelR);
-        scrollPaneR.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPaneR.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPaneR.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPaneR.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         frame.add(scrollPaneR);
     }
 
@@ -185,7 +204,7 @@ public class Home implements ActionListener {
     private void setSplitScreen() {
         sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelL, scrollPaneR);
         sl.setDividerLocation(0.5);
-        sl.setDividerSize(10);
+        sl.setDividerSize(8);
         frame.add(sl);
     }
 
@@ -208,44 +227,32 @@ public class Home implements ActionListener {
             throw new RuntimeException(ex);
         }
 
-        int trackCommentY = 10;
-
+        panelR.remove(imageLabel);
+        panelR.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         // Add everything for this library
-        for (int i = 0; i < getNumberOfComments(); i++) {
-            String ratingMessage = "<html>"
-                    + loadedInfo.getLibraries().get(1).getListOfComments().getComments().get(i).toString()
-                    + "</html>";
-            JPanel ratingPanel = new JPanel(new BorderLayout());
-            ratingPanel.setBackground(Color.cyan);
-            ratingPanel.setBounds(10, trackCommentY, 500, 80);
-            ratingPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-            JLabel label = new JLabel(ratingMessage);
-            label.setPreferredSize(new Dimension(500, 80));
-
-            ratingPanel.add(label);
-            panelR.add(ratingPanel);
-            trackCommentY = trackCommentY + 80 + COMMENT_GAP;
-        }
-
-        // Adding multiple Comments?
-        for (int i = 0; i < getNumberOfComments(); i++) {
-            String ratingMessage = "<html>"
-                    + loadedInfo.getLibraries().get(1).getListOfComments().getComments().get(i).toString()
-                    + "</html>";
-            JPanel ratingPanel = new JPanel(new BorderLayout());
-            ratingPanel.setBackground(Color.cyan);
-            ratingPanel.setBounds(10, trackCommentY, 500, 80);
-            ratingPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-            JLabel label = new JLabel(ratingMessage);
-            label.setPreferredSize(new Dimension(500, 80));
-
-            ratingPanel.add(label);
-            panelR.add(ratingPanel);
-            trackCommentY = trackCommentY + 80 + COMMENT_GAP;
-        }
+        retrieveComments(loadedInfo);
 
         sl.setDividerLocation(0.5);
+        panelL.setMinimumSize(new Dimension(550, 500));
+        panelR.setPreferredSize(new Dimension(550, trackCommentY - 20 - COMMENT_GAP));
+    }
+
+    private void retrieveComments(System loadedInfo) {
+        for (int i = 0; i < getNumberOfComments(); i++) {
+            String ratingMessage = "<html>"
+                    + loadedInfo.getLibraries().get(1).getListOfComments().getComments().get(i).toString()
+                    + "</html>";
+            JPanel commentPanel = new JPanel(new BorderLayout());
+            commentPanel.setBackground(Color.cyan);
+            commentPanel.setBounds(10, trackCommentY, 500, 60);
+            commentPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+            JLabel label = new JLabel(ratingMessage);
+            label.setPreferredSize(new Dimension(500, 60));
+
+            commentPanel.add(label);
+            panelR.add(commentPanel);
+            trackCommentY = trackCommentY + 60 + COMMENT_GAP;
+        }
     }
 }
