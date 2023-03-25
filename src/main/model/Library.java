@@ -9,7 +9,7 @@ import java.util.List;
 
 // Represents a library system with comments associated
 
-public class Library implements WriteEnable {
+public class Library implements WriteEnable { // may extract a Rating Calculator to reduce cohesion
     private Comments comments;
     private double overallRatingForCalculation;
     private String overallRatingDisplayed;

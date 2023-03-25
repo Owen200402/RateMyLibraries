@@ -46,12 +46,12 @@
             {
                 "date": "Sun Mar 05 17:23:49 PST 2023",
                 "password": "Hello",
-                "rating": 0,
-                "message": "I love Jasper"
+                "rating": 1,
+                "message": "Washroom is kinda dirty!"
             }
         ],
         "name": "Irving K. Barber Learning Centre",
-        "rating": "3"
+        "rating": "3.3"
     },
     {
         "library": [

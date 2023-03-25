@@ -47,7 +47,7 @@ public class Comment implements WriteEnable {
     @Override
     public String toString() {
         return "User " + numberBeingAdded + ". " + "Rating = " + rating + "\n"
-                + " - Commented at " + date + " : " + message;
+                + " - commented at " + date + " : " + message;
     }
 
     // EFFECTS: returns a JSONObject that contains message, rating, password and date in it

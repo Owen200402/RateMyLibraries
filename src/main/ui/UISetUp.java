@@ -412,4 +412,9 @@ public class UISetUp {
         }
     }
 
+    // getter
+    public model.System getSystem() {
+        return this.system;
+    }
+
 }
