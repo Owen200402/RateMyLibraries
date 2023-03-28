@@ -30,8 +30,8 @@ class CommentTest {
     @Test
     public void testToString() {
         comment.setNumberBeingAdded(1);
-        assertEquals("User " + 1 + ". " + "Rating = " + 1.0 + "\n"
-                + " - Commented at " + newDate + " : " + "Great Environment"
+        assertEquals("<html><b>User " + 1 + "</b>: " + "Rating = " + 1.0 + "\n"
+                + " - commented at " + newDate + " : " + "Great Environment</html>"
                 , comment.toString());
     }
 

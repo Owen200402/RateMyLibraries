@@ -44,14 +44,20 @@
                 "message": "Provides sport equipments and great hardware like i-mac! Great learning experience!"
             },
             {
-                "date": "Sun Mar 05 17:23:49 PST 2023",
-                "password": "Hello",
+                "date": "Mon Mar 27 21:32:09 PDT 2023",
+                "password": "owen04",
+                "rating": 5,
+                "message": "Hello Owen"
+            },
+            {
+                "date": "Tue Mar 28 01:46:24 PDT 2023",
+                "password": "234234",
                 "rating": 1,
-                "message": "Washroom is kinda dirty!"
+                "message": "123123123"
             }
         ],
         "name": "Irving K. Barber Learning Centre",
-        "rating": "3.3"
+        "rating": "3.2"
     },
     {
         "library": [

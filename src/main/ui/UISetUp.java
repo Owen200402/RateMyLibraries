@@ -367,7 +367,7 @@ public class UISetUp {
     }
 
     // EFFECTS: saves the library to file
-    private void saveLibrary() {
+    public void saveLibrary() {
         try {
             system.add(asianL);
             system.add(ikbL);
@@ -387,7 +387,7 @@ public class UISetUp {
 
     // MODIFIES: this
     // EFFECTS: loads libraries from file
-    private void loadLibrary() {
+    public void loadLibrary() {
         try {
             model.System loadedInfo = jsonReader.read();
 
