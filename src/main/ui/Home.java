@@ -8,6 +8,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
+// REFERENCE:
+// vancouver-vancouver-marine.gif: https://tenor.com/view/vancouver-vancouver-marina-british-columbia-victoria-harbour-front-gif-18735026
+// UBC-Logo.png: https://institute.ctlt.ubc.ca/ubc-logo-2/
+// Ikblearningcentre.jpg: https://en.wikipedia.org/wiki/Irving_K._Barber_Learning_Centre
+
 // GUI Class Representing the Rate My Libraries
 public class Home implements ActionListener {
     // Constants:
