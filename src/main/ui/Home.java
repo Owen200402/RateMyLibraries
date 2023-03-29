@@ -62,7 +62,6 @@ public class Home implements ActionListener {
     // EFFECTS: sets the frame (pop-up window) with minimum size so that users cannot shrink it
     private void setFrame() {
         frame = new JFrame();
-
         frame.setSize(1140, 500); // 20px Border everywhere
         frame.setMaximumSize(new Dimension(1140, 500));
         frame.setMinimumSize(new Dimension(1000, 450));
@@ -95,7 +94,7 @@ public class Home implements ActionListener {
     private void setRightPanel() {
         panelR = new JPanel();
         panelR.setLayout(new FlowLayout(FlowLayout.CENTER));
-        panelR.setBackground(Color.GRAY);
+        panelR.setBackground(new Color(242, 245, 196));
 
         panelR.setPreferredSize(new Dimension(550, 500));
 
@@ -179,7 +178,7 @@ public class Home implements ActionListener {
     private void setDescriptionPanel() {
         titleAndDescriptionPanel = new JPanel();
         titleAndDescriptionPanel.setLayout(null);
-        titleAndDescriptionPanel.setBackground(Color.pink);
+        titleAndDescriptionPanel.setBackground(new Color(53, 243, 250, 144));
         titleAndDescriptionPanel.setPreferredSize(new Dimension(500, 300));
         titleAndDescriptionPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelL.add(titleAndDescriptionPanel, BorderLayout.NORTH);
@@ -196,14 +195,14 @@ public class Home implements ActionListener {
                         + "one of the libraries that have the most books stored!</html>");
         label.setPreferredSize(new Dimension(220, 50)); // to avoid overflow
 
-        Font fantasyFont = new Font("Comic Sans MS", Font.PLAIN, 14);
+        Font fantasyFont = new Font("Serif", Font.PLAIN, 14);
         label.setFont(fantasyFont);
 
         JPanel panelForLibDescription = new JPanel(new BorderLayout());
         panelForLibDescription.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         panelForLibDescription.add(label, BorderLayout.LINE_START);
         panelForLibDescription.setBounds(220, 75, 250, 180);
-        panelForLibDescription.setBackground(Color.yellow);
+        panelForLibDescription.setBackground(new Color(132, 204, 250));
         titleAndDescriptionPanel.add(panelForLibDescription);
     }
 
@@ -211,7 +210,7 @@ public class Home implements ActionListener {
     // EFFECTS: sets the panel containing buttons "Add" and "Remove"
     private void setPromptPanel() {
         promptPanel = new JPanel();
-        promptPanel.setBackground(Color.ORANGE);
+        promptPanel.setBackground(new Color(242, 245, 196));
         promptPanel.setLayout(new BorderLayout());
         promptPanel.setBorder(BorderFactory.createEmptyBorder(0,5,0,5));
         panelL.add(promptPanel, BorderLayout.CENTER);
@@ -247,7 +246,7 @@ public class Home implements ActionListener {
     // EFFECTS: sets the subtitle panel containing "Click here to view" button
     private void setSubtitlePanel() {
         subTitlePanel = new JPanel();
-        subTitlePanel.setBackground(Color.cyan);
+        subTitlePanel.setBackground(new Color(96, 243, 231, 229));
         subTitlePanel.setBounds(30, 210, IMAGE_WIDTH, 50);
         subTitlePanel.setLayout(new BorderLayout());
         titleAndDescriptionPanel.add(subTitlePanel);
@@ -283,10 +282,10 @@ public class Home implements ActionListener {
 
         textLabel.setText(concat);
 
-        Font font = new Font("Roboto", Font.BOLD, 12);
+        Font font = new Font("SansSerif", Font.BOLD, 12);
         textLabel.setFont(font);
         textLabel.setBounds(30, 200, IMAGE_WIDTH, 30);
-        textLabel.setBorder(BorderFactory.createSoftBevelBorder(1));
+        textLabel.setBorder(BorderFactory.createLoweredSoftBevelBorder());
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
         subTitlePanel.add(textLabel, BorderLayout.NORTH);
     }
@@ -332,9 +331,9 @@ public class Home implements ActionListener {
             String ratingMessage = "<html>"
                     + loadedInfo.getLibraries().get(1).getListOfComments().getComments().get(i).toString() + "</html>";
             JPanel commentPanel = new JPanel(new BorderLayout());
-            commentPanel.setBackground(Color.cyan);
+            commentPanel.setBackground(new Color(190, 188, 180));
             commentPanel.setBounds(10, trackCommentY, 500, 60);
-            commentPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            commentPanel.setBorder(BorderFactory.createEmptyBorder(5, 8, 5, 8));
 
             JLabel label = new JLabel(ratingMessage);
             label.setPreferredSize(new Dimension(500, 60));
@@ -346,12 +345,12 @@ public class Home implements ActionListener {
             commentPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    commentPanel.setBackground(Color.YELLOW);
+                    commentPanel.setBackground(new Color(237, 161, 239, 255));
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    commentPanel.setBackground(Color.cyan);
+                    commentPanel.setBackground(new Color(190, 188, 180));
                 }
             });
         }
@@ -366,7 +365,7 @@ public class Home implements ActionListener {
                 + " Click on <b>Add</b> to add your comments or <b>Remove</b> to remove "
                 + "it and follow the prompt. </html>");
         addOrRemovePanel = new JPanel(new GridLayout(1, 2));
-        addOrRemovePanel.setBackground(Color.ORANGE);
+        addOrRemovePanel.setBackground(new Color(242, 245, 196));
 
         description.setPreferredSize(new Dimension(30, 90));
         description.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -380,8 +379,8 @@ public class Home implements ActionListener {
     private void setAddAndRemovePanel() {
         buttonAdd = new JButton("Add");
         buttonRemove = new JButton("Remove");
-        buttonAdd.setForeground(Color.magenta);
-        buttonRemove.setForeground(Color.magenta);
+        buttonAdd.setForeground(new Color(28, 96, 43));
+        buttonRemove.setForeground(new Color(28, 96, 43));
         addOrRemovePanel.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
         addOrRemovePanel.add(buttonAdd);
         addOrRemovePanel.add(buttonRemove);

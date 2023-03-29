@@ -40,6 +40,7 @@ public class AddingWindow implements ActionListener {
         setScrollPane();
         setRatingPasswordAndSaveButton();
         setClearAllButton();
+        setColorToGray();
 
         container.add(userLabel);
         container.add(ratingLabel);
@@ -53,9 +54,12 @@ public class AddingWindow implements ActionListener {
         success = new JLabel();
         success.setBounds(20, 160 + VGAP + VGAP / 2, 300, 25);
         success.setForeground(Color.RED);
-        success.setFont(new Font("Roboto", 0, 12));
+        success.setFont(new Font("SansSerif", 0, 12));
 
         container.add(success);
+        frame.setBackground(new Color(5, 63, 190));
+        panel.setBackground(new Color(183, 153, 234));
+        container.setBackground(new Color(183, 153, 234));
         frame.add(panel);
         frame.setVisible(true);
     }
@@ -102,13 +106,21 @@ public class AddingWindow implements ActionListener {
     }
 
     // MODIFIES: this
+    // EFFECTS: sets colors to gray for all input panels
+    private void setColorToGray() {
+        textArea.setBackground(new Color(222, 221, 213));
+        passwordText.setBackground(new Color(222, 221, 213));
+        ratingText.setBackground(new Color(222, 221, 213));
+    }
+
+    // MODIFIES: this
     // EFFECTS: sets prompt and allows users to save their rating with a password of their choice;
     //          the "Save" button has action event to allows savings
     private void setRatingPasswordAndSaveButton() {
         ratingLabel = new JLabel("Give it a rate! (out of 5)");
         ratingLabel.setBounds(20, 80, 150, 30);
         ratingText = new JTextField();
-        ratingText.setBounds(150 + HGAP, 80, 40, 30);
+        ratingText.setBounds(150 + HGAP, 80, 30, 30);
 
 
         passwordLabel = new JLabel("<html>Password: <I>(Ensuring your comment cannot be modified"

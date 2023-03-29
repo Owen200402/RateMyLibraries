@@ -37,21 +37,25 @@ public class RemovingWindow implements ActionListener {
         setFrame();
         setPromptAndRadioButtons();
         setRatingPasswordAndSaveButton();
+        setColorToGray();
         setClearAllButton();
 
         container.add(userLabel);
         container.add(passwordLabel);
         container.add(passwordText);
 
-
         panel.add(container, BorderLayout.CENTER);
 
         success = new JLabel();
         success.setBounds(20, 160 + VGAP + VGAP / 2, 300, 25);
         success.setForeground(Color.RED);
-        success.setFont(new Font("Roboto", 0, 12));
+        success.setFont(new Font("SansSerif", 0, 12));
 
         container.add(success);
+        frame.setBackground(new Color(5, 63, 190));
+        panel.setBackground(new Color(236, 106, 144));
+        container.setBackground(new Color(236, 106, 144));
+        radioContainer.setBackground(new Color(236, 106, 144));
         frame.add(panel);
         frame.setVisible(true);
     }
@@ -81,6 +85,12 @@ public class RemovingWindow implements ActionListener {
         container = new JPanel(null);
 
         setRadioButton();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets colors to gray for all input panels
+    private void setColorToGray() {
+        passwordText.setBackground(new Color(222, 221, 213));
     }
 
     // MODIFIES: this
