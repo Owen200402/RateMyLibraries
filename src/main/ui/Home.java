@@ -14,7 +14,7 @@ public class Home implements ActionListener {
     private static final int IMAGE_WIDTH = 180;
     private static final int COMMENT_GAP = 20;
     private static final JsonReader jsonReader = new JsonReader("./data/libraries.json");
-    private static int trackCommentY = 20;
+    private int trackCommentY = 20;
 
     // Components:
     private static System loadedInfo;

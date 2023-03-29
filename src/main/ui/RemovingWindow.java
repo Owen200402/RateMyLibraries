@@ -22,7 +22,9 @@ public class RemovingWindow implements ActionListener {
     private static JLabel passwordLabel;
     private static JPasswordField passwordText;
     private static JButton button;
+    private static JButton clearAll;
     private static JLabel success;
+    private static ButtonGroup buttonGroup;
     private static JRadioButton radioButton;
     private static JPanel radioContainer;
     private int userNum;
@@ -35,6 +37,7 @@ public class RemovingWindow implements ActionListener {
         setFrame();
         setPromptAndRadioButtons();
         setRatingPasswordAndSaveButton();
+        setClearAllButton();
 
         container.add(userLabel);
         container.add(passwordLabel);
@@ -104,7 +107,7 @@ public class RemovingWindow implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets the affect for the radio button and save the data as to which one is clicked
     private void setButton(int userNumber) {
-        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup = new ButtonGroup();
         for (int i = 0; i < userNumber; i++) {
             radioButton = new JRadioButton("User: " + (i + 1));
             radioButton.setSize(new Dimension(20,20));
@@ -129,12 +132,30 @@ public class RemovingWindow implements ActionListener {
         panel.add(passwordLabel);
 
         passwordText = new JPasswordField();
-        passwordText.setBounds(20, 145 + VGAP, 400 - HGAP * 6, 25);
+        passwordText.setBounds(20, 145 + VGAP, 200, 25);
 
         button = new JButton("Remove");
-        button.setBounds(400 - HGAP * 5, 145 + VGAP, 80, 25);
+        button.setBounds(400 - HGAP * 9 - 5, 145 + VGAP, 80, 25);
         button.addActionListener(this);
         container.add(button);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the button for clearing all the text user has answered
+    private void setClearAllButton() {
+        clearAll = new JButton("Clear");
+        clearAll.setBounds(400 - HGAP * 5 - 10, 145 + VGAP, 100, 25);
+        addActionForClearAll();
+        container.add(clearAll);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets action for clearing texts in all fields when the user clicks on the "Clear All button"
+    private void addActionForClearAll() {
+        clearAll.addActionListener(e -> {
+            passwordText.setText("");
+            buttonGroup.clearSelection();
+        });
     }
 
 
@@ -156,9 +177,9 @@ public class RemovingWindow implements ActionListener {
 
         try {
             System system = jsonReader.read();
-            boolean removed = system.getLibraries().get(1).getListOfComments().remove(userNum, password);
-            if (!removed) {
+            if (!system.getLibraries().get(1).getListOfComments().remove(userNum, password)) {
                 success.setText("Password is incorrect!");
+                passwordText.setText("");
                 return;
             }
             jsonWriter.open();

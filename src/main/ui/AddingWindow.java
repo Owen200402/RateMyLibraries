@@ -27,6 +27,7 @@ public class AddingWindow implements ActionListener {
     private static JTextField ratingText;
     private static JPasswordField passwordText;
     private static JButton button;
+    private static JButton clearAll;
     private static JLabel success;
 
     private JsonReader jsonReader = new JsonReader("./data/libraries.json");
@@ -38,6 +39,7 @@ public class AddingWindow implements ActionListener {
         setPromptAndTextArea();
         setScrollPane();
         setRatingPasswordAndSaveButton();
+        setClearAllButton();
 
         container.add(userLabel);
         container.add(ratingLabel);
@@ -115,12 +117,31 @@ public class AddingWindow implements ActionListener {
         panel.add(passwordLabel);
 
         passwordText = new JPasswordField();
-        passwordText.setBounds(20, 145 + VGAP, 400 - HGAP * 6, 25);
+        passwordText.setBounds(20, 145 + VGAP, 200, 25);
 
         button = new JButton("Save");
-        button.setBounds(400 - HGAP * 5, 145 + VGAP, 80, 25);
+        button.setBounds(400 - HGAP * 9 - 5, 145 + VGAP, 80, 25);
         button.addActionListener(this);
         container.add(button);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the button for clearing all the text user has answered
+    private void setClearAllButton() {
+        clearAll = new JButton("Clear All");
+        clearAll.setBounds(400 - HGAP * 5 - 10, 145 + VGAP, 100, 25);
+        addActionForClearAll();
+        container.add(clearAll);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets action for clearing texts in all fields when the user clicks on the "Clear All button"
+    private void addActionForClearAll() {
+        clearAll.addActionListener(e -> {
+            textArea.setText("");
+            passwordText.setText("");
+            ratingText.setText("");
+        });
     }
 
     // MODIFIES: this
@@ -138,6 +159,7 @@ public class AddingWindow implements ActionListener {
         }
         if (password.length() <= 5) {
             success.setText("Unsafe Password. Please Enter A Longer Password.");
+            passwordText.setText("");
             return;
         }
         if (Double.parseDouble(rating) < 0 || Double.parseDouble(rating) > 5) {
@@ -171,7 +193,7 @@ public class AddingWindow implements ActionListener {
     private void switchScreen() {
         JFrame oldFrame = Home.getFrame();
         new Home();
-        oldFrame.dispose();
         frame.dispose();
+        oldFrame.dispose();
     }
 }
