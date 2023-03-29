@@ -116,7 +116,6 @@ public class RemovingWindow implements ActionListener {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     userNum = finalI + 1;
-                    java.lang.System.out.println(userNum);
                 }
             });
             radioContainer.add(radioButton);

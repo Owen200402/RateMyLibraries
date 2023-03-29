@@ -72,16 +72,10 @@
                 "password": "asdasd",
                 "rating": 1,
                 "message": "One more!"
-            },
-            {
-                "date": "Tue Mar 28 22:26:37 PDT 2023",
-                "password": "qweqwe",
-                "rating": 2,
-                "message": "Hello World"
             }
         ],
         "name": "Irving K. Barber Learning Centre",
-        "rating": "3"
+        "rating": "3.1"
     },
     {
         "library": [
