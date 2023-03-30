@@ -7,9 +7,7 @@ import persistance.JsonReader;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.nio.file.*;
-import java.nio.file.*;
+import java.io.*;
 
 // REFERENCE:
 // vancouver-vancouver-marine.gif: https://tenor.com/view/vancouver-vancouver-marina-british-columbia-victoria-harbour-front-gif-18735026
@@ -96,63 +94,85 @@ public class Home implements ActionListener {
         JLabel label = new JLabel("<html>Save Your Changes?</html>");
         label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
 
-        button1.addActionListener(e -> {
-            save();
-        });
-
-        button2.addActionListener(e -> {
-            noSave();
-        });
-
         frameClosing.add(button1, BorderLayout.WEST);
         frameClosing.add(button2, BorderLayout.EAST);
         frameClosing.add(label, BorderLayout.NORTH);
+
+        button1.addActionListener(e -> {
+            saveHistory();
+        });
+
+        button2.addActionListener(e -> {
+            noSaveHistory();
+        });
+    }
+
+    // MODIFIES: this
+    // EFFECTS: saves history for this library
+    public void saveHistory() {
+        try {
+            save();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: doesn't save history for this library
+    public void noSaveHistory() {
+        try {
+            noSave();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: synchronizes librariesTemp.json and libraries.json and closes the frame
-    private void save() {
-        Path sourceFilePath = Path.of("./data/libraries.json");
-        Path toFilePath = Path.of("./data/librariesTemp.json");
+    private void save() throws IOException {
+        File source = new File("./data/libraries.json");
+        File toFile = new File("./data/librariesTemp.json");
 
-        String sourceJsonString = null;
-        try {
-            sourceJsonString = Files.readString(sourceFilePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        BufferedReader sourceReader = new BufferedReader(new FileReader(source));
+        StringBuilder sourceJsonStringBuilder = new StringBuilder();
+        String line;
+        while ((line = sourceReader.readLine()) != null) {
+            sourceJsonStringBuilder.append(line);
         }
+        sourceReader.close();
 
-        JSONObject source = new JSONObject(sourceJsonString);
+        JSONObject sourceJsonObject = new JSONObject(sourceJsonStringBuilder.toString());
 
-        try {
-            Files.writeString(toFilePath, source.toString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        FileWriter destinationWriter = new FileWriter(toFile);
+        destinationWriter.write(sourceJsonObject.toString());
+        destinationWriter.close();
+
         frameClosing.dispose();
+        frame.dispose();
     }
 
     // MODIFIES: this
     // EFFECTS: removes the changes to jsonReader and closes the frame
-    private void noSave() {
-        Path sourceFilePath = Path.of("./data/librariesTemp.json");
-        Path toFilePath = Path.of("./data/libraries.json");
+    private void noSave() throws IOException {
+        File source = new File("./data/librariesTemp.json");
+        File toFile = new File("./data/libraries.json");
 
-        String sourceJsonString = null;
-        try {
-            sourceJsonString = Files.readString(sourceFilePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        BufferedReader sourceReader = new BufferedReader(new FileReader(source));
+        StringBuilder sourceJsonStringBuilder = new StringBuilder();
+        String line;
+        while ((line = sourceReader.readLine()) != null) {
+            sourceJsonStringBuilder.append(line);
         }
+        sourceReader.close();
 
-        JSONObject source = new JSONObject(sourceJsonString);
+        JSONObject sourceJsonObject = new JSONObject(sourceJsonStringBuilder.toString());
 
-        try {
-            Files.writeString(toFilePath, source.toString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        FileWriter destinationWriter = new FileWriter(toFile);
+        destinationWriter.write(sourceJsonObject.toString());
+        destinationWriter.close();
+
         frameClosing.dispose();
+        frame.dispose();
     }
 
     // MODIFIES: this
