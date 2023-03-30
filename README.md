@@ -34,11 +34,11 @@ may have through their transition to the university of british columbia.
 ## Instructions for Grader
 - You can generate the first required action related to adding Xs to a Y by clicking on "Add" button on the bottom left
 - You can generate the second required action related to adding Xs to a Y by clicking on Remove button on the bottom left
-- You can generate the third & fourth required action by hovering mouse onto the comment box to achieve highlighting, and also selecting radio buttons in "Remove" (only one selection allowed) that keeps track of your current selection before removing it accurately
+- You can generate the third required action by hovering mouse onto the comment box to achieve highlighting
 - You can locate my visual component by looking at the right panel when you load my application
-- You can save the state of my application by clicking on Save button after entering your rating or clear it by clicking on "Clear" to avoid saving your data to the system (since this is a more preferred way to get the best user's experience, I typically didn't allow for saving on a new pop-up window. If you want me to, I can change it still)
+- You can save the state of your application by closing my application window and clicking on "Save" on a separate pop-up window
+- You can load the state of my application by clicking on "Click here to view" and follow the new prompt which asks you to load or not
 - You can delete comments by selecting user number with correct password. The first couple's passwords, by default, are "owen04"
-- You can reload the state of my application by clicking on "Click here to view"
 
 ## Citations:
 https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo

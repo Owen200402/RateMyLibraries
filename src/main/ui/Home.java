@@ -1,12 +1,15 @@
 package ui;
 
 import model.System;
+import org.json.JSONObject;
 import persistance.JsonReader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 // REFERENCE:
 // vancouver-vancouver-marine.gif: https://tenor.com/view/vancouver-vancouver-marina-british-columbia-victoria-harbour-front-gif-18735026
@@ -19,11 +22,14 @@ public class Home implements ActionListener {
     private static final int IMAGE_WIDTH = 180;
     private static final int COMMENT_GAP = 20;
     private static final JsonReader jsonReader = new JsonReader("./data/libraries.json");
+    private static final JsonReader jsonReaderEmpty = new JsonReader("./data/generalLibraries.json");
     private int trackCommentY = 20;
 
     // Components:
     private static System loadedInfo;
     private static JFrame frame;
+    private static JFrame frameLoadingPrompt;
+    private static JFrame frameClosing;
     private static AddingWindow addingWindow;
     private static RemovingWindow removingWindow;
     private static JPanel panelL;
@@ -67,7 +73,94 @@ public class Home implements ActionListener {
         frame.setMinimumSize(new Dimension(1000, 450));
         frame.setLocationRelativeTo(null);
         frame.setTitle("Rate My UBC Libraries");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                close();
+            }
+        });
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Asking user whether they want to save their changes or not
+    private void close() {
+        frameClosing = new JFrame();
+        frameClosing.setSize(new Dimension(450, 100));
+        frameClosing.setVisible(true);
+        frameClosing.setLocationRelativeTo(null);
+
+        JButton button1 = new JButton("Save");
+        button1.setBounds(10,20, 50, 30);
+        JButton button2 = new JButton("No Save");
+        button2.setBounds(40,20, 30, 30);
+        JLabel label = new JLabel("<html>Save Your Changes?</html>");
+        label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+
+        button1.addActionListener(e -> {
+            save();
+        });
+
+        button2.addActionListener(e -> {
+            noSave();
+        });
+
+        frameClosing.add(button1, BorderLayout.WEST);
+        frameClosing.add(button2, BorderLayout.EAST);
+        frameClosing.add(label, BorderLayout.NORTH);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: synchronizes librariesTemp.json and libraries.json and closes the frame
+    private void save() {
+        // path to the source and destination files
+        Path sourceFilePath = Path.of("./data/libraries.json");
+        Path toFilePath = Path.of("./data/librariesTemp.json");
+
+        // read the contents of the source file
+        String sourceJsonString = null;
+        try {
+            sourceJsonString = Files.readString(sourceFilePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // parse the JSON string to a JSONObject
+        JSONObject sourceJsonObject = new JSONObject(sourceJsonString);
+
+        // write the JSON object to the destination file
+        try {
+            Files.writeString(toFilePath, sourceJsonObject.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        frameClosing.dispose();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes the changes to jsonReader and closes the frame
+    private void noSave() {
+        // path to the source and destination files
+        Path sourceFilePath = Path.of("./data/librariesTemp.json");
+        Path toFilePath = Path.of("./data/libraries.json");
+
+        // read the contents of the source file
+        String sourceJsonString = null;
+        try {
+            sourceJsonString = Files.readString(sourceFilePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // parse the JSON string to a JSONObject
+        JSONObject sourceJsonObject = new JSONObject(sourceJsonString);
+
+        // write the JSON object to the destination file
+        try {
+            Files.writeString(toFilePath, sourceJsonObject.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        frameClosing.dispose();
     }
 
     // MODIFIES: this
@@ -295,6 +388,7 @@ public class Home implements ActionListener {
     //          with comments only
     private void setClickHereToViewButton() {
         clickHereToView = new JButton("Click here to view");
+
         clickHereToView.setHorizontalAlignment(SwingConstants.CENTER);
         subTitlePanel.add(clickHereToView, BorderLayout.SOUTH);
 
@@ -401,6 +495,38 @@ public class Home implements ActionListener {
     //          disables the "Click here to view" button
     @Override
     public void actionPerformed(ActionEvent e) {
+        addLoad();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds and loads the changes or no
+    public void addLoad() {
+        frameLoadingPrompt = new JFrame();
+        frameLoadingPrompt.setSize(new Dimension(450, 100));
+        frameLoadingPrompt.setVisible(true);
+        frameLoadingPrompt.setLocationRelativeTo(null);
+
+        JButton button1 = new JButton("Load");
+        button1.setBounds(10,20, 50, 30);
+        JButton button2 = new JButton("No Load");
+        button2.setBounds(40,20, 30, 30);
+        JLabel label = new JLabel("<html>Load History or no? If no, then you can't perform add or remove.</html>");
+        label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+
+        frameLoadingPrompt.add(button1, BorderLayout.WEST);
+        frameLoadingPrompt.add(button2, BorderLayout.EAST);
+        frameLoadingPrompt.add(label, BorderLayout.NORTH);
+
+        button1.addActionListener(e -> {
+            loadAction();
+        });
+
+        button2.addActionListener(e -> {
+            noLoadAction();
+        });
+    }
+
+    public void loadAction() {
         scrollPaneR.removeComponentListener(adapter);
         System loadedInfo;
         try {
@@ -419,6 +545,28 @@ public class Home implements ActionListener {
         panelL.setMinimumSize(new Dimension(550, 500));
         panelR.setPreferredSize(new Dimension(550, trackCommentY - 20 - COMMENT_GAP));
         clickHereToView.setEnabled(false);
+        frameLoadingPrompt.dispose();
+    }
+
+    public void noLoadAction() {
+        scrollPaneR.removeComponentListener(adapter);
+        try {
+            loadedInfo = jsonReaderEmpty.read();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        panelR.remove(imageLabel);
+        panelR.remove(ubcLogo);
+        panelR.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        sl.setDividerLocation(0.5);
+        panelL.setMinimumSize(new Dimension(550, 500));
+        panelR.setPreferredSize(new Dimension(550, trackCommentY - 20 - COMMENT_GAP));
+        clickHereToView.setEnabled(false);
+        buttonAdd.setEnabled(false);
+        buttonRemove.setEnabled(false);
+        frameLoadingPrompt.dispose();
     }
 
     // EFFECTS: gets the parent frame

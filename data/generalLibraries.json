@@ -1,125 +1,31 @@
 {"Rate My Library": [
   {
-    "library": [
-      {
-        "date": "Fri Feb 11 00:00:00 PST 2022",
-        "password": "owen04",
-        "rating": 4,
-        "message": "Clean Environment"
-      },
-      {
-        "date": "Fri Feb 11 00:00:00 PST 2022",
-        "password": "owen04",
-        "rating": 5,
-        "message": "Very quiet, enjoy studying in the silent space with sound-insulated walls"
-      },
-      {
-        "date": "Sun Mar 05 00:25:37 PST 2023",
-        "password": "owen",
-        "rating": 4,
-        "message": "askjdhsad"
-      }
-    ],
+    "library": [],
     "name": "Asian Library",
     "rating": "4.3"
   },
   {
-    "library": [
-      {
-        "date": "Fri Feb 11 00:00:00 PST 2022",
-        "password": "owen04",
-        "rating": 4,
-        "message": "Love the Ridingson since people cannot talk loud there, perfect for studying!"
-      },
-      {
-        "date": "Fri Feb 11 00:00:00 PST 2022",
-        "password": "owen04",
-        "rating": 5,
-        "message": "Provides sport equipments and great hardware like i-mac! Great learning experience!"
-      },
-      {
-        "date": "Sun Mar 05 17:23:49 PST 2023",
-        "password": "Hello",
-        "rating": 0,
-        "message": "I love Jasper"
-      }
-    ],
+    "library": [],
     "name": "Irving K. Barber Learning Centre",
     "rating": "3"
   },
   {
-    "library": [
-      {
-        "date": "Fri Feb 11 00:00:00 PST 2022",
-        "password": "owen04",
-        "rating": 3,
-        "message": "Sometimes people do tutoring and start to get noisy downstairs."
-      },
-      {
-        "date": "Fri Feb 11 00:00:00 PST 2022",
-        "password": "owen04",
-        "rating": 0,
-        "message": "Pretty dark inside, and almost no charging areas provided. Even 0/5 is too high."
-      }
-    ],
+    "library": [],
     "name": "Koerner Library",
     "rating": "1.5"
   },
   {
-    "library": [{
-      "date": "Fri Feb 11 00:00:00 PST 2022",
-      "password": "owen04",
-      "rating": 4,
-      "message": "Close to Rose Garden and most of my econ classes held in buchanan."
-    }],
+    "library": [],
     "name": "Law Library",
     "rating": "4"
   },
   {
-    "library": [
-      {
-        "date": "Fri Feb 11 00:00:00 PST 2022",
-        "password": "owen04",
-        "rating": 4,
-        "message": "Love the two lecture halls but would rather studying far from it."
-      },
-      {
-        "date": "Fri Feb 11 00:00:00 PST 2022",
-        "password": "owen04",
-        "rating": 2,
-        "message": "Dirty washroom! Seems like people are smoking in here, but space is bright and comfy for long-time studying"
-      },
-      {
-        "date": "Fri Feb 11 00:00:00 PST 2022",
-        "password": "owen04",
-        "rating": 5,
-        "message": "Perfect for Arts students who have classes nearby that area. Also,, it isclose to the bus loop and restaurants in university blvd. Best choice ever!"
-      }
-    ],
+    "library": [],
     "name": "Woodward Library",
     "rating": "3.7"
   },
   {
-    "library": [
-      {
-        "date": "Fri Feb 11 00:00:00 PST 2022",
-        "password": "owen04",
-        "rating": 4.6,
-        "message": "Very new building, think they are still expanding it. Can' wait to see what it will look like after a couple of years!"
-      },
-      {
-        "date": "Sun Mar 05 00:15:46 PST 2023",
-        "password": "owen",
-        "rating": 0,
-        "message": "I hate it"
-      },
-      {
-        "date": "Sun Mar 05 00:21:54 PST 2023",
-        "password": "daniel",
-        "rating": 5,
-        "message": "Daniel is the god of the god"
-      }
-    ],
+    "library": [],
     "name": "Biomedical Branch Library",
     "rating": "3.2"
   }

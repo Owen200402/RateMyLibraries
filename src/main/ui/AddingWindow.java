@@ -131,7 +131,7 @@ public class AddingWindow implements ActionListener {
         passwordText = new JPasswordField();
         passwordText.setBounds(20, 145 + VGAP, 200, 25);
 
-        button = new JButton("Save");
+        button = new JButton("Add");
         button.setBounds(400 - HGAP * 9 - 5, 145 + VGAP, 80, 25);
         button.addActionListener(this);
         container.add(button);
