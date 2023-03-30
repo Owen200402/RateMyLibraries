@@ -8,8 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
+import java.nio.file.*;
 
 // REFERENCE:
 // vancouver-vancouver-marine.gif: https://tenor.com/view/vancouver-vancouver-marina-british-columbia-victoria-harbour-front-gif-18735026
@@ -112,11 +112,9 @@ public class Home implements ActionListener {
     // MODIFIES: this
     // EFFECTS: synchronizes librariesTemp.json and libraries.json and closes the frame
     private void save() {
-        // path to the source and destination files
         Path sourceFilePath = Path.of("./data/libraries.json");
         Path toFilePath = Path.of("./data/librariesTemp.json");
 
-        // read the contents of the source file
         String sourceJsonString = null;
         try {
             sourceJsonString = Files.readString(sourceFilePath);
@@ -124,12 +122,10 @@ public class Home implements ActionListener {
             throw new RuntimeException(e);
         }
 
-        // parse the JSON string to a JSONObject
-        JSONObject sourceJsonObject = new JSONObject(sourceJsonString);
+        JSONObject source = new JSONObject(sourceJsonString);
 
-        // write the JSON object to the destination file
         try {
-            Files.writeString(toFilePath, sourceJsonObject.toString());
+            Files.writeString(toFilePath, source.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -139,11 +135,9 @@ public class Home implements ActionListener {
     // MODIFIES: this
     // EFFECTS: removes the changes to jsonReader and closes the frame
     private void noSave() {
-        // path to the source and destination files
         Path sourceFilePath = Path.of("./data/librariesTemp.json");
         Path toFilePath = Path.of("./data/libraries.json");
 
-        // read the contents of the source file
         String sourceJsonString = null;
         try {
             sourceJsonString = Files.readString(sourceFilePath);
@@ -151,12 +145,10 @@ public class Home implements ActionListener {
             throw new RuntimeException(e);
         }
 
-        // parse the JSON string to a JSONObject
-        JSONObject sourceJsonObject = new JSONObject(sourceJsonString);
+        JSONObject source = new JSONObject(sourceJsonString);
 
-        // write the JSON object to the destination file
         try {
-            Files.writeString(toFilePath, sourceJsonObject.toString());
+            Files.writeString(toFilePath, source.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
