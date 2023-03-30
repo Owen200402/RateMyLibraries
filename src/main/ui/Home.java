@@ -530,15 +530,17 @@ public class Home implements ActionListener {
         frameLoadingPrompt.add(label, BorderLayout.NORTH);
 
         button1.addActionListener(e -> {
-            loadAction();
+            show();
         });
 
         button2.addActionListener(e -> {
-            noLoadAction();
+            noShow();
         });
     }
 
-    public void loadAction() {
+    // MODIFIES: this
+    // EFFECTS: shows comments
+    public void show() {
         scrollPaneR.removeComponentListener(adapter);
         System loadedInfo;
         try {
@@ -560,7 +562,9 @@ public class Home implements ActionListener {
         frameLoadingPrompt.dispose();
     }
 
-    public void noLoadAction() {
+    // MODIFIES: this
+    // EFFECTS: shows empty comments and disable add and remove buttons for further actions
+    public void noShow() {
         scrollPaneR.removeComponentListener(adapter);
         try {
             loadedInfo = jsonReaderEmpty.read();
