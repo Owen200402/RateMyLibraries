@@ -1,6 +1,5 @@
 package ui;
 
-import model.Comment;
 import model.System;
 import persistance.JsonReader;
 import persistance.JsonWriter;
@@ -10,10 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Date;
 
-// Separate Window for adding comments linked with password
-public class AddingWindow implements ActionListener {
+// Separate Window for removing comments linked with password
+public class RemovingWindowGUI implements ActionListener {
     private static int HGAP = 20;
     private static int VGAP = 10;
     private static JFrame frame;
@@ -21,33 +19,40 @@ public class AddingWindow implements ActionListener {
     private static JPanel container;
     private static JLabel prompt;
     private static JLabel userLabel;
-    private static JTextArea textArea;
     private static JLabel passwordLabel;
-    private static JLabel ratingLabel;
-    private static JTextField ratingText;
     private static JPasswordField passwordText;
     private static JButton button;
     private static JButton clearAll;
     private static JLabel success;
+    private static ButtonGroup buttonGroup;
+    private static JRadioButton radioButton;
+    private static JPanel radioContainer;
+    private int userNum;
 
     private JsonReader jsonReader = new JsonReader("./data/libraries.json");
     private JsonWriter jsonWriter = new JsonWriter("./data/libraries.json");
 
+    private LibraryGUI libraryGUI;
+    private int libraryNum;
+
+    // REQUIRES: libraryNum to save all the content to jsonReader
+    // EFFECT: Constructs the AddingWindowGUI
+    public RemovingWindowGUI(int libraryNum, LibraryGUI libraryGUI) {
+        this.libraryGUI = libraryGUI;
+        this.libraryNum = libraryNum;
+    }
+
     // EFFECTS: sets up the window with frames and all components
     public void setUpWindow() {
         setFrame();
-        setPromptAndTextArea();
-        setScrollPane();
+        setPromptAndRadioButtons();
         setRatingPasswordAndSaveButton();
-        setClearAllButton();
         setColorToGray();
+        setClearAllButton();
 
         container.add(userLabel);
-        container.add(ratingLabel);
-        container.add(ratingText);
         container.add(passwordLabel);
         container.add(passwordText);
-
 
         panel.add(container, BorderLayout.CENTER);
 
@@ -58,8 +63,9 @@ public class AddingWindow implements ActionListener {
 
         container.add(success);
         frame.setBackground(new Color(5, 63, 190));
-        panel.setBackground(new Color(183, 153, 234));
-        container.setBackground(new Color(183, 153, 234));
+        panel.setBackground(new Color(236, 106, 144));
+        container.setBackground(new Color(236, 106, 144));
+        radioContainer.setBackground(new Color(236, 106, 144));
         frame.add(panel);
         frame.setVisible(true);
     }
@@ -78,17 +84,9 @@ public class AddingWindow implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets scroll pane for the text area
-    private void setScrollPane() {
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(20,30,400 - HGAP - HGAP, 40);
-        container.add(scrollPane);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: displays the question prompt and text areas for users to input their comments
-    private void setPromptAndTextArea() {
-        prompt = new JLabel("<html><h2>Adding Comment</h2><html>");
+    // EFFECTS: sets up the prompt asking users to remove their comments and radio buttons
+    private void setPromptAndRadioButtons() {
+        prompt = new JLabel("<html><h2>Removing Comment</h2><html>");
         prompt.setSize(new Dimension(350, 50));
         prompt.setBackground(Color.BLUE);
         prompt.setHorizontalAlignment(SwingConstants.CENTER);
@@ -96,42 +94,66 @@ public class AddingWindow implements ActionListener {
 
         container = new JPanel(null);
 
-        userLabel = new JLabel("Comment:");
-        userLabel.setBounds(20,0,100,25);
-
-        textArea = new JTextArea();
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        textArea.setBounds(20, 30, 400 - HGAP - HGAP, 40);
+        setRadioButton();
     }
 
     // MODIFIES: this
     // EFFECTS: sets colors to gray for all input panels
     private void setColorToGray() {
-        textArea.setBackground(new Color(222, 221, 213));
         passwordText.setBackground(new Color(222, 221, 213));
-        ratingText.setBackground(new Color(222, 221, 213));
     }
 
     // MODIFIES: this
-    // EFFECTS: sets prompt and allows users to save their rating with a password of their choice;
-    //          the "Save" button has action event to allows savings
+    // EFFECTS: sets the radio button to allow only single choice and its container has flexible grid layout
+    //          depending on number of inputs
+    private void setRadioButton() {
+        userLabel = new JLabel("Select a user comment you want to remove: ");
+        userLabel.setBounds(20,0,300,25);
+
+
+        try {
+            System system = jsonReader.read();
+            int userNumber = system.getLibraries().get(libraryNum).getListOfComments().getComments().size();
+            radioContainer = new JPanel(new GridLayout((2 + userNumber) / 3, 3));
+            radioContainer.setBounds(50, 20, 300, 100);
+            setButton(userNumber);
+
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        container.add(radioContainer, BorderLayout.CENTER);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the affect for the radio button and save the data as to which one is clicked
+    private void setButton(int userNumber) {
+        buttonGroup = new ButtonGroup();
+        for (int i = 0; i < userNumber; i++) {
+            radioButton = new JRadioButton("User: " + (i + 1));
+            radioButton.setSize(new Dimension(20,20));
+            int finalI = i;
+            radioButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    userNum = finalI + 1;
+                }
+            });
+            radioContainer.add(radioButton);
+            buttonGroup.add(radioButton);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the password prompt and allows removal
     private void setRatingPasswordAndSaveButton() {
-        ratingLabel = new JLabel("Give it a rate! (out of 5)");
-        ratingLabel.setBounds(20, 80, 150, 30);
-        ratingText = new JTextField();
-        ratingText.setBounds(150 + HGAP, 80, 30, 30);
-
-
-        passwordLabel = new JLabel("<html>Password: <I>(Ensuring your comment cannot be modified"
-                + "by others)</I></html>");
+        passwordLabel = new JLabel("<html>Password: </html>");
         passwordLabel.setBounds(20, 110 + VGAP, 400 - HGAP - HGAP, 35);
         panel.add(passwordLabel);
 
         passwordText = new JPasswordField();
         passwordText.setBounds(20, 145 + VGAP, 200, 25);
 
-        button = new JButton("Add");
+        button = new JButton("Remove");
         button.setBounds(400 - HGAP * 9 - 5, 145 + VGAP, 80, 25);
         button.addActionListener(this);
         container.add(button);
@@ -140,7 +162,7 @@ public class AddingWindow implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets the button for clearing all the text user has answered
     private void setClearAllButton() {
-        clearAll = new JButton("Clear All");
+        clearAll = new JButton("Clear");
         clearAll.setBounds(400 - HGAP * 5 - 10, 145 + VGAP, 100, 25);
         addActionForClearAll();
         container.add(clearAll);
@@ -150,62 +172,53 @@ public class AddingWindow implements ActionListener {
     // EFFECTS: sets action for clearing texts in all fields when the user clicks on the "Clear All button"
     private void addActionForClearAll() {
         clearAll.addActionListener(e -> {
-            textArea.setText("");
             passwordText.setText("");
-            ratingText.setText("");
+            buttonGroup.clearSelection();
         });
     }
 
+
     // MODIFIES: this
-    // EFFECTS: action event that validates user's inputs and switch screen back to Home frame with initial
-    //          set up after the refresh.
+    // EFFECTS: action event that validates user's inputs, switch screen back to Home frame with initial
+    //          set up after the refresh and write the changes into ./data/libraries.json file
     @Override
     public void actionPerformed(ActionEvent e) {
-        String comment = textArea.getText();
         String password = passwordText.getText();
-        String rating = ratingText.getText();
 
-        if (password.isEmpty() | comment.isEmpty() | rating.isEmpty()) {
-            success.setText("Fields Cannot Be Empty!");
+        if (password.isEmpty()) {
+            success.setText("Password Field Cannot Be Empty!");
             return;
         }
-        if (password.length() <= 5) {
-            success.setText("Unsafe Password. Please Enter A Longer Password.");
-            passwordText.setText("");
+        if (userNum == 0) {
+            success.setText("Please Make a Choice!");
             return;
         }
-        if (Double.parseDouble(rating) < 0 || Double.parseDouble(rating) > 5) {
-            success.setText("Please Enter A Number Between 0 and 5.");
-            return;
-        }
-        setText();
-        switchScreen();
-    }
 
-    // MODIFIES: this
-    // EFFECTS: writes the new info into ./data/libraries.json file
-    private void setText() {
-        String comment = textArea.getText();
-        String password = passwordText.getText();
-        String rating = ratingText.getText();
         try {
             System system = jsonReader.read();
-            system.getLibraries().get(1).getListOfComments().add(new Comment(comment,
-                    Double.parseDouble(rating), password, new Date().toString()));
+            if (!system.getLibraries().get(libraryNum).getListOfComments().remove(userNum, password)) {
+                success.setText("Password is incorrect!");
+                passwordText.setText("");
+                return;
+            }
             jsonWriter.open();
             jsonWriter.write(system);
             jsonWriter.close();
+
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+
+        switchScreen();
     }
 
     // MODIFIES: this
     // EFFECT: Switch Back to the Main Screen
     private void switchScreen() {
-        JFrame oldFrame = Home.getFrame();
-        new Home();
+        JFrame oldFrame = LibraryGUI.getFrame();
+        new LibraryGUI(libraryGUI.getTitle(), libraryGUI.getLibraryNum(), libraryGUI.getDescriptionText());
         frame.dispose();
         oldFrame.dispose();
     }
 }
+

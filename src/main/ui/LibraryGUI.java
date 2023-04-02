@@ -15,7 +15,7 @@ import java.io.*;
 // Ikblearningcentre.jpg: https://en.wikipedia.org/wiki/Irving_K._Barber_Learning_Centre
 
 // GUI Class Representing the Rate My Libraries
-public class Home implements ActionListener {
+public class LibraryGUI implements ActionListener {
     // Constants:
     private static final int IMAGE_WIDTH = 180;
     private static final int COMMENT_GAP = 20;
@@ -28,8 +28,8 @@ public class Home implements ActionListener {
     private static JFrame frame;
     private static JFrame frameLoadingPrompt;
     private static JFrame frameClosing;
-    private static AddingWindow addingWindow;
-    private static RemovingWindow removingWindow;
+    private static AddingWindowGUI addingWindowGUI;
+    private static RemovingWindowGUI removingWindowGUI;
     private static JPanel panelL;
     private static JPanel panelR;
     private static JPanel addOrRemovePanel;
@@ -46,9 +46,29 @@ public class Home implements ActionListener {
     private static JSplitPane sl;
     private static ComponentAdapter adapter;
 
+    // Inherited Fields
+    private String title;
+    private int libraryNum;
+    private String descriptionText;
+
     // EFFECTS: sets the main display screen with components added into the parent frame window
     //         that users can interact with
-    public Home() {
+    public LibraryGUI() {
+        run();
+    }
+
+    // REQUIRES: title for the current library, the id of a library
+    // EFFECTS: sets the main display screen with components added into the parent frame window
+    //         that users can interact with
+    public LibraryGUI(String title, int libraryNum, String descriptionText) {
+        this.title = title;
+        this.libraryNum = libraryNum;
+        this.descriptionText = descriptionText;
+        run();
+    }
+
+    // EFFECTS: runs the GUI
+    protected void run() {
         setFrame();
         setPanel();
         setScrollPane();
@@ -284,7 +304,7 @@ public class Home implements ActionListener {
         titleAndDescriptionPanel = new JPanel();
         titleAndDescriptionPanel.setLayout(null);
         titleAndDescriptionPanel.setBackground(new Color(53, 243, 250, 144));
-        titleAndDescriptionPanel.setPreferredSize(new Dimension(500, 300));
+        titleAndDescriptionPanel.setPreferredSize(new Dimension(550, 300));
         titleAndDescriptionPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelL.add(titleAndDescriptionPanel, BorderLayout.NORTH);
     }
@@ -293,11 +313,7 @@ public class Home implements ActionListener {
     // EFFECTS: sets up text description inside titleAndDescriptionPanel
     private void setTextDescription() {
         JLabel label = new JLabel();
-        label.setText(
-                "<html><u>Description</u>: <br>"
-                        + "The gigantic tower well-known for its gorgeous looking "
-                        + "and the packed studying areas with great hardware. It is "
-                        + "one of the libraries that have the most books stored!</html>");
+        label.setText(descriptionText);
         label.setPreferredSize(new Dimension(220, 50)); // to avoid overflow
 
         Font fantasyFont = new Font("Serif", Font.PLAIN, 14);
@@ -306,7 +322,7 @@ public class Home implements ActionListener {
         JPanel panelForLibDescription = new JPanel(new BorderLayout());
         panelForLibDescription.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         panelForLibDescription.add(label, BorderLayout.LINE_START);
-        panelForLibDescription.setBounds(220, 75, 250, 180);
+        panelForLibDescription.setBounds(250, 75, 250, 180);
         panelForLibDescription.setBackground(new Color(132, 204, 250));
         titleAndDescriptionPanel.add(panelForLibDescription);
     }
@@ -325,21 +341,23 @@ public class Home implements ActionListener {
     // EFFECTS: sets the rating displayed according to what is saved in jsonReader
     private void setRatingDisplayed() {
         try {
-            JLabel library = new JLabel("Irving K Barber Learning Centre");
+            JLabel libraryTitle = new JLabel(title);
             loadedInfo = jsonReader.read();
-            JLabel rating = new JLabel("-- " + loadedInfo.getLibraries().get(1).getRatingDisplayed() + " / 5.0");
-            library.setBounds(30, 20, 450, 40);
+            JLabel rating = new JLabel("-- " + loadedInfo.getLibraries().get(libraryNum)
+                    .getRatingDisplayed() + " / 5.0");
+            libraryTitle.setSize(new Dimension(550, 40));
+            libraryTitle.setHorizontalAlignment(SwingConstants.CENTER);
             rating.setBounds(450, 50, 100, 20);
 
             // Set the font to bold
-            Font boldFont = new Font(library.getFont().getName(), Font.BOLD, 25);
-            library.setFont(boldFont);
+            Font boldFont = new Font(libraryTitle.getFont().getName(), Font.BOLD, 25);
+            libraryTitle.setFont(boldFont);
 
             // Set font for rating to Comic Sans MS
             Font fantasyFont = new Font("Comic Sans MS", Font.PLAIN, 15);
             rating.setFont(fantasyFont);
 
-            titleAndDescriptionPanel.add(library);
+            titleAndDescriptionPanel.add(libraryTitle, BorderLayout.CENTER);
             titleAndDescriptionPanel.add(rating);
 
         } catch (IOException e) {
@@ -352,7 +370,7 @@ public class Home implements ActionListener {
     private void setSubtitlePanel() {
         subTitlePanel = new JPanel();
         subTitlePanel.setBackground(new Color(96, 243, 231, 229));
-        subTitlePanel.setBounds(30, 210, IMAGE_WIDTH, 50);
+        subTitlePanel.setBounds(50, 210, IMAGE_WIDTH, 50);
         subTitlePanel.setLayout(new BorderLayout());
         titleAndDescriptionPanel.add(subTitlePanel);
     }
@@ -371,7 +389,7 @@ public class Home implements ActionListener {
 
         // set the imageIcon as the label's icon
         imageLabel.setIcon(inserted);
-        imageLabel.setBounds(30, 40, IMAGE_WIDTH, 200);
+        imageLabel.setBounds(50, 40, IMAGE_WIDTH, 200);
 
         // add panelLeft to the frame
         titleAndDescriptionPanel.add(imageLabel);
@@ -426,7 +444,7 @@ public class Home implements ActionListener {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return loadedInfo.getLibraries().get(1).getListOfComments().getComments().size();
+        return loadedInfo.getLibraries().get(libraryNum).getListOfComments().getComments().size();
     }
 
     // MODIFIES: this
@@ -434,8 +452,8 @@ public class Home implements ActionListener {
     //          mouse event highlights every comment of our choice.
     private void retrieveComments(System loadedInfo) {
         for (int i = 0; i < getNumberOfComments(); i++) {
-            String ratingMessage = "<html>"
-                    + loadedInfo.getLibraries().get(1).getListOfComments().getComments().get(i).toString() + "</html>";
+            String ratingMessage = "<html>" + loadedInfo.getLibraries().get(libraryNum)
+                    .getListOfComments().getComments().get(i).toString() + "</html>";
             JPanel commentPanel = new JPanel(new BorderLayout());
             commentPanel.setBackground(new Color(190, 188, 180));
             commentPanel.setBounds(10, trackCommentY, 500, 60);
@@ -492,13 +510,13 @@ public class Home implements ActionListener {
         addOrRemovePanel.add(buttonRemove);
 
         buttonAdd.addActionListener(e -> {
-            addingWindow = new AddingWindow();
-            addingWindow.setUpWindow();
+            addingWindowGUI = new AddingWindowGUI(libraryNum, this);
+            addingWindowGUI.setUpWindow();
         });
 
         buttonRemove.addActionListener(e -> {
-            removingWindow = new RemovingWindow();
-            removingWindow.setUpWindow();
+            removingWindowGUI = new RemovingWindowGUI(libraryNum, this);
+            removingWindowGUI.setUpWindow();
         });
     }
 
@@ -588,5 +606,20 @@ public class Home implements ActionListener {
     // EFFECTS: gets the parent frame
     public static JFrame getFrame() {
         return frame;
+    }
+
+    // EFFECTS: gets the title of this library
+    public String getTitle() {
+        return title;
+    }
+
+    // EFFECTS; gets the id of this library
+    public int getLibraryNum() {
+        return libraryNum;
+    }
+
+    // EFFECTS: gets the description text for this library
+    public String getDescriptionText() {
+        return descriptionText;
     }
 }
