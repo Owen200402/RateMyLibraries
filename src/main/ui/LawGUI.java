@@ -7,6 +7,7 @@ public class LawGUI extends LibraryGUI {
                 "<html><u>Description</u>: <br>"
                         + "Want to talking to leaders of tomorrow in faculty of law?"
                         + "Come here and have a coffee chat with them! School of Law has a great environment"
-                        + "for anyone whether to sit quiet or to do group discussion! </html>");
+                        + "for anyone whether to sit quiet or to do group discussion! </html>",
+                "image/Law_Library.jpg");
     }
 }

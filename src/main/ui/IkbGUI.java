@@ -8,6 +8,6 @@ public class IkbGUI extends LibraryGUI {
                         + "The gigantic tower well-known for its gorgeous looking "
                         + "and the packed studying areas with great hardware. It is "
                         + "one of the libraries that have the most books stored! Also, lots of room-booking "
-                        + "Services! </html>");
+                        + "Services! </html>", "image/Ikblearningcentre.jpg");
     }
 }

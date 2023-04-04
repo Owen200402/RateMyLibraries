@@ -50,6 +50,7 @@ public class LibraryGUI implements ActionListener {
     private String title;
     private int libraryNum;
     private String descriptionText;
+    private String imagePath;
 
     // EFFECTS: sets the main display screen with components added into the parent frame window
     //         that users can interact with
@@ -60,10 +61,11 @@ public class LibraryGUI implements ActionListener {
     // REQUIRES: title for the current library, the id of a library
     // EFFECTS: sets the main display screen with components added into the parent frame window
     //         that users can interact with
-    public LibraryGUI(String title, int libraryNum, String descriptionText) {
+    public LibraryGUI(String title, int libraryNum, String descriptionText, String imagePath) {
         this.title = title;
         this.libraryNum = libraryNum;
         this.descriptionText = descriptionText;
+        this.imagePath = imagePath;
         run();
     }
 
@@ -413,7 +415,7 @@ public class LibraryGUI implements ActionListener {
         JLabel imageLabel = new JLabel();
 
         // create an ImageIcon from a file path or URL
-        ImageIcon imageIcon = new ImageIcon("image/Ikblearningcentre.jpg");
+        ImageIcon imageIcon = new ImageIcon(imagePath);
         Image image = imageIcon.getImage().getScaledInstance(180, 130, Image.SCALE_SMOOTH);
 
         ImageIcon inserted = new ImageIcon(image);
@@ -541,12 +543,12 @@ public class LibraryGUI implements ActionListener {
         addOrRemovePanel.add(buttonRemove);
 
         buttonAdd.addActionListener(e -> {
-            addingWindowGUI = new AddingWindowGUI(libraryNum, this);
+            addingWindowGUI = new AddingWindowGUI(libraryNum, this, imagePath);
             addingWindowGUI.setUpWindow();
         });
 
         buttonRemove.addActionListener(e -> {
-            removingWindowGUI = new RemovingWindowGUI(libraryNum, this);
+            removingWindowGUI = new RemovingWindowGUI(libraryNum, this, imagePath);
             removingWindowGUI.setUpWindow();
         });
     }

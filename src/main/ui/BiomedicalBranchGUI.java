@@ -6,6 +6,7 @@ public class BiomedicalBranchGUI extends LibraryGUI {
         super("Biomedical Branch Library", 5,
                 "<html><u>Description</u>: <br>"
                         + "One of the newest Libraries that lots of old UBCers haven't gone for a visit!"
-                        + "Without spoiling too much about it, come here and enjoy your sunny study session! </html>");
+                        + "Without spoiling too much about it, come here and enjoy your sunny study session! </html>",
+                "image/Biomed_Library.jpg");
     }
 }

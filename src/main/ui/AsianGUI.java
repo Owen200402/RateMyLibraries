@@ -8,6 +8,6 @@ public class AsianGUI extends LibraryGUI {
                         + "Surrounded by peaceful and serene forest that could turn"
                         + "everything into nothingness, with one of the libraries Asian learners "
                         + "are proud of! In here, there is also a gigantic study area for quiet learning. "
-                        + "Check it out!</html>");
+                        + "Check it out!</html>", "image/Asian_Centre.jpg");
     }
 }

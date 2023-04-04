@@ -34,12 +34,14 @@ public class RemovingWindowGUI implements ActionListener {
 
     private LibraryGUI libraryGUI;
     private int libraryNum;
+    private String imagePath;
 
     // REQUIRES: libraryNum to save all the content to jsonReader
     // EFFECT: Constructs the AddingWindowGUI
-    public RemovingWindowGUI(int libraryNum, LibraryGUI libraryGUI) {
+    public RemovingWindowGUI(int libraryNum, LibraryGUI libraryGUI, String imagePath) {
         this.libraryGUI = libraryGUI;
         this.libraryNum = libraryNum;
+        this.imagePath = imagePath;
     }
 
     // EFFECTS: sets up the window with frames and all components
@@ -216,7 +218,7 @@ public class RemovingWindowGUI implements ActionListener {
     // EFFECT: Switch Back to the Main Screen
     private void switchScreen() {
         JFrame oldFrame = LibraryGUI.getFrame();
-        new LibraryGUI(libraryGUI.getTitle(), libraryGUI.getLibraryNum(), libraryGUI.getDescriptionText());
+        new LibraryGUI(libraryGUI.getTitle(), libraryGUI.getLibraryNum(), libraryGUI.getDescriptionText(), imagePath);
         frame.dispose();
         oldFrame.dispose();
     }
