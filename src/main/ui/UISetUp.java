@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-// Rate My Library Application - Loading data from json and having a back-up original data can be used
+// Rate My Library Console Application - Loading data from json and having a back-up original data can be used
 
 public class UISetUp {
     private static final String JSON_STORE = "./data/libraries.json";

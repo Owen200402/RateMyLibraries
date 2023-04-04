@@ -1,6 +1,10 @@
 package ui;
 
 // Represents a GUI for Asian library
+
+// Reference:
+// image/Asian_Centre.jpg: https://www.rjc.ca/project-details/ubc-asian-centre-roof-replacement.html
+
 public class AsianGUI extends LibraryGUI {
     public AsianGUI() {
         super("Asian Centre", 0,

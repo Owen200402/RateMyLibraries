@@ -1,6 +1,10 @@
 package ui;
 
 // Represents a GUI for Koerner Library
+
+// Reference:
+// image/Koerner_Library.jpg: https://commons.wikimedia.org/wiki/File:Koerner_library_ubc.jpg
+
 public class KoernerGUI extends LibraryGUI {
     public KoernerGUI() {
         super("Koerner Library", 2,

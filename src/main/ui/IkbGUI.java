@@ -1,6 +1,10 @@
 package ui;
 
 // Represents a GUI for Irving K. Barber Learning Centre
+
+// Reference:
+// image/Ikblearningcentre.jpg: https://en.wikipedia.org/wiki/Irving_K._Barber_Learning_Centre
+
 public class IkbGUI extends LibraryGUI {
     public IkbGUI() {
         super("Irving K. Barber Learning Centre", 1,

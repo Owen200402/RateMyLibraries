@@ -1,6 +1,11 @@
 package ui;
 
 // Represents a GUI for Law Library
+
+
+// Reference:
+// image/Law_Library.jpg: https://news.ubc.ca/2014/01/28/ubc-law-asks-b-c-s-law-society-to-consider-impact-of-trinity-westerns-covenant-on-lgbt-community/
+
 public class LawGUI extends LibraryGUI {
     public LawGUI() {
         super("Law Library", 3,

@@ -1,6 +1,10 @@
 package ui;
 
 // Represents a GUI for Woodward Library
+
+// Reference:
+// Woodward_Library.jpg: https://infrastructuredevelopment.ubc.ca/projects/woodward-library-entrance-and-study-space/
+
 public class WoodwardGUI extends LibraryGUI {
     public WoodwardGUI() {
         super("Woodward Library", 4,

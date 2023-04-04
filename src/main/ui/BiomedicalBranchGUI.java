@@ -1,6 +1,10 @@
 package ui;
 
 // Represents a GUI for Biomedical Branch Library
+
+// Reference:
+// image/Biomed_Library.jpg: https://nicelocal.ca/vancouver/cultural_places/ubc_biomedical_branch_library/
+
 public class BiomedicalBranchGUI extends LibraryGUI {
     public BiomedicalBranchGUI() {
         super("Biomedical Branch Library", 5,
