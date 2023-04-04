@@ -76,6 +76,7 @@ public class LibraryGUI implements ActionListener {
         setImageDisplayed();
         setTextDescription();
         setSubtitlePanel();
+        setReturnIcon();
         setNumberOfComments();
         setSplitScreen();
         setClickHereToViewButton();
@@ -88,7 +89,7 @@ public class LibraryGUI implements ActionListener {
         frame = new JFrame();
         frame.setSize(1140, 500); // 20px Border everywhere
         frame.setMaximumSize(new Dimension(1140, 500));
-        frame.setMinimumSize(new Dimension(1000, 450));
+        frame.setMinimumSize(new Dimension(1000, 470));
         frame.setLocationRelativeTo(null);
         frame.setTitle("Rate My UBC Libraries");
         frame.addWindowListener(new WindowAdapter() {
@@ -111,7 +112,7 @@ public class LibraryGUI implements ActionListener {
         button1.setBounds(10,20, 50, 30);
         JButton button2 = new JButton("No Save");
         button2.setBounds(40,20, 30, 30);
-        JLabel label = new JLabel("<html>Save Your Changes?</html>");
+        JLabel label = new JLabel("<html>Save Your Changes to this Library?</html>");
         label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
 
         frameClosing.add(button1, BorderLayout.WEST);
@@ -124,6 +125,36 @@ public class LibraryGUI implements ActionListener {
 
         button2.addActionListener(e -> {
             noSaveHistory();
+        });
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Asking user whether they want to save their changes and direct to Home page
+    private void closeAndDirectHome() {
+        frameClosing = new JFrame();
+        frameClosing.setSize(new Dimension(450, 100));
+        frameClosing.setVisible(true);
+        frameClosing.setLocationRelativeTo(null);
+
+        JButton button1 = new JButton("Save");
+        button1.setBounds(10,20, 50, 30);
+        JButton button2 = new JButton("No Save");
+        button2.setBounds(40,20, 30, 30);
+        JLabel label = new JLabel("<html>Save Your Changes to This Library?</html>");
+        label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+
+        frameClosing.add(button1, BorderLayout.WEST);
+        frameClosing.add(button2, BorderLayout.EAST);
+        frameClosing.add(label, BorderLayout.NORTH);
+
+        button1.addActionListener(e -> {
+            saveHistory();
+            new HomeGUI();
+        });
+
+        button2.addActionListener(e -> {
+            noSaveHistory();
+            new HomeGUI();
         });
     }
 
@@ -303,7 +334,7 @@ public class LibraryGUI implements ActionListener {
     private void setDescriptionPanel() {
         titleAndDescriptionPanel = new JPanel();
         titleAndDescriptionPanel.setLayout(null);
-        titleAndDescriptionPanel.setBackground(new Color(53, 243, 250, 144));
+        titleAndDescriptionPanel.setBackground(new Color(59, 229, 234));
         titleAndDescriptionPanel.setPreferredSize(new Dimension(550, 300));
         titleAndDescriptionPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelL.add(titleAndDescriptionPanel, BorderLayout.NORTH);
@@ -532,15 +563,16 @@ public class LibraryGUI implements ActionListener {
     // EFFECTS: adds and loads the changes or no
     public void addLoad() {
         frameLoadingPrompt = new JFrame();
-        frameLoadingPrompt.setSize(new Dimension(450, 100));
+        frameLoadingPrompt.setMinimumSize(new Dimension(400, 100));
         frameLoadingPrompt.setVisible(true);
         frameLoadingPrompt.setLocationRelativeTo(null);
 
-        JButton button1 = new JButton("Load");
-        button1.setBounds(10,20, 50, 30);
-        JButton button2 = new JButton("No Load");
+        JButton button1 = new JButton("Yes");
+        button1.setBounds(10,20, 30, 30);
+        JButton button2 = new JButton("No");
         button2.setBounds(40,20, 30, 30);
-        JLabel label = new JLabel("<html>Load History or no? If no, then you can't perform add or remove.</html>");
+        JLabel label = new JLabel("<html>Load comments? If no, you can't add or remove comments"
+                + ".</html>");
         label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
 
         frameLoadingPrompt.add(button1, BorderLayout.WEST);
@@ -601,6 +633,37 @@ public class LibraryGUI implements ActionListener {
         buttonAdd.setEnabled(false);
         buttonRemove.setEnabled(false);
         frameLoadingPrompt.dispose();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the return icon
+    public void setReturnIcon() {
+        JPanel container = new JPanel();
+        container.setBounds(45,45,30,30);
+
+        JLabel imageLabel = new JLabel();
+        ImageIcon imageIcon = new ImageIcon("image/home-icon.png");
+        Image image = imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+
+        ImageIcon inserted = new ImageIcon(image);
+        imageLabel.setIcon(inserted);
+
+        container.add(imageLabel);
+        container.setBackground(new Color(59, 229, 234));
+        frame.add(container);
+
+        setMouseEventForReturningHomePage(container);
+        imageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+
+    // EFFECTS: activates the homeIcon
+    public void setMouseEventForReturningHomePage(JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                closeAndDirectHome();
+            }
+        });
     }
 
     // EFFECTS: gets the parent frame
