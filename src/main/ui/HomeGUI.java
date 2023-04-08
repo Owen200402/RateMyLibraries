@@ -1,5 +1,7 @@
 package ui;
 
+import model.EventLog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -29,6 +31,7 @@ public class HomeGUI {
         frame.setMaximumSize(new Dimension(1140, 500));
         frame.setMinimumSize(new Dimension(1000, 470));
         frame.setLocationRelativeTo(null);
+        logEvents();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -120,6 +123,17 @@ public class HomeGUI {
                 } else if (name.equals("BioMedical Branch Library")) {
                     new BiomedicalBranchGUI();
                     frame.dispose();
+                }
+            }
+        });
+    }
+
+    private void logEvents() {
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (model.Event event : EventLog.getInstance()) {
+                    java.lang.System.out.println(event.getDescription());
                 }
             }
         });

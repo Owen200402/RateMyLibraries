@@ -1,6 +1,5 @@
 package model;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,7 @@ public class SystemTest {
         system = new System();
         Comment c = new Comment("Great Environment", 3, "owen04", date.toString());
         comments = new Comments();
-        comments.add(c);
+        comments.addToSystem(c);
         library = new Library(comments, "Koerner", 4);
     }
 

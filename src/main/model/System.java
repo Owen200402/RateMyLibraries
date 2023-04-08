@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 // The Rate My Library System
-
 public class System implements WriteEnable {
     private List<Library> libraries;
 

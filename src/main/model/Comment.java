@@ -4,7 +4,6 @@ import org.json.JSONObject;
 import persistance.WriteEnable;
 
 // Represents statistics of individual comments made by users
-
 public class Comment implements WriteEnable {
     private String message;
     private double rating;

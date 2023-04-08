@@ -71,11 +71,17 @@ public class JsonReader {
         JSONArray jsonArray = jsonObject.getJSONArray("library");
         String name = jsonObject.getString("name");
         String number = jsonObject.getString("rating");
+
         Comments comments = new Comments();
 
+        comments.setIsReadingFromJson(true);
         for (Object json: jsonArray) {
-            comments.add(addComments((JSONObject) json));
+            comments.addToSystem(addComments((JSONObject) json));
         }
+        comments.setIsReadingFromJson(false);
+
+        Library myLibrary = new Library(comments, name, Double.parseDouble(number));
+        comments.setLibrary(myLibrary);
 
         return new Library(comments, name, Double.parseDouble(number));
     }

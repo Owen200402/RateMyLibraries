@@ -8,7 +8,6 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 // Represents a library system with comments associated
-
 public class Library implements WriteEnable { // may extract a Rating Calculator to reduce cohesion
     private Comments comments;
     private double overallRatingForCalculation;
@@ -21,6 +20,7 @@ public class Library implements WriteEnable { // may extract a Rating Calculator
         this.comments = comments;
         this.name = name;
         this.number = number;
+        comments.setLibrary(this);
     }
 
     // MODIFIES: this
@@ -85,4 +85,6 @@ public class Library implements WriteEnable { // may extract a Rating Calculator
 
         return jsonArray;
     }
+
+
 }

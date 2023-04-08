@@ -198,7 +198,7 @@ public class RemovingWindowGUI implements ActionListener {
 
         try {
             System system = jsonReader.read();
-            if (!system.getLibraries().get(libraryNum).getListOfComments().remove(userNum, password)) {
+            if (!system.getLibraries().get(libraryNum).getListOfComments().removeFromSystem(userNum, password)) {
                 success.setText("Password is incorrect!");
                 passwordText.setText("");
                 return;

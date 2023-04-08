@@ -34,7 +34,7 @@ class JsonWriterTest {
             Date date = new Date(20);
             Comment c = new Comment("Great Environment", 3, "owen04", date.toString());
             Comments comments = new Comments();
-            comments.add(c);
+            comments.addToSystem(c);
             Library library = new Library(comments, "Koerner", 4);
             system.add(library);
 
@@ -83,7 +83,7 @@ class JsonWriterTest {
         Date date = new Date(20);
         Comment c = new Comment("Great Environment", 3, "owen04", date.toString());
         Comments comments = new Comments();
-        comments.add(c);
+        comments.addToSystem(c);
         Library library = new Library(comments, "Koerner", 4);
         system.add(library);
     }

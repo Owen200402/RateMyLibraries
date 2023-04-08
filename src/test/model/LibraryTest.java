@@ -17,7 +17,7 @@ public class LibraryTest {
     public void setUp() {
         Comment c = new Comment("Great Environment", 3, "owen04", date.toString());
         comments = new Comments();
-        comments.add(c);
+        comments.addToSystem(c);
         library = new Library(comments, "Koerner", 4);
     }
 
@@ -35,7 +35,7 @@ public class LibraryTest {
         assertEquals(0, library.getOverallRating());
         library.calculateOverallRating();
         assertEquals(3, library.getOverallRating());
-        library.getListOfComments().add(new Comment("Hey", 2.6, "owen04",
+        library.getListOfComments().addToSystem(new Comment("Hey", 2.6, "owen04",
                 new Date().toString()));
         library.calculateOverallRating();
         assertEquals(2.8, library.getOverallRating());
@@ -54,7 +54,7 @@ public class LibraryTest {
     @Test
     public void testToJsonWithMultipleLibraries() {
         Comment newComment = new Comment("Nice!", 5, "daniel", date.toString());
-        comments.add(newComment);
+        comments.addToSystem(newComment);
 
         JSONObject jsonObject = library.toJson();
 

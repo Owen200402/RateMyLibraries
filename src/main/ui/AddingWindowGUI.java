@@ -1,6 +1,7 @@
 package ui;
 
 import model.Comment;
+import model.Comments;
 import model.System;
 import persistance.JsonReader;
 import persistance.JsonWriter;
@@ -190,6 +191,8 @@ public class AddingWindowGUI implements ActionListener {
             success.setText("Please Enter A Number Between 0 and 5.");
             return;
         }
+
+
         setText();
         switchScreen();
     }
@@ -202,7 +205,7 @@ public class AddingWindowGUI implements ActionListener {
         String rating = ratingText.getText();
         try {
             System system = jsonReader.read();
-            system.getLibraries().get(libraryNum).getListOfComments().add(new Comment(comment,
+            system.getLibraries().get(libraryNum).getListOfComments().addToSystem(new Comment(comment,
                     Double.parseDouble(rating), password, new Date().toString()));
             jsonWriter.open();
             jsonWriter.write(system);

@@ -26,7 +26,7 @@ public class CommentsTest {
     public void testAdd() {
         assertEquals(0, comments.getComments().size());
         Comment comment = new Comment("Great Environment", 1, "owen04", new Date().toString());
-        comments.add(comment);
+        comments.addToSystem(comment);
 
         assertEquals(1, comments.getComments().size());
         assertEquals(1, comment.getNumberBeingAdded());
@@ -35,22 +35,22 @@ public class CommentsTest {
     @Test
     public void testRemove() {
         Comment comment = new Comment("Great Environment", 1, "owen04", new Date().toString());
-        comments.add(comment);
+        comments.addToSystem(comment);
 
-        assertFalse(comments.remove(1, "gregor"));
+        assertFalse(comments.removeFromSystem(1, "gregor"));
         assertEquals(1, comments.getComments().size());
 
-        assertFalse(comments.remove(0, "gregor"));
+        assertFalse(comments.removeFromSystem(0, "gregor"));
         assertEquals(1, comments.getComments().size());
 
-        assertTrue(comments.remove(1, "owen04"));
+        assertTrue(comments.removeFromSystem(1, "owen04"));
         assertEquals(0, comments.getComments().size());
     }
 
     @Test
     public void testToJson() {
         Comment comment = new Comment("Great Environment", 1, "owen04", new Date().toString());
-        comments.add(comment);
+        comments.addToSystem(comment);
 
         JSONObject jsonObject = comments.toJson();
         assertEquals(comments.commentsToJson().toString(), jsonObject.get("comments").toString());
@@ -60,8 +60,8 @@ public class CommentsTest {
     public void testToJsonAddMultipleComments() {
         Comment comment = new Comment("Great Environment", 1, "owen04", new Date().toString());
         Comment comment2 = new Comment("Nice", 5, "Daniel", new Date().toString());
-        comments.add(comment);
-        comments.add(comment2);
+        comments.addToSystem(comment);
+        comments.addToSystem(comment2);
 
         JSONObject jsonObject = comments.toJson();
         assertEquals(comments.commentsToJson().toString(), jsonObject.get("comments").toString());

@@ -21,7 +21,7 @@ I am committed to create this software interface to minimize obstacles students
 may have through their transition to the university of british columbia.
 
 
-### As a *user*, you may do the following:
+## As a *user*, you may do the following:
 - check out previous comments I made so far for each library with user's unique key linked to each comment
 - add comments with ratings for every library with their current date and time associated with their comments
 - remove comments with ratings for each library commented after key/password validation
@@ -31,14 +31,20 @@ may have through their transition to the university of british columbia.
 - when I start the application, I will be given the option to load my historical comments so everything is up-to-date.
 
 
-## Instructions for Grader
+## Instructions for Grader:
 - You can generate the first required action related to adding Xs to a Y by clicking on "Add" button on the bottom left
 - You can generate the second required action related to adding Xs to a Y by clicking on Remove button on the bottom left
-- You can generate the third required action by hovering mouse onto the comment box to achieve highlighting
-- You can locate my visual component by looking at the right panel when you load my application
-- You can save the state of your application by closing my application window and clicking on "Save" on a separate pop-up window
-- You can load the state of my application by clicking on "Click here to view" and follow the new prompt which asks you to load or not
-- You can delete comments by selecting user number with correct password. The first couple's passwords, by default, are "owen04"
+- You can locate my visual component such as Vancouver's gif at the right panel when you load my application
+- You can save the state of Rate My Library by closing my application window and clicking on "Save" on a separate pop-up window
+- You can load the state of my application by clicking on "Click here to view" and follow the new prompt which asks you to load or not. If chosen not to load, you cannot remove or add comments.
+- You can delete your comments by selecting user number with correct password. The most common passwords for them are "owen04" (or "qweqwe").
 
-## Citations:
-https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+## Phase 4: Task 2
+#### - made sure data-preserving code and GUI are not logged
+### Sample of Events:
+- A new comment is added to Asian Library
+- A new comment is added to Biomedical Branch Library
+- A comment is removed from Irving K. Barber Learning Centre
+- A new comment is added to Law Library
+- A comment is removed from Asian Library
+- A comment is removed from Biomedical Branch Library

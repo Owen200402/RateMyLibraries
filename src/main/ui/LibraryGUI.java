@@ -1,5 +1,8 @@
 package ui;
 
+import model.Comments;
+import model.Event;
+import model.EventLog;
 import model.System;
 import org.json.JSONObject;
 import persistance.JsonReader;
@@ -39,6 +42,7 @@ public class LibraryGUI implements ActionListener {
     private static JLabel imageLabel;
     private static JLabel ubcLogo;
     private static JLabel textLabel;
+    private static JLabel homeIcon;
     private static JButton clickHereToView;
     private static JButton buttonAdd;
     private static JButton buttonRemove;
@@ -122,11 +126,24 @@ public class LibraryGUI implements ActionListener {
         frameClosing.add(label, BorderLayout.NORTH);
 
         button1.addActionListener(e -> {
+            setConsoleLogs();
             saveHistory();
         });
 
         button2.addActionListener(e -> {
+            setConsoleLogs();
             noSaveHistory();
+        });
+    }
+
+    private void setConsoleLogs() {
+        frameClosing.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                for (model.Event event : EventLog.getInstance()) {
+                    java.lang.System.out.println(event.getDescription());
+                }
+            }
         });
     }
 
@@ -200,6 +217,8 @@ public class LibraryGUI implements ActionListener {
         destinationWriter.write(sourceJsonObject.toString());
         destinationWriter.close();
 
+//        Comments.saved(libraryNum);
+
         frameClosing.dispose();
         frame.dispose();
     }
@@ -223,6 +242,8 @@ public class LibraryGUI implements ActionListener {
         FileWriter destinationWriter = new FileWriter(toFile);
         destinationWriter.write(sourceJsonObject.toString());
         destinationWriter.close();
+
+//        Comments.unsaved(libraryNum);
 
         frameClosing.dispose();
         frame.dispose();
@@ -411,20 +432,16 @@ public class LibraryGUI implements ActionListener {
     // MODIFIES: this
     // EFFECTS: displays the image with smooth scaling
     private void setImageDisplayed() {
-        // create a new JLabel component
         JLabel imageLabel = new JLabel();
 
-        // create an ImageIcon from a file path or URL
         ImageIcon imageIcon = new ImageIcon(imagePath);
         Image image = imageIcon.getImage().getScaledInstance(180, 130, Image.SCALE_SMOOTH);
 
         ImageIcon inserted = new ImageIcon(image);
 
-        // set the imageIcon as the label's icon
         imageLabel.setIcon(inserted);
         imageLabel.setBounds(50, 40, IMAGE_WIDTH, 200);
 
-        // add panelLeft to the frame
         titleAndDescriptionPanel.add(imageLabel);
     }
 
@@ -487,14 +504,12 @@ public class LibraryGUI implements ActionListener {
         for (int i = 0; i < getNumberOfComments(); i++) {
             String ratingMessage = "<html>" + loadedInfo.getLibraries().get(libraryNum)
                     .getListOfComments().getComments().get(i).toString() + "</html>";
+
             JPanel commentPanel = new JPanel(new BorderLayout());
-            commentPanel.setBackground(new Color(190, 188, 180));
-            commentPanel.setBounds(10, trackCommentY, 500, 60);
-            commentPanel.setBorder(BorderFactory.createEmptyBorder(5, 8, 5, 8));
+            setCommentPanel(commentPanel);
 
             JLabel label = new JLabel(ratingMessage);
             label.setPreferredSize(new Dimension(500, 60));
-
 
             commentPanel.add(label);
             panelR.add(commentPanel);
@@ -511,6 +526,14 @@ public class LibraryGUI implements ActionListener {
                 }
             });
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the comment panel
+    private void setCommentPanel(JPanel panel) {
+        panel.setBackground(new Color(190, 188, 180));
+        panel.setBounds(10, trackCommentY, 500, 60);
+        panel.setBorder(BorderFactory.createEmptyBorder(5, 8, 5, 8));
     }
 
     // MODIFIES: this
@@ -604,14 +627,13 @@ public class LibraryGUI implements ActionListener {
         panelR.remove(imageLabel);
         panelR.remove(ubcLogo);
         panelR.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        // Add everything for this library
-        retrieveComments(loadedInfo);
 
-        sl.setDividerLocation(0.5);
+        retrieveComments(loadedInfo);
         panelL.setMinimumSize(new Dimension(550, 500));
         panelR.setPreferredSize(new Dimension(550, trackCommentY - 20 - COMMENT_GAP));
         clickHereToView.setEnabled(false);
         frameLoadingPrompt.dispose();
+
     }
 
     // MODIFIES: this
@@ -628,9 +650,6 @@ public class LibraryGUI implements ActionListener {
         panelR.remove(ubcLogo);
         panelR.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        sl.setDividerLocation(0.5);
-        panelL.setMinimumSize(new Dimension(550, 500));
-        panelR.setPreferredSize(new Dimension(550, trackCommentY - 20 - COMMENT_GAP));
         clickHereToView.setEnabled(false);
         buttonAdd.setEnabled(false);
         buttonRemove.setEnabled(false);
@@ -643,23 +662,23 @@ public class LibraryGUI implements ActionListener {
         JPanel container = new JPanel();
         container.setBounds(45,45,30,30);
 
-        JLabel imageLabel = new JLabel();
+        homeIcon = new JLabel();
         ImageIcon imageIcon = new ImageIcon("image/home-icon.png");
         Image image = imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 
         ImageIcon inserted = new ImageIcon(image);
-        imageLabel.setIcon(inserted);
+        homeIcon.setIcon(inserted);
 
-        container.add(imageLabel);
+        container.add(homeIcon);
         container.setBackground(new Color(59, 229, 234));
         frame.add(container);
 
         setMouseEventForReturningHomePage(container);
-        imageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        homeIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     // EFFECTS: activates the homeIcon
-    public void setMouseEventForReturningHomePage(JPanel panel) {
+    private void setMouseEventForReturningHomePage(JPanel panel) {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -687,4 +706,6 @@ public class LibraryGUI implements ActionListener {
     public String getDescriptionText() {
         return descriptionText;
     }
+
+
 }

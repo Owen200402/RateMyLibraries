@@ -16,7 +16,7 @@ public class UserTest {
     public void setUp() {
         Comment c = new Comment("Great Environment", 1, "owen04", new Date().toString());
         Comments comments = new Comments();
-        comments.add(c);
+        comments.addToSystem(c);
         List<Library> libraries = new ArrayList<>();
         libraries.add(new Library(comments, "Asian Library", 1));
         user = new User(libraries);

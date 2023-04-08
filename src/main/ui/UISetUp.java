@@ -121,7 +121,7 @@ public class UISetUp {
         Calendar calendar = new GregorianCalendar(2022, Calendar.FEBRUARY, 11);
         String date = calendar.getTime().toString();
         Comment comment = new Comment(message, rating, "owen04", date);
-        comments.add(comment);
+        comments.addToSystem(comment);
     }
 
     // EFFECTS: print out the intro statement to users
@@ -297,7 +297,7 @@ public class UISetUp {
         System.out.println("Enter a password linked to this comment so you can view or change it anytime: ");
         String password = scanner.next();
 
-        library.getListOfComments().add(new Comment(comment, rating, password, new Date().toString()));
+        library.getListOfComments().addToSystem(new Comment(comment, rating, password, new Date().toString()));
         library.calculateOverallRating();
     }
 
@@ -311,7 +311,7 @@ public class UISetUp {
         System.out.print("Enter your unique key associated with this comment to remove it: ");
         String password = scanner.next();
 
-        boolean result = library.getListOfComments().remove(commentNum, password);
+        boolean result = library.getListOfComments().removeFromSystem(commentNum, password);
 
         if (result) {
             System.out.println("You've successfully removed your comment");
