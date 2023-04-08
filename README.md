@@ -48,3 +48,21 @@ may have through their transition to the university of british columbia.
 - A new comment is added to Law Library
 - A comment is removed from Asian Library
 - A comment is removed from Biomedical Branch Library
+
+
+## Phase 4: Task 3
+There are four places that could be refactored better in my project.
+
+Firstly, in the Comments class, the method setLibrary() violates the single responsibility principle , as this class is only for manipulating(adding or removing) comments. Associating a library for these comments explicitly does not make sense. In order to
+achieve bi-directional relationship, I should consider passing it into the constructor instead, and a lot of codes in UISetUp and JsonReader would have to be changed. The second change, in my opinion, is that the User class can be removed, since it only performs one operation, which is to view all the comments
+under a password by a particular user. Since one user's password can still change, this feature does not make a lot of sense, and it is also why I took it out in my GUI. However, if keeping it still makes sense
+to the users, I should declare a method in UISetUp for iterating over all the comments in different libraries there rather than having a separate class to handle this utility function. Optionally, I can also 
+consider letting Library implement Iterable<Comments> to write fewer for-loops.
+
+The third improvement I would make is to give an ID to every individual library. The reason is that when I tried to iterate over or search for a library in UI, I often lost my pointer
+and did not know which library I was referring to. Therefore, I had to add a Hashmap to map a unique number for every library, which was tedious to do so. If I were to improve it,
+I would make a singleton class to generate ID for each library or simply add an ID field to each library. By doing so, I will be able to greatly reduce code in UISetUp class and also
+HomeGUI's directToOtherPages() method. Lots of "if" clauses and for loops will be reduced as a result. Lastly, there are lots of duplications in 
+AddingWindowGUI and RemovingWindowGUI classes as lots of them share the same features such as setFrame() and setUpWindow(). I can actually
+have an abstract parent class for them to reduce some code, and if I want, I can set up similar windows easily in the future by just calling the
+letting the new class extend this abstract parent class.

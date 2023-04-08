@@ -13,7 +13,7 @@ public class User {
         this.libraryList = libraries;
     }
 
-    // REQUIRES: 5 < password <= 20 characters
+    // REQUIRES: 5 <= password <= 20 characters
     // EFFECTS: view the comments this particular user has commented on
     public Map<Comment, String> viewPreviousCommented(String password) {
         Map<Comment, String> commentMap = new HashMap<>();
