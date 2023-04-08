@@ -1,7 +1,6 @@
 package ui;
 
 import model.Comment;
-import model.Comments;
 import model.System;
 import persistance.JsonReader;
 import persistance.JsonWriter;

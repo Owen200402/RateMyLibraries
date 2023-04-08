@@ -40,7 +40,7 @@ may have through their transition to the university of british columbia.
 - You can delete your comments by selecting user number with correct password. The most common passwords for them are "owen04" (or "qweqwe").
 
 ## Phase 4: Task 2
-#### - made sure data-preserving code and GUI are not logged
+##### - made sure data-preserving code and GUI are not logged, but key actions (add and remove) are logged no matter if the user saved it or not
 ### Sample of Events:
 - A new comment is added to Asian Library
 - A new comment is added to Biomedical Branch Library

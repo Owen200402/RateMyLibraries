@@ -1,7 +1,5 @@
 package ui;
 
-import model.Comments;
-import model.Event;
 import model.EventLog;
 import model.System;
 import org.json.JSONObject;
