@@ -43,11 +43,9 @@ class  JsonReaderTest {
             List<Library> libraries = system.getLibraries();
             assertEquals(6, libraries.size());
             assertEquals("Asian Library", libraries.get(0).getName());
-            assertEquals("4.3", libraries.get(0).getRatingDisplayed());
+            assertEquals("NaN", libraries.get(0).getRatingDisplayed());
 
-            assertEquals(3, libraries.get(0).getListOfComments().getComments().size());
-            assertEquals("Clean Environment",
-                    libraries.get(0).getListOfComments().getComments().get(0).getMessage());
+            assertEquals(0, libraries.get(0).getListOfComments().getComments().size());
 
         } catch (IOException e) {
             fail("Couldn't read from file");

@@ -19,8 +19,10 @@ public class SystemTest {
         system = new System();
         Comment c = new Comment("Great Environment", 3, "owen04", date.toString());
         comments = new Comments();
-        comments.addToSystem(c);
+
         library = new Library(comments, "Koerner", 4);
+        comments.setLibrary(library);
+        comments.addToSystem(c);
     }
 
     @Test

@@ -16,9 +16,12 @@ public class UserTest {
     public void setUp() {
         Comment c = new Comment("Great Environment", 1, "owen04", new Date().toString());
         Comments comments = new Comments();
-        comments.addToSystem(c);
         List<Library> libraries = new ArrayList<>();
-        libraries.add(new Library(comments, "Asian Library", 1));
+        Library asianL = new Library(comments, "Asian Library", 1);
+        libraries.add(asianL);
+
+        comments.setLibrary(asianL);
+        comments.addToSystem(c);
         user = new User(libraries);
     }
 

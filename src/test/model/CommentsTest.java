@@ -11,10 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CommentsTest {
     Comments comments;
+    Date date = new Date(20);
 
     @BeforeEach
     public void setUp() {
         comments = new Comments();
+        Library library = new Library(comments, "Koerner", 4);
+
+        comments.setLibrary(library);
     }
 
     @Test
