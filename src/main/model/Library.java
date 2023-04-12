@@ -36,6 +36,7 @@ public class Library implements WriteEnable { // may extract a Rating Calculator
         this.overallRatingForCalculation = count / (double) commentList.size();
     }
 
+    // EFFECTS: gets the rating formatted so that it can be displayed onto GUI
     public String getRatingDisplayed() {
         DecimalFormat df = new DecimalFormat("#.#");
         this.overallRatingDisplayed = df.format(overallRatingForCalculation);

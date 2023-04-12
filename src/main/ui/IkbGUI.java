@@ -6,6 +6,7 @@ package ui;
 // image/Ikblearningcentre.jpg: https://en.wikipedia.org/wiki/Irving_K._Barber_Learning_Centre
 
 public class IkbGUI extends LibraryGUI {
+    // EFFECTS: calls the super constructor and pass in the library's title, description and its image
     public IkbGUI() {
         super("Irving K. Barber Learning Centre", 1,
                 "<html><u>Description</u>: <br>"

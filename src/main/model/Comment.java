@@ -43,6 +43,7 @@ public class Comment implements WriteEnable {
         return numberBeingAdded;
     }
 
+    // EFFECTS: formats the fields into message displayed on screen
     @Override
     public String toString() {
         return "<html><b>User " + numberBeingAdded + "</b>: " + "Rating = " + rating + "\n"

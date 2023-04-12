@@ -7,6 +7,7 @@ package ui;
 // image/Law_Library.jpg: https://news.ubc.ca/2014/01/28/ubc-law-asks-b-c-s-law-society-to-consider-impact-of-trinity-westerns-covenant-on-lgbt-community/
 
 public class LawGUI extends LibraryGUI {
+    // EFFECTS: calls the super constructor and pass in the library's title, description and its image
     public LawGUI() {
         super("Law Library", 3,
                 "<html><u>Description</u>: <br>"

@@ -6,6 +6,7 @@ package ui;
 // image/Biomed_Library.jpg: https://nicelocal.ca/vancouver/cultural_places/ubc_biomedical_branch_library/
 
 public class BiomedicalBranchGUI extends LibraryGUI {
+    // EFFECTS: calls the super constructor and pass in the library's title, description and its image
     public BiomedicalBranchGUI() {
         super("Biomedical Branch Library", 5,
                 "<html><u>Description</u>: <br>"

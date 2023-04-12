@@ -6,6 +6,7 @@ package ui;
 // image/Asian_Centre.jpg: https://www.rjc.ca/project-details/ubc-asian-centre-roof-replacement.html
 
 public class AsianGUI extends LibraryGUI {
+    // EFFECTS: calls the super constructor and pass in the library's title, description and its image
     public AsianGUI() {
         super("Asian Centre", 0,
                 "<html><u>Description</u>: <br>"

@@ -134,6 +134,7 @@ public class LibraryGUI implements ActionListener {
         });
     }
 
+    // EFFECTS: logs all events on the console
     private void setConsoleLogs() {
         frameClosing.addWindowListener(new WindowAdapter() {
             @Override
@@ -217,8 +218,6 @@ public class LibraryGUI implements ActionListener {
         destinationWriter.write(sourceJsonObject.toString());
         destinationWriter.close();
 
-//        Comments.saved(libraryNum);
-
         frameClosing.dispose();
         frame.dispose();
     }
@@ -242,8 +241,6 @@ public class LibraryGUI implements ActionListener {
         FileWriter destinationWriter = new FileWriter(toFile);
         destinationWriter.write(sourceJsonObject.toString());
         destinationWriter.close();
-
-//        Comments.unsaved(libraryNum);
 
         frameClosing.dispose();
         frame.dispose();

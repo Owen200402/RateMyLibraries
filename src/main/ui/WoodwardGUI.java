@@ -6,6 +6,7 @@ package ui;
 // Woodward_Library.jpg: https://infrastructuredevelopment.ubc.ca/projects/woodward-library-entrance-and-study-space/
 
 public class WoodwardGUI extends LibraryGUI {
+    // EFFECTS: calls the super constructor and pass in the library's title, description and its image
     public WoodwardGUI() {
         super("Woodward Library", 4,
                 "<html><u>Description</u>: <br>"

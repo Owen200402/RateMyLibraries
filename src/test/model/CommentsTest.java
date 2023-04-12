@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CommentsTest {
     Comments comments;
-    Date date = new Date(20);
 
     @BeforeEach
     public void setUp() {

@@ -18,14 +18,12 @@ public class Comments implements WriteEnable {
         comments = new ArrayList<>();
     }
 
-    // EFFECTS: constructs a list of comments and sets up the library field
-
     // EFFECTS: associates Comments with its Libraries
     public void setLibrary(Library library) {
         this.library = library;
     }
 
-    // REQUIRES: comment from the user
+    // REQUIRES: a comment from the user
     // MODIFIES: this
     // EFFECTS: adds comment to the list of comments we have so far
     //      and record the number of that comment being added in a queue
@@ -57,6 +55,7 @@ public class Comments implements WriteEnable {
         return false;
     }
 
+    // EFFECTS: make a json object for this class
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

@@ -128,12 +128,15 @@ public class HomeGUI {
         });
     }
 
+    // EFFECTS: logs events on the console after user closes the Home Window
     private void logEvents() {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 for (model.Event event : EventLog.getInstance()) {
+                    java.lang.System.out.println(event.getDate());
                     java.lang.System.out.println(event.getDescription());
+                    java.lang.System.out.println();
                 }
             }
         });

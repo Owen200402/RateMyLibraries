@@ -6,6 +6,7 @@ package ui;
 // image/Koerner_Library.jpg: https://commons.wikimedia.org/wiki/File:Koerner_library_ubc.jpg
 
 public class KoernerGUI extends LibraryGUI {
+    // EFFECTS: calls the super constructor and pass in the library's title, description and its image
     public KoernerGUI() {
         super("Koerner Library", 2,
                 "<html><u>Description</u>: <br>"
