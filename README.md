@@ -42,12 +42,31 @@ may have through their transition to the university of british columbia.
 ## Phase 4: Task 2
 ##### - made sure data-preserving code and GUI are not logged, but key actions (add and remove) are logged no matter if the user saved it or not
 ### Sample of Events:
-- A new comment is added to Asian Library
-- A new comment is added to Biomedical Branch Library
-- A comment is removed from Irving K. Barber Learning Centre
-- A new comment is added to Law Library
-- A comment is removed from Asian Library
-- A comment is removed from Biomedical Branch Library
+Wed Apr 12 09:02:09 PDT 2023
+
+A new comment is added to Asian Library<br><br>
+
+
+
+Wed Apr 12 09:02:19 PDT 2023
+
+A new comment is added to Biomedical Branch Library<br><br>
+
+Wed Apr 12 09:02:43 PDT 2023
+
+A comment is removed from Irving K. Barber Learning Centre<br><br>
+
+Wed Apr 12 09:03:12 PDT 2023
+
+A new comment is added to Law Library<br><br>
+
+Wed Apr 12 09:03:40 PDT 2023 
+
+A comment is removed from Asian Library<br><br>
+
+Wed Apr 12 09:03:51 PDT 2023
+
+A comment is removed from Biomedical Branch Library
 
 
 ## Phase 4: Task 3

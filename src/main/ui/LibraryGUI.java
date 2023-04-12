@@ -139,7 +139,9 @@ public class LibraryGUI implements ActionListener {
             @Override
             public void windowClosed(WindowEvent e) {
                 for (model.Event event : EventLog.getInstance()) {
+                    java.lang.System.out.println(event.getDate());
                     java.lang.System.out.println(event.getDescription());
+                    java.lang.System.out.println();
                 }
             }
         });
