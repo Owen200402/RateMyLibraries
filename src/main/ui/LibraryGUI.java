@@ -21,13 +21,11 @@ public class LibraryGUI implements ActionListener {
     private static final int IMAGE_WIDTH = 180;
     private static final int COMMENT_GAP = 20;
     private static final JsonReader jsonReader = new JsonReader("./data/libraries.json");
-    private static final JsonReader jsonReaderEmpty = new JsonReader("./data/generalLibraries.json");
     private int trackCommentY = 20;
 
     // Components:
     private static System loadedInfo;
     private static JFrame frame;
-    private static JFrame frameLoadingPrompt;
     private static JFrame frameClosing;
     private static AddingWindowGUI addingWindowGUI;
     private static RemovingWindowGUI removingWindowGUI;
@@ -514,12 +512,12 @@ public class LibraryGUI implements ActionListener {
             commentPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    commentPanel.setBackground(new Color(237, 161, 239, 255));
+                    commentPanel.setBackground(new Color(95, 98, 200, 255));
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    commentPanel.setBackground(new Color(190, 188, 180));
+                    commentPanel.setBackground(new Color(125, 149, 180));
                 }
             });
         }
@@ -528,9 +526,9 @@ public class LibraryGUI implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets the comment panel
     private void setCommentPanel(JPanel panel) {
-        panel.setBackground(new Color(190, 188, 180));
+        panel.setBackground(new Color(125, 149, 180));
         panel.setBounds(10, trackCommentY, 500, 60);
-        panel.setBorder(BorderFactory.createEmptyBorder(5, 8, 5, 8));
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
     }
 
     // MODIFIES: this
@@ -584,30 +582,7 @@ public class LibraryGUI implements ActionListener {
     // MODIFIES: this
     // EFFECTS: adds and loads the changes or no
     public void addLoad() {
-        frameLoadingPrompt = new JFrame();
-        frameLoadingPrompt.setMinimumSize(new Dimension(400, 100));
-        frameLoadingPrompt.setVisible(true);
-        frameLoadingPrompt.setLocationRelativeTo(null);
-
-        JButton button1 = new JButton("Yes");
-        button1.setBounds(10,20, 30, 30);
-        JButton button2 = new JButton("No");
-        button2.setBounds(40,20, 30, 30);
-        JLabel label = new JLabel("<html>Load comments? If no, you can't add or remove comments"
-                + ".</html>");
-        label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
-
-        frameLoadingPrompt.add(button1, BorderLayout.WEST);
-        frameLoadingPrompt.add(button2, BorderLayout.EAST);
-        frameLoadingPrompt.add(label, BorderLayout.NORTH);
-
-        button1.addActionListener(e -> {
-            show();
-        });
-
-        button2.addActionListener(e -> {
-            noShow();
-        });
+        show();
     }
 
     // MODIFIES: this
@@ -629,28 +604,7 @@ public class LibraryGUI implements ActionListener {
         panelL.setMinimumSize(new Dimension(550, 500));
         panelR.setPreferredSize(new Dimension(550, trackCommentY - 20 - COMMENT_GAP));
         clickHereToView.setEnabled(false);
-        frameLoadingPrompt.dispose();
 
-    }
-
-    // MODIFIES: this
-    // EFFECTS: shows empty comments and disable add and remove buttons for further actions
-    public void noShow() {
-        scrollPaneR.removeComponentListener(adapter);
-        try {
-            loadedInfo = jsonReaderEmpty.read();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-
-        panelR.remove(imageLabel);
-        panelR.remove(ubcLogo);
-        panelR.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        clickHereToView.setEnabled(false);
-        buttonAdd.setEnabled(false);
-        buttonRemove.setEnabled(false);
-        frameLoadingPrompt.dispose();
     }
 
     // MODIFIES: this

@@ -10,13 +10,15 @@ public class Comment implements WriteEnable {
     private String password;
     private String date;
     private int numberBeingAdded;
+    private Client client;
 
     // EFFECTS: write default messages into the comments, and set rating
-    public Comment(String message, double rating, String password, String date) {
+    public Comment(String message, double rating, String password, String date, String userName) {
         this.message = message;
         this.rating = rating;
         this.password = password;
         this.date = date;
+        client = new Client(userName);
     }
 
     public String getMessage() {
@@ -47,7 +49,7 @@ public class Comment implements WriteEnable {
     @Override
     public String toString() {
         return "<html><b>User " + numberBeingAdded + "</b>: " + "Rating = " + rating + "\n"
-                + " - commented at " + date + " : " + message + "</html>";
+                + " - commented on " + date + " : " + message + "</html>";
     }
 
     // EFFECTS: returns a JSONObject that contains message, rating, password and date in it
@@ -58,6 +60,7 @@ public class Comment implements WriteEnable {
         jsonObject.put("rating", rating);
         jsonObject.put("password", password);
         jsonObject.put("date", date);
+        jsonObject.put("userName", client.getUserName());
         return jsonObject;
     }
 }

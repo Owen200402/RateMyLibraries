@@ -49,12 +49,10 @@ public class RemovingWindowGUI implements ActionListener {
         setFrame();
         setPromptAndRadioButtons();
         setRatingPasswordAndSaveButton();
-        setColorToGray();
+//        setColorToGray();
         setClearAllButton();
 
         container.add(userLabel);
-        container.add(passwordLabel);
-        container.add(passwordText);
 
         panel.add(container, BorderLayout.CENTER);
 
@@ -148,15 +146,8 @@ public class RemovingWindowGUI implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets the password prompt and allows removal
     private void setRatingPasswordAndSaveButton() {
-        passwordLabel = new JLabel("<html>Password: </html>");
-        passwordLabel.setBounds(20, 110 + VGAP, 400 - HGAP - HGAP, 35);
-        panel.add(passwordLabel);
-
-        passwordText = new JPasswordField();
-        passwordText.setBounds(20, 145 + VGAP, 200, 25);
-
         button = new JButton("Remove");
-        button.setBounds(400 - HGAP * 9 - 5, 145 + VGAP, 80, 25);
+        button.setBounds(400 - HGAP * 9 - 30, 145 + VGAP, 100, 25);
         button.addActionListener(this);
         container.add(button);
     }

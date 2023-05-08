@@ -1,5 +1,6 @@
 package ui;
 
+import model.Client;
 import model.Comment;
 import model.System;
 import persistance.JsonReader;
@@ -22,7 +23,6 @@ public class AddingWindowGUI implements ActionListener {
     private static JLabel prompt;
     private static JLabel userLabel;
     private static JTextArea textArea;
-    private static JLabel passwordLabel;
     private static JLabel ratingLabel;
     private static JTextField ratingText;
     private static JPasswordField passwordText;
@@ -57,8 +57,6 @@ public class AddingWindowGUI implements ActionListener {
         container.add(userLabel);
         container.add(ratingLabel);
         container.add(ratingText);
-        container.add(passwordLabel);
-        container.add(passwordText);
 
 
         panel.add(container, BorderLayout.CENTER);
@@ -121,7 +119,6 @@ public class AddingWindowGUI implements ActionListener {
     // EFFECTS: sets colors to gray for all input panels
     private void setColorToGray() {
         textArea.setBackground(new Color(222, 221, 213));
-        passwordText.setBackground(new Color(222, 221, 213));
         ratingText.setBackground(new Color(222, 221, 213));
     }
 
@@ -129,19 +126,10 @@ public class AddingWindowGUI implements ActionListener {
     // EFFECTS: sets prompt and allows users to save their rating with a password of their choice;
     //          the "Save" button has action event to allows savings
     private void setRatingPasswordAndSaveButton() {
-        ratingLabel = new JLabel("Give it a rate! (out of 5)");
-        ratingLabel.setBounds(20, 80, 150, 30);
+        ratingLabel = new JLabel("Give it a rating (out of 5):");
+        ratingLabel.setBounds(20, 100, 200, 30);
         ratingText = new JTextField();
-        ratingText.setBounds(150 + HGAP, 80, 30, 30);
-
-
-        passwordLabel = new JLabel("<html>Password: <I>(Ensuring your comment cannot be modified"
-                + "by others)</I></html>");
-        passwordLabel.setBounds(20, 110 + VGAP, 400 - HGAP - HGAP, 35);
-        panel.add(passwordLabel);
-
-        passwordText = new JPasswordField();
-        passwordText.setBounds(20, 145 + VGAP, 200, 25);
+        ratingText.setBounds(180 + HGAP, 100, 30, 30);
 
         button = new JButton("Add");
         button.setBounds(400 - HGAP * 9 - 5, 145 + VGAP, 80, 25);
@@ -206,6 +194,7 @@ public class AddingWindowGUI implements ActionListener {
             System system = jsonReader.read();
             system.getLibraries().get(libraryNum).getListOfComments().addToSystem(new Comment(comment,
                     Double.parseDouble(rating), password, new Date().toString()));
+
             jsonWriter.open();
             jsonWriter.write(system);
             jsonWriter.close();
