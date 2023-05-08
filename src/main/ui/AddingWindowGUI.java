@@ -37,6 +37,8 @@ public class AddingWindowGUI implements ActionListener {
     private int libraryNum;
     private String imagePath;
 
+    private String userName;
+
     // REQUIRES: libraryNum to save all the content to jsonReader, the current library gui and the path of its image
     // EFFECT: Constructs the AddingWindowGUI
     public AddingWindowGUI(int libraryNum, LibraryGUI libraryGUI, String imagePath) {
@@ -192,8 +194,9 @@ public class AddingWindowGUI implements ActionListener {
         String rating = ratingText.getText();
         try {
             System system = jsonReader.read();
+            // TODO: switch Owen into the actual user name displayed on screen!
             system.getLibraries().get(libraryNum).getListOfComments().addToSystem(new Comment(comment,
-                    Double.parseDouble(rating), password, new Date().toString()));
+                    Double.parseDouble(rating), password, new Date().toString(), "Owen"));
 
             jsonWriter.open();
             jsonWriter.write(system);

@@ -59,8 +59,8 @@ public class Comment implements WriteEnable {
         jsonObject.put("message", message);
         jsonObject.put("rating", rating);
         jsonObject.put("password", password);
-        jsonObject.put("date", date);
         jsonObject.put("userName", client.getUserName());
+        jsonObject.put("date", date);
         return jsonObject;
     }
 }
