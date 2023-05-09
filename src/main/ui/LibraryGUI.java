@@ -89,9 +89,9 @@ public class LibraryGUI implements ActionListener {
     // EFFECTS: sets the frame (pop-up window) with minimum size so that users cannot shrink it
     private void setFrame() {
         frame = new JFrame();
-        frame.setSize(1140, 500); // 20px Border everywhere
-        frame.setMaximumSize(new Dimension(1140, 500));
-        frame.setMinimumSize(new Dimension(1000, 470));
+        frame.setSize(1140, 550); // 20px Border everywhere
+        frame.setMaximumSize(new Dimension(1140, 550));
+        frame.setMinimumSize(new Dimension(1000, 500));
         frame.setLocationRelativeTo(null);
         frame.setTitle("Rate My UBC Libraries");
         frame.addWindowListener(new WindowAdapter() {
@@ -542,8 +542,8 @@ public class LibraryGUI implements ActionListener {
         addOrRemovePanel = new JPanel(new GridLayout(1, 2));
         addOrRemovePanel.setBackground(new Color(242, 245, 196));
 
-        description.setPreferredSize(new Dimension(30, 90));
-        description.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        description.setPreferredSize(new Dimension(30, 120));
+        description.setBorder(BorderFactory.createEmptyBorder(1, 8, 2, 2));
         promptPanel.add(description, BorderLayout.NORTH);
         promptPanel.add(addOrRemovePanel, BorderLayout.CENTER);
         setAddAndRemovePanel();

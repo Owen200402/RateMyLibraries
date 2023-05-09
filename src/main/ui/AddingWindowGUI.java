@@ -1,6 +1,5 @@
 package ui;
 
-import model.Client;
 import model.Comment;
 import model.System;
 import persistance.JsonReader;
@@ -116,6 +115,8 @@ public class AddingWindowGUI implements ActionListener {
         textArea.setWrapStyleWord(true);
         textArea.setBounds(20, 30, 400 - HGAP - HGAP, 40);
     }
+
+
 
     // MODIFIES: this
     // EFFECTS: sets colors to gray for all input panels
