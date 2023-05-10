@@ -3,7 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistance.WriteEnable;
 
-// Represents statistics of individual comments made by users
+// Represents statistics of comments written by clients
 public class Comment implements WriteEnable {
     private String message;
     private double rating;
@@ -13,12 +13,12 @@ public class Comment implements WriteEnable {
     private Client client;
 
     // EFFECTS: write default messages into the comments, and set rating
-    public Comment(String message, double rating, String password, String date, String userName) {
+    public Comment(String message, double rating, String password, String date) {
         this.message = message;
         this.rating = rating;
         this.password = password;
         this.date = date;
-        client = new Client(userName);
+//        client = new Client(userName, password);
     }
 
     public String getMessage() {

@@ -195,9 +195,8 @@ public class AddingWindowGUI implements ActionListener {
         String rating = ratingText.getText();
         try {
             System system = jsonReader.read();
-            // TODO: switch Owen into the actual user name displayed on screen!
             system.getLibraries().get(libraryNum).getListOfComments().addToSystem(new Comment(comment,
-                    Double.parseDouble(rating), password, new Date().toString(), "Owen"));
+                    Double.parseDouble(rating), password, new Date().toString()));
 
             jsonWriter.open();
             jsonWriter.write(system);

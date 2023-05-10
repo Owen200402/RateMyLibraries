@@ -92,7 +92,6 @@ public class JsonReader {
         String password = jsonObject.getString("password");
         double rating = jsonObject.getDouble("rating");
         String message = jsonObject.getString("message");
-        String username = jsonObject.getString("userName");
-        return new Comment(message, rating, password, date, username);
+        return new Comment(message, rating, password, date);
     }
 }
