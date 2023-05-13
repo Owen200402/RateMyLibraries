@@ -259,8 +259,10 @@ public class LibraryGUI implements ActionListener {
     private void setLeftPanel() {
         panelL = new JPanel();
         panelL.setLayout(new BorderLayout());
-        panelL.setPreferredSize(new Dimension(550, 500));
-        panelL.setMinimumSize(new Dimension(550, 500));
+        panelL.setPreferredSize(new Dimension(550, 530));
+        panelL.setMinimumSize(new Dimension(550, 530));
+        panelL.setBorder(BorderFactory.createEmptyBorder(5, 0,0,0));
+        panelL.setBackground(new Color(59, 229, 234));
     }
 
     // MODIFIES: this
@@ -339,7 +341,7 @@ public class LibraryGUI implements ActionListener {
                 ImageIcon inserted2 = new ImageIcon(image2);
                 ubcLogo.setIcon(inserted2);
                 panelR.add(ubcLogo, BorderLayout.SOUTH);
-                panelR.setMinimumSize(new Dimension(550, 500));
+                panelR.setMinimumSize(new Dimension(550, 510));
 
                 panelR.revalidate();
                 panelR.repaint();
@@ -353,8 +355,8 @@ public class LibraryGUI implements ActionListener {
         titleAndDescriptionPanel = new JPanel();
         titleAndDescriptionPanel.setLayout(null);
         titleAndDescriptionPanel.setBackground(new Color(59, 229, 234));
-        titleAndDescriptionPanel.setPreferredSize(new Dimension(550, 300));
-        titleAndDescriptionPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        titleAndDescriptionPanel.setPreferredSize(new Dimension(550, 310));
+        titleAndDescriptionPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
         panelL.add(titleAndDescriptionPanel, BorderLayout.NORTH);
     }
 
@@ -371,7 +373,7 @@ public class LibraryGUI implements ActionListener {
         JPanel panelForLibDescription = new JPanel(new BorderLayout());
         panelForLibDescription.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         panelForLibDescription.add(label, BorderLayout.LINE_START);
-        panelForLibDescription.setBounds(250, 75, 250, 180);
+        panelForLibDescription.setBounds(250, 95, 250, 180);
         panelForLibDescription.setBackground(new Color(132, 204, 250));
         titleAndDescriptionPanel.add(panelForLibDescription);
     }
@@ -396,17 +398,17 @@ public class LibraryGUI implements ActionListener {
                     .getRatingDisplayed() + " / 5.0");
             libraryTitle.setSize(new Dimension(550, 40));
             libraryTitle.setHorizontalAlignment(SwingConstants.CENTER);
-            rating.setBounds(450, 50, 100, 20);
+            rating.setBounds(450, 60, 100, 20);
 
             // Set the font to bold
             Font boldFont = new Font(libraryTitle.getFont().getName(), Font.BOLD, 25);
             libraryTitle.setFont(boldFont);
 
             // Set font for rating to Comic Sans MS
-            Font fantasyFont = new Font("Comic Sans MS", Font.PLAIN, 15);
+            Font fantasyFont = new Font("Comic Sans MS", Font.PLAIN, 16);
             rating.setFont(fantasyFont);
 
-            titleAndDescriptionPanel.add(libraryTitle, BorderLayout.CENTER);
+            titleAndDescriptionPanel.add(libraryTitle, BorderLayout.SOUTH);
             titleAndDescriptionPanel.add(rating);
 
         } catch (IOException e) {
@@ -419,7 +421,7 @@ public class LibraryGUI implements ActionListener {
     private void setSubtitlePanel() {
         subTitlePanel = new JPanel();
         subTitlePanel.setBackground(new Color(96, 243, 231, 229));
-        subTitlePanel.setBounds(50, 210, IMAGE_WIDTH, 50);
+        subTitlePanel.setBounds(50, 230, IMAGE_WIDTH, 50);
         subTitlePanel.setLayout(new BorderLayout());
         titleAndDescriptionPanel.add(subTitlePanel);
     }
@@ -435,7 +437,7 @@ public class LibraryGUI implements ActionListener {
         ImageIcon inserted = new ImageIcon(image);
 
         imageLabel.setIcon(inserted);
-        imageLabel.setBounds(50, 40, IMAGE_WIDTH, 200);
+        imageLabel.setBounds(50, 60, IMAGE_WIDTH, 200);
 
         titleAndDescriptionPanel.add(imageLabel);
     }
@@ -601,7 +603,7 @@ public class LibraryGUI implements ActionListener {
         panelR.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         retrieveComments(loadedInfo);
-        panelL.setMinimumSize(new Dimension(550, 500));
+        panelL.setMinimumSize(new Dimension(550, 510));
         panelR.setPreferredSize(new Dimension(550, trackCommentY - 20 - COMMENT_GAP));
         clickHereToView.setEnabled(false);
 
@@ -611,7 +613,7 @@ public class LibraryGUI implements ActionListener {
     // EFFECTS: sets the return icon
     public void setReturnIcon() {
         JPanel container = new JPanel();
-        container.setBounds(45,45,30,30);
+        container.setBounds(45,55,30,30);
 
         homeIcon = new JLabel();
         ImageIcon imageIcon = new ImageIcon("image/home-icon.png");

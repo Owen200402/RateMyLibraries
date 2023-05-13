@@ -11,21 +11,20 @@ import java.io.IOException;
 
 // Separate Window for adding comments linked with password
 public class SignUpGUI {
-    private static int HGAP = 20;
-    private static int VGAP = 10;
+    private static final int HGAP = 20;
+    private static final int VGAP = 10;
     private static JFrame frame;
-    private static GradientPanel panel = new GradientPanel();
+    private final GradientPanel panel = new GradientPanel(new Color(255, 110, 127), new Color(191, 233, 255));
     private static JPanel container;
     private static JLabel prompt;
     private static JLabel userLabel;
     private static JTextArea textArea1;
     private static JButton button;
     private static JLabel success;
-    private static JLabel passwordText;
     private static JLabel passwordLabel;
     private static JLabel passwordConfirmLabel;
-    private static JTextArea textArea2;
-    private static JTextArea textArea3;
+    private static JPasswordField textArea2;
+    private static JPasswordField textArea3;
 
     private LoginReader loginReader = new LoginReader("./data/loginProfile.json");
     private LoginWriter loginWriter = new LoginWriter("./data/loginProfile.json");
@@ -54,7 +53,7 @@ public class SignUpGUI {
         success = new JLabel();
         success.setBounds(75, 160 + VGAP + VGAP / 2, 270, 25);
         success.setForeground(Color.RED);
-        success.setFont(new Font("SansSerif", 1, 14));
+        success.setFont(new Font("SansSerif", 1, 12));
 
         container.add(success, BorderLayout.NORTH);
         frame.add(panel);
@@ -78,7 +77,7 @@ public class SignUpGUI {
     // MODIFIES: this
     // EFFECTS: displays the question prompt and text areas for users to input their comments
     private void setPromptAndTextArea() {
-        prompt = new JLabel("<html><h2>Rate My Libraries Account Sign-Up</h2><html>");
+        prompt = new JLabel("<html><h1>Rate My Libraries Sign-Up</h1><html>");
         prompt.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         prompt.setSize(new Dimension(350, 50));
         prompt.setHorizontalAlignment(SwingConstants.CENTER);
@@ -98,10 +97,10 @@ public class SignUpGUI {
         textArea1 = new JTextArea();
         textArea1.setBounds(215, 10, 100, TEXTAREA_HEIGHT);
 
-        textArea2 = new JTextArea();
+        textArea2 = new JPasswordField();
         textArea2.setBounds(215, 40, 150, TEXTAREA_HEIGHT);
 
-        textArea3 = new JTextArea();
+        textArea3 = new JPasswordField();
         textArea3.setBounds(215, 70, 150, TEXTAREA_HEIGHT);
     }
 
@@ -129,7 +128,14 @@ public class SignUpGUI {
     private void setPasswordConfirmLabel() {
         button = new JButton("Create an Account");
         button.setBounds(400 / 2 - 150 / 2, 120, 150, 25);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         container.add(button);
+        setButton(button);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets clicking events for the button
+    private void setButton(JButton button) {
         button.addActionListener(e -> {
             if (textArea1.getText().length() == 0 | textArea2.getText().length() == 0) {
                 success.setForeground(Color.RED);
@@ -178,18 +184,16 @@ public class SignUpGUI {
     // MODIFIES: this
     // EFFECTS: sets the link for directing to the Login page
     private void setFootNote() {
-        JLabel label = new JLabel("<html><a href=\"\\ui\\LoginGUI\"> "
-                + "Account exists already? Click here to login</a></html>");
-        label.setBounds(400 / 2 - 270 / 2, 150, 270,30);
-        container.add(label);
-
+        JButton label = new JButton("<html><u>Already have an account? Click here to login</u></html>");
+        label.setBorder(BorderFactory.createEmptyBorder());
+        label.setForeground(Color.BLUE);
+        label.setBounds(400 / 2 - 300 / 2, 150, 300,30);
         label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//        label.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                // TODO
-//            }
-//        });
+        label.addActionListener(e -> {
+            new LoginGUI();
+            frame.dispose();
+        });
+        container.add(label);
     }
 
     // MODIFIES: this
@@ -208,4 +212,6 @@ public class SignUpGUI {
             throw new RuntimeException(ex);
         }
     }
+
+
 }

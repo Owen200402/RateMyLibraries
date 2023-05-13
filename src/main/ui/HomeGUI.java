@@ -11,14 +11,17 @@ public class HomeGUI {
     private static JFrame frame;
     private static JLabel heading;
     private static JPanel libraryList;
+    private static JLabel imageLabel;
 
     // EFFECTS: constructs and shows the window of Home Page of Rate My Library
     public HomeGUI() {
         frame = new JFrame("Rate My Libraries - Home");
+        imageLabel = new JLabel();
         setFrame();
         setHeading();
         setGrid();
         insertLibraryList();
+        setIcon();
         frame.setVisible(true);
     }
 
@@ -33,6 +36,27 @@ public class HomeGUI {
         frame.setLocationRelativeTo(null);
         logEvents();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the login icon
+    private void setIcon() {
+        ImageIcon imageIcon = new ImageIcon("image/icon.png");
+        Image image = imageIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+
+        ImageIcon inserted = new ImageIcon(image);
+
+        imageLabel.setIcon(inserted);
+        imageLabel.setBounds(200, 20, 30, 30);
+        frame.add(imageLabel, BorderLayout.AFTER_LINE_ENDS);
+        imageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        imageLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                new LoginGUI();
+            }
+        });
     }
 
     // MODIFIES: this
