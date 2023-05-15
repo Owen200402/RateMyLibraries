@@ -3,16 +3,13 @@ package ui;
 import model.Client;
 import model.Clients;
 import persistance.LoginReader;
-import persistance.LoginWriter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.Arrays;
 
 // Separate Window for adding comments linked with password
 public class LoginGUI {
-    private static final int HGAP = 20;
     private static final int VGAP = 10;
     private static JFrame frame;
     private final  GradientPanel panel = new GradientPanel(new Color(109, 213, 237), new Color(33, 147, 176));
@@ -23,17 +20,18 @@ public class LoginGUI {
     private static JButton button;
     private static JLabel success;
     private static JLabel passwordLabel;
-    private static JLabel passwordConfirmLabel;
     private static JPasswordField textArea2;
-    private static JPanel parent;
-    private static HomeGUI homeGUI;
+    @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
+    public static boolean loggedIn;
+    @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
+    public static String displayedName;
 
     private LoginReader loginReader = new LoginReader("./data/loginProfile.json");
-    private LoginWriter loginWriter = new LoginWriter("./data/loginProfile.json");
 
     private static int TEXTAREA_HEIGHT = 18;
 
     public LoginGUI() {
+        loggedIn = false;
         setUpWindow();
     }
 
@@ -159,6 +157,8 @@ public class LoginGUI {
                 String str = new String(textArea2.getPassword());
                 if (client.getUserName().equals(textArea1.getText())
                         && client.getPassword().equals(str)) {
+                    loggedIn = true;
+                    displayedName = client.getUserName();
                     return true;
                 }
             }
@@ -188,8 +188,10 @@ public class LoginGUI {
     // MODIFIES: this
     // EFFECT: Switch Back to the Main Screen
     private void switchScreen() {
+        JFrame oldFrame = HomeGUI.getFrame();
         new HomeGUI();
         frame.dispose();
+        oldFrame.dispose();
     }
 }
 

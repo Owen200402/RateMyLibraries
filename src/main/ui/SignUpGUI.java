@@ -11,7 +11,6 @@ import java.io.IOException;
 
 // Separate Window for adding comments linked with password
 public class SignUpGUI {
-    private static final int HGAP = 20;
     private static final int VGAP = 10;
     private static JFrame frame;
     private final GradientPanel panel = new GradientPanel(new Color(255, 110, 127), new Color(191, 233, 255));
@@ -135,8 +134,14 @@ public class SignUpGUI {
 
     // MODIFIES: this
     // EFFECTS: sets clicking events for the button
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void setButton(JButton button) {
         button.addActionListener(e -> {
+            if (textArea1.getText().length() > 20) {
+                success.setForeground(Color.RED);
+                success.setText("The user name you created is too long!");
+                setEmptyTextArea();
+            }
             if (textArea1.getText().length() == 0 | textArea2.getText().length() == 0) {
                 success.setForeground(Color.RED);
                 success.setText("User name or password cannot be empty!");

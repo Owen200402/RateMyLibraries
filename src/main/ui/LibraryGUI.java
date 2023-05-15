@@ -16,7 +16,7 @@ import java.io.*;
 // image/home-icon.png: https://www.flaticon.com/search?word=Home
 
 // GUI Class Representing the Rate My Libraries
-public class LibraryGUI implements ActionListener {
+public class LibraryGUI extends SharedResources implements ActionListener {
     // Constants:
     private static final int IMAGE_WIDTH = 180;
     private static final int COMMENT_GAP = 20;
@@ -94,6 +94,9 @@ public class LibraryGUI implements ActionListener {
         frame.setMinimumSize(new Dimension(1000, 500));
         frame.setLocationRelativeTo(null);
         frame.setTitle("Rate My UBC Libraries");
+        if (LoginGUI.loggedIn) {
+            addWelcomeMessage(frame);
+        }
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -393,6 +396,7 @@ public class LibraryGUI implements ActionListener {
     private void setRatingDisplayed() {
         try {
             JLabel libraryTitle = new JLabel(title);
+            libraryTitle.setBorder(BorderFactory.createEmptyBorder(13, 0, 0, 0));
             loadedInfo = jsonReader.read();
             JLabel rating = new JLabel("-- " + loadedInfo.getLibraries().get(libraryNum)
                     .getRatingDisplayed() + " / 5.0");
@@ -401,7 +405,7 @@ public class LibraryGUI implements ActionListener {
             rating.setBounds(450, 60, 100, 20);
 
             // Set the font to bold
-            Font boldFont = new Font(libraryTitle.getFont().getName(), Font.BOLD, 25);
+            Font boldFont = new Font(libraryTitle.getFont().getName(), Font.BOLD, 24);
             libraryTitle.setFont(boldFont);
 
             // Set font for rating to Comic Sans MS
@@ -661,4 +665,21 @@ public class LibraryGUI implements ActionListener {
     }
 
 
+    @Override
+    public void addWelcomeMessage(Frame frame) {
+        JLabel label = new JLabel("User: " + LoginGUI.displayedName);
+        label.setFont(new Font("Palatino", Font.PLAIN, 12));
+        label.setForeground(Color.DARK_GRAY);
+        FontMetrics metrics = label.getFontMetrics(label.getFont());
+        int width = metrics.stringWidth(label.getText());
+        label.setBounds(5, 3, width + 5, 20);
+        frame.add(label);
+
+        frame.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                label.setBounds(5, 3, width + 5, 20);
+            }
+        });
+    }
 }

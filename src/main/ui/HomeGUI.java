@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 // Represents the Home Page where users can select libraries of their choices
-public class HomeGUI {
+public class HomeGUI extends SharedResources {
     private static JFrame frame;
     private static JLabel heading;
     private static JPanel libraryList;
@@ -34,6 +34,9 @@ public class HomeGUI {
         frame.setMaximumSize(new Dimension(1140, 500));
         frame.setMinimumSize(new Dimension(1000, 470));
         frame.setLocationRelativeTo(null);
+        if (LoginGUI.loggedIn) {
+            addWelcomeMessage(frame);
+        }
         logEvents();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -79,7 +82,7 @@ public class HomeGUI {
     private void setGrid() {
         libraryList = new JPanel();
         libraryList.setPreferredSize(new Dimension(400, 500));
-        libraryList.setBorder(BorderFactory.createEmptyBorder(20,200,20,200));
+        libraryList.setBorder(BorderFactory.createEmptyBorder(20, 200, 20, 200));
         libraryList.setLayout(new GridLayout(2, 3, 0, 20));
         libraryList.setBackground(new Color(204, 87, 87));
         frame.add(libraryList);
@@ -162,6 +165,27 @@ public class HomeGUI {
                     java.lang.System.out.println(event.getDescription());
                     java.lang.System.out.println();
                 }
+            }
+        });
+    }
+
+    public static JFrame getFrame() {
+        return frame;
+    }
+
+    @Override
+    public void addWelcomeMessage(Frame frame) {
+        JLabel label = new JLabel("Welcome " + LoginGUI.displayedName + "!");
+        label.setForeground(Color.LIGHT_GRAY);
+        FontMetrics metrics = label.getFontMetrics(label.getFont());
+        int width = metrics.stringWidth(label.getText());
+        label.setBounds(frame.getWidth() - width, 5, width + 5, 20);
+        frame.add(label);
+
+        frame.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                label.setBounds(frame.getWidth() - label.getWidth(), 5, width + 5, 20);
             }
         });
     }
