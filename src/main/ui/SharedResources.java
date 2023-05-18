@@ -1,9 +1,6 @@
 package ui;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 // Represents shared functionalities between HomeGUI and LibraryGUI
 public abstract class SharedResources {

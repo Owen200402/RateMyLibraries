@@ -169,7 +169,7 @@ public class HomeGUI extends SharedResources {
         });
     }
 
-    public static JFrame getFrame() {
+    public static JFrame getNewFrame() {
         return frame;
     }
 

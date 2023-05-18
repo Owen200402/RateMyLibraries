@@ -94,13 +94,13 @@ public class SignUpGUI {
         passwordConfirmLabel.setBounds(75, 70, 150, 25);
 
         textArea1 = new JTextArea();
-        textArea1.setBounds(215, 10, 100, TEXTAREA_HEIGHT);
+        textArea1.setBounds(215, 10, 120, TEXTAREA_HEIGHT);
 
         textArea2 = new JPasswordField();
-        textArea2.setBounds(215, 40, 150, TEXTAREA_HEIGHT);
+        textArea2.setBounds(215, 40, 120, TEXTAREA_HEIGHT);
 
         textArea3 = new JPasswordField();
-        textArea3.setBounds(215, 70, 150, TEXTAREA_HEIGHT);
+        textArea3.setBounds(215, 70, 120, TEXTAREA_HEIGHT);
     }
 
     // MODIFIES: this
@@ -157,7 +157,7 @@ public class SignUpGUI {
             } else {
                 setJson();
                 success.setForeground(new Color(19, 171, 116));
-                success.setText("You've successfully signed up your account!");
+                success.setText("You successfully signed up your account!");
                 setEmptyTextArea();
             }
         });

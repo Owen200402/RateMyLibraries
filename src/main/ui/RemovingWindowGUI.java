@@ -19,8 +19,6 @@ public class RemovingWindowGUI implements ActionListener {
     private static JPanel container;
     private static JLabel prompt;
     private static JLabel userLabel;
-    private static JLabel passwordLabel;
-    private static JPasswordField passwordText;
     private static JButton button;
     private static JButton clearAll;
     private static JLabel success;
@@ -98,24 +96,18 @@ public class RemovingWindowGUI implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets colors to gray for all input panels
-    private void setColorToGray() {
-        passwordText.setBackground(new Color(222, 221, 213));
-    }
-
-    // MODIFIES: this
     // EFFECTS: sets the radio button to allow only single choice and its container has flexible grid layout
     //          depending on number of inputs
     private void setRadioButton() {
         userLabel = new JLabel("Select a user comment you want to remove: ");
-        userLabel.setBounds(20,0,300,25);
+        userLabel.setBounds(20,10,300,25);
 
 
         try {
             System system = jsonReader.read();
             int userNumber = system.getLibraries().get(libraryNum).getListOfComments().getComments().size();
             radioContainer = new JPanel(new GridLayout((2 + userNumber) / 3, 3));
-            radioContainer.setBounds(50, 20, 300, 100);
+            radioContainer.setBounds(50, 40, 300, 100);
             setButton(userNumber);
 
         } catch (IOException ex) {
@@ -165,7 +157,6 @@ public class RemovingWindowGUI implements ActionListener {
     // EFFECTS: sets action for clearing texts in all fields when the user clicks on the "Clear All button"
     private void addActionForClearAll() {
         clearAll.addActionListener(e -> {
-            passwordText.setText("");
             buttonGroup.clearSelection();
         });
     }
@@ -176,12 +167,6 @@ public class RemovingWindowGUI implements ActionListener {
     //          set up after the refresh and write the changes into ./data/libraries.json file
     @Override
     public void actionPerformed(ActionEvent e) {
-        String password = passwordText.getText();
-
-        if (password.isEmpty()) {
-            success.setText("Password Field Cannot Be Empty!");
-            return;
-        }
         if (userNum == 0) {
             success.setText("Please Make a Choice!");
             return;
@@ -189,11 +174,12 @@ public class RemovingWindowGUI implements ActionListener {
 
         try {
             System system = jsonReader.read();
-            if (!system.getLibraries().get(libraryNum).getListOfComments().removeFromSystem(userNum, password)) {
-                success.setText("Password is incorrect!");
-                passwordText.setText("");
+            if (!system.getLibraries().get(libraryNum).getListOfComments()
+                    .removeFromSystem(userNum, LoginGUI.displayedName)) {
+                success.setText("You cannot remove other people's comments.");
                 return;
             }
+
             jsonWriter.open();
             jsonWriter.write(system);
             jsonWriter.close();

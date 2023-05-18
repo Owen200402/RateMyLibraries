@@ -103,6 +103,8 @@ public class LibraryGUI extends SharedResources implements ActionListener {
                 close();
             }
         });
+
+
     }
 
     // MODIFIES: this
@@ -219,8 +221,8 @@ public class LibraryGUI extends SharedResources implements ActionListener {
         destinationWriter.write(sourceJsonObject.toString());
         destinationWriter.close();
 
-        frameClosing.dispose();
         frame.dispose();
+        frameClosing.dispose();
     }
 
     // MODIFIES: this
@@ -513,6 +515,7 @@ public class LibraryGUI extends SharedResources implements ActionListener {
             label.setPreferredSize(new Dimension(500, 60));
 
             commentPanel.add(label);
+            commentPanel.setBorder(BorderFactory.createEmptyBorder(2, 3, 2, 3));
             panelR.add(commentPanel);
             trackCommentY = trackCommentY + 60 + COMMENT_GAP;
             commentPanel.addMouseListener(new MouseAdapter() {
@@ -534,7 +537,7 @@ public class LibraryGUI extends SharedResources implements ActionListener {
     private void setCommentPanel(JPanel panel) {
         panel.setBackground(new Color(125, 149, 180));
         panel.setBounds(10, trackCommentY, 500, 60);
-        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
     }
 
     // MODIFIES: this
@@ -567,13 +570,21 @@ public class LibraryGUI extends SharedResources implements ActionListener {
         addOrRemovePanel.add(buttonRemove);
 
         buttonAdd.addActionListener(e -> {
-            addingWindowGUI = new AddingWindowGUI(libraryNum, this, imagePath);
-            addingWindowGUI.setUpWindow();
+            if (!LoginGUI.loggedIn) {
+                new LoginGUI(this);
+            } else {
+                addingWindowGUI = new AddingWindowGUI(libraryNum, this, imagePath);
+                addingWindowGUI.setUpWindow();
+            }
         });
 
         buttonRemove.addActionListener(e -> {
-            removingWindowGUI = new RemovingWindowGUI(libraryNum, this, imagePath);
-            removingWindowGUI.setUpWindow();
+            if (!LoginGUI.loggedIn) {
+                new LoginGUI(this);
+            } else {
+                removingWindowGUI = new RemovingWindowGUI(libraryNum, this, imagePath);
+                removingWindowGUI.setUpWindow();
+            }
         });
     }
 
@@ -664,7 +675,6 @@ public class LibraryGUI extends SharedResources implements ActionListener {
         return descriptionText;
     }
 
-
     @Override
     public void addWelcomeMessage(Frame frame) {
         JLabel label = new JLabel("User: " + LoginGUI.displayedName);
@@ -681,5 +691,11 @@ public class LibraryGUI extends SharedResources implements ActionListener {
                 label.setBounds(5, 3, width + 5, 20);
             }
         });
+    }
+
+    // EFFECTS: reloads current LibraryGUI
+    public LibraryGUI reload() {
+        frame.dispose();
+        return new LibraryGUI(title, libraryNum, descriptionText, imagePath);
     }
 }

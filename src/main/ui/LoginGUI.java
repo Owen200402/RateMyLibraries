@@ -14,6 +14,8 @@ public class LoginGUI {
     private static JFrame frame;
     private final  GradientPanel panel = new GradientPanel(new Color(109, 213, 237), new Color(33, 147, 176));
     private static JPanel container;
+    private static JPanel panelLeftBottom;
+    private static JPanel panelRightBottom;
     private static JLabel prompt;
     private static JLabel userLabel;
     private static JTextArea textArea1;
@@ -21,44 +23,52 @@ public class LoginGUI {
     private static JLabel success;
     private static JLabel passwordLabel;
     private static JPasswordField textArea2;
+    private LibraryGUI currentGUI;
     @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
     public static boolean loggedIn;
     @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
     public static String displayedName;
 
+    // Data Preserving:
     private LoginReader loginReader = new LoginReader("./data/loginProfile.json");
 
+    // CONSTANTS:
     private static int TEXTAREA_HEIGHT = 18;
 
+    // EFFECTS: constructs a LoginGUI
     public LoginGUI() {
         loggedIn = false;
         setUpWindow();
     }
 
+    // EFFECTS: constructs a LoginGUI with current frame passed in for screen switching
+    public LoginGUI(LibraryGUI currentGUI) {
+        loggedIn = false;
+        this.currentGUI = currentGUI;
+        setUpWindow();
+    }
+
     // EFFECTS: sets up the window with frames and all components
-    public void setUpWindow() {
+    private void setUpWindow() {
         setFrame();
         setPromptAndTextArea();
         addTextAreaToContainer();
         setPasswordConfirmLabel();
         setFootNote();
 
-        container.add(userLabel);
-        container.add(passwordLabel);
-
-        container.setOpaque(false);
+        panelLeftBottom.add(userLabel);
+        panelLeftBottom.add(passwordLabel);
 
         success = new JLabel();
         success.setBounds(75, 160 + VGAP + VGAP / 2, 270, 25);
         success.setForeground(Color.RED);
         success.setFont(new Font("SansSerif", 1, 12));
 
-        container.add(success, BorderLayout.NORTH);
+        panelLeftBottom.add(success, BorderLayout.NORTH);
         frame.add(panel);
         frame.setVisible(true);
 
         panel.add(container, BorderLayout.CENTER);
-
     }
 
 
@@ -68,15 +78,16 @@ public class LoginGUI {
         frame = new JFrame();
         panel.setLayout(new BorderLayout());
 
-        frame.setSize(400, 300);
-        frame.setMaximumSize(new Dimension(400, 300));
-        frame.setMinimumSize(new Dimension(400, 300));
+        frame.setSize(600, 300);
+        frame.setMaximumSize(new Dimension(600, 300));
+        frame.setMinimumSize(new Dimension(600, 300));
 
         frame.setLocationRelativeTo(null);
     }
 
     // MODIFIES: this
     // EFFECTS: displays the question prompt and text areas for users to input their comments
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void setPromptAndTextArea() {
         prompt = new JLabel("<html><h1>Rate My libraries Login</h1><html>");
         prompt.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -84,7 +95,17 @@ public class LoginGUI {
         prompt.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(prompt, BorderLayout.NORTH);
 
-        container = new JPanel(null);
+        container = new JPanel(new BorderLayout());
+        container.setOpaque(false);
+
+        panelLeftBottom = new JPanel(null);
+        panelLeftBottom.setPreferredSize(new Dimension(300, 150));
+        panelLeftBottom.setOpaque(false);
+
+        panelRightBottom = new JPanel(new BorderLayout());
+        panelRightBottom.setPreferredSize(new Dimension(300, 150));
+        panelRightBottom.setOpaque(false);
+        insertToPanelRight();
 
         userLabel = new JLabel("Username:");
         userLabel.setBounds(70,5,100,25);
@@ -102,11 +123,29 @@ public class LoginGUI {
     }
 
     // MODIFIES: this
+    // EFFECTS: inserts login logo to the right panel
+    private void insertToPanelRight() {
+        JLabel imageLabel = new JLabel();
+        ImageIcon imageIcon = new ImageIcon("image/th.png");
+        Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
+        ImageIcon inserted = new ImageIcon(image);
+
+        imageLabel.setIcon(inserted);
+        imageLabel.setSize(100, 100);
+
+        panelRightBottom.add(imageLabel, BorderLayout.CENTER);
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        container.add(panelRightBottom, BorderLayout.EAST);
+    }
+
+    // MODIFIES: this
     // EFFECTS: adds text area to the container
     private void addTextAreaToContainer() {
-        container.add(textArea1, BorderLayout.CENTER);
-        container.add(textArea2, BorderLayout.CENTER);
+        panelLeftBottom.add(textArea1);
+        panelLeftBottom.add(textArea2);
         setTextAreaBorder();
+        container.add(panelLeftBottom, BorderLayout.WEST);
     }
 
     // MODIFIES: this
@@ -116,7 +155,6 @@ public class LoginGUI {
         textArea2.setBorder(BorderFactory.createLineBorder(Color.gray));
     }
 
-
     // MODIFIES: this
     // EFFECTS: sets prompt and allows users to save their rating with a password of their choice;
     //          the "Save" button has action event to allows savings
@@ -124,7 +162,7 @@ public class LoginGUI {
         button = new JButton("Login");
         button.setBounds(70, 125, 400 - 70 * 2, TEXTAREA_HEIGHT + 2);
 
-        container.add(button, BorderLayout.CENTER);
+        panelLeftBottom.add(button, BorderLayout.CENTER);
 
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setButton(button);
@@ -173,25 +211,31 @@ public class LoginGUI {
     // EFFECTS: sets the link for directing to the Login page
     private void setFootNote() {
         JButton label = new JButton("<html><u>"
-                + "No account? Click here to sign it up!</u></html>");
+                + "No account? Click here to sign up!</u></html>");
         label.setBorder(BorderFactory.createEmptyBorder());
         label.setForeground(Color.BLUE);
-        label.setBounds(400 / 2 - 250 / 2, 150, 250,30);
+        label.setBounds(370 / 2 - 250 / 2, 150, 250,30);
         label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         label.addActionListener(e -> {
             new SignUpGUI();
             frame.dispose();
         });
-        container.add(label);
+        panelLeftBottom.add(label);
     }
 
     // MODIFIES: this
     // EFFECT: Switch Back to the Main Screen
     private void switchScreen() {
-        JFrame oldFrame = HomeGUI.getFrame();
-        new HomeGUI();
-        frame.dispose();
-        oldFrame.dispose();
+        if (currentGUI != null) {
+            currentGUI.reload();
+            frame.dispose();
+            return;
+        } else {
+            JFrame oldFrame = HomeGUI.getNewFrame();
+            new HomeGUI();
+            frame.dispose();
+            oldFrame.dispose();
+        }
     }
 }
 

@@ -1,15 +1,11 @@
 {"Clients": [
     {
         "password": "123",
-        "userName": "owen"
+        "userName": "owen04"
     },
     {
         "password": "1234",
         "userName": "henry"
-    },
-    {
-        "password": "owen04",
-        "userName": "Owen"
     },
     {
         "password": "12r",
@@ -17,6 +13,14 @@
     },
     {
         "password": "123",
-        "userName": "owenzheng"
+        "userName": "Owen"
+    },
+    {
+        "password": "jogn1234",
+        "userName": "John"
+    },
+    {
+        "password": "1234s",
+        "userName": "Sophie"
     }
 ]}

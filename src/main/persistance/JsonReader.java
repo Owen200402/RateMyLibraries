@@ -89,9 +89,9 @@ public class JsonReader {
     // EFFECTS: Parses and returns every comment from jsonObject
     private Comment addComments(JSONObject jsonObject) {
         String date = jsonObject.getString("date");
-        String password = jsonObject.getString("password");
         double rating = jsonObject.getDouble("rating");
         String message = jsonObject.getString("message");
+        String password = jsonObject.getString("password");
         return new Comment(message, rating, password, date);
     }
 }

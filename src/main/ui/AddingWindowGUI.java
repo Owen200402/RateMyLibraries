@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 
 // Separate Window for adding comments linked with password
@@ -36,7 +37,6 @@ public class AddingWindowGUI implements ActionListener {
     private int libraryNum;
     private String imagePath;
 
-    private String userName;
 
     // REQUIRES: libraryNum to save all the content to jsonReader, the current library gui and the path of its image
     // EFFECT: Constructs the AddingWindowGUI
@@ -164,24 +164,12 @@ public class AddingWindowGUI implements ActionListener {
     //          set up after the refresh.
     @Override
     public void actionPerformed(ActionEvent e) {
-        String comment = textArea.getText();
-        String password = passwordText.getText();
         String rating = ratingText.getText();
 
-        if (password.isEmpty() | comment.isEmpty() | rating.isEmpty()) {
-            success.setText("Fields Cannot Be Empty!");
-            return;
-        }
-        if (password.length() <= 5) {
-            success.setText("Unsafe Password. Please Enter A Longer Password.");
-            passwordText.setText("");
-            return;
-        }
         if (Double.parseDouble(rating) < 0 || Double.parseDouble(rating) > 5) {
             success.setText("Please Enter A Number Between 0 and 5.");
             return;
         }
-
 
         setText();
         switchScreen();
@@ -191,12 +179,18 @@ public class AddingWindowGUI implements ActionListener {
     // EFFECTS: writes the new info into ./data/libraries.json file
     private void setText() {
         String comment = textArea.getText();
-        String password = passwordText.getText();
+        String id = LoginGUI.displayedName;
         String rating = ratingText.getText();
+
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
         try {
             System system = jsonReader.read();
             system.getLibraries().get(libraryNum).getListOfComments().addToSystem(new Comment(comment,
-                    Double.parseDouble(rating), password, new Date().toString()));
+                    Double.parseDouble(rating), id, "" + calendar.get(Calendar.YEAR)
+                    + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.DATE)));
 
             jsonWriter.open();
             jsonWriter.write(system);
