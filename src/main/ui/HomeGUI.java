@@ -103,12 +103,13 @@ public class HomeGUI extends SharedResources {
         heading = new JLabel();
 
         ImageIcon imageIcon = new ImageIcon("image/RateMyLib.png");
-        Image image = imageIcon.getImage().getScaledInstance(500, 120, Image.SCALE_SMOOTH);
+        Image image = imageIcon.getImage().getScaledInstance(500, 80, Image.SCALE_SMOOTH);
 
         ImageIcon inserted = new ImageIcon(image);
 
         heading.setIcon(inserted);
         heading.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+        heading.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         frame.add(heading, BorderLayout.NORTH);
     }
 
