@@ -92,7 +92,7 @@ public class AddingWindowGUI implements ActionListener {
     // EFFECTS: sets scroll pane for the text area
     private void setScrollPane() {
         JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(20,30,400 - HGAP - HGAP, 40);
+        scrollPane.setBounds(20,50,400 - HGAP - HGAP, 40);
         container.add(scrollPane);
     }
 
@@ -101,19 +101,19 @@ public class AddingWindowGUI implements ActionListener {
     private void setPromptAndTextArea() {
         prompt = new JLabel("<html><h2>Adding Comment</h2><html>");
         prompt.setSize(new Dimension(350, 50));
+        prompt.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         prompt.setBackground(Color.BLUE);
         prompt.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(prompt, BorderLayout.NORTH);
 
         container = new JPanel(null);
 
-        userLabel = new JLabel("Comment:");
-        userLabel.setBounds(20,0,100,25);
+        userLabel = new JLabel("<html>Comment: <i>Should contain at least 20 characters</i></html>");
+        userLabel.setBounds(20,20,400,25);
 
         textArea = new JTextArea();
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        textArea.setBounds(20, 30, 400 - HGAP - HGAP, 40);
     }
 
 
@@ -165,9 +165,14 @@ public class AddingWindowGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String rating = ratingText.getText();
+        String text = textArea.getText();
 
-        if (Double.parseDouble(rating) < 0 || Double.parseDouble(rating) > 5) {
-            success.setText("Please Enter A Number Between 0 and 5.");
+        if (text.isEmpty()) {
+            success.setText("Your comment can not be empty!");
+        } else if (text.length() <= 20) {
+            success.setText("Your comment isn't long enough");
+        } else if (Double.parseDouble(rating) < 1 || Double.parseDouble(rating) > 5) {
+            success.setText("Please Enter any number from 1 to 5.");
             return;
         }
 

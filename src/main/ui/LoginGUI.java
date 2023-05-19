@@ -19,7 +19,7 @@ public class LoginGUI {
     private static JLabel prompt;
     private static JLabel userLabel;
     private static JTextArea textArea1;
-    private static JButton button;
+    private static JButton loginButton;
     private static JLabel success;
     private static JLabel passwordLabel;
     private static JPasswordField textArea2;
@@ -116,10 +116,10 @@ public class LoginGUI {
         passwordLabel.setFont(new Font("SansSerif", 0, 14));
 
         textArea1 = new JTextArea();
-        textArea1.setBounds(70, 35, 400 - 80 * 2, TEXTAREA_HEIGHT);
+        textArea1.setBounds(70, 35, 400 - 85 * 2, TEXTAREA_HEIGHT);
 
         textArea2 = new JPasswordField();
-        textArea2.setBounds(70, 95, 400 - 80 * 2, TEXTAREA_HEIGHT);
+        textArea2.setBounds(70, 95, 400 - 85 * 2, TEXTAREA_HEIGHT);
     }
 
     // MODIFIES: this
@@ -159,13 +159,13 @@ public class LoginGUI {
     // EFFECTS: sets prompt and allows users to save their rating with a password of their choice;
     //          the "Save" button has action event to allows savings
     private void setPasswordConfirmLabel() {
-        button = new JButton("Login");
-        button.setBounds(70, 125, 400 - 70 * 2, TEXTAREA_HEIGHT + 2);
+        loginButton = new JButton("Login");
+        loginButton.setBounds(70, 125, 400 - 85 * 2, TEXTAREA_HEIGHT + 2);
 
-        panelLeftBottom.add(button, BorderLayout.CENTER);
+        panelLeftBottom.add(loginButton);
 
-        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        setButton(button);
+        loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        setButton(loginButton);
     }
 
     // MODIFIES: this

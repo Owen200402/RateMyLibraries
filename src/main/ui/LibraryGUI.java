@@ -183,32 +183,10 @@ public class LibraryGUI extends SharedResources implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: Asking user whether they want to save their changes and direct to Home page
-    private void setLogOutConfirmWindow() {
-        logOutFrame = new JFrame();
-        logOutFrame.setSize(new Dimension(450, 100));
-        logOutFrame.setVisible(true);
-        logOutFrame.setLocationRelativeTo(null);
-
-        JButton button1 = new JButton("Yes");
-        button1.setBounds(10,20, 30, 30);
-        JButton button2 = new JButton("No");
-        button2.setBounds(40,20, 30, 30);
-        JLabel label = new JLabel("<html>Proceed to log out?</html>");
-        label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
-
-        logOutFrame.add(button1, BorderLayout.WEST);
-        logOutFrame.add(button2, BorderLayout.EAST);
-        logOutFrame.add(label, BorderLayout.NORTH);
-
-        button1.addActionListener(e -> {
-            LoginGUI.loggedIn = false;
-            reload();
-        });
-
-        button2.addActionListener(e -> {
-            logOutFrame.dispose();
-        });
+    // EFFECTS: Log the user out
+    private void logOut() {
+        LoginGUI.loggedIn = false;
+        reload();
     }
 
     // MODIFIES: this
@@ -542,7 +520,7 @@ public class LibraryGUI extends SharedResources implements ActionListener {
             setCommentPanel(commentPanel);
 
             JLabel label = new JLabel(ratingMessage);
-            label.setPreferredSize(new Dimension(500, 60));
+            label.setPreferredSize(new Dimension(520, 60));
 
             commentPanel.add(label);
             commentPanel.setBorder(BorderFactory.createEmptyBorder(2, 3, 2, 3));
@@ -566,8 +544,7 @@ public class LibraryGUI extends SharedResources implements ActionListener {
     // EFFECTS: sets the comment panel
     private void setCommentPanel(JPanel panel) {
         panel.setBackground(new Color(125, 149, 180));
-        panel.setBounds(10, trackCommentY, 500, 60);
-        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
+        panel.setBounds(10, trackCommentY, 550, 60);
     }
 
     // MODIFIES: this
@@ -726,8 +703,8 @@ public class LibraryGUI extends SharedResources implements ActionListener {
 
         button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                setLogOutConfirmWindow();
+            public void mouseReleased(MouseEvent e) {
+                logOut();
             }
         });
 

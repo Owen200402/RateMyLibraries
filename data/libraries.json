@@ -14,16 +14,10 @@
                 "message": "Very quiet, enjoy studying in the silent space with sound-insulated walls"
             },
             {
-                "date": "2023.5.3",
-                "password": "owen",
-                "rating": 4,
-                "message": "askjdhsad"
-            },
-            {
                 "date": "2023.5.10",
                 "password": "10",
                 "rating": 5,
-                "message": "I love the friendly people there. Everyone's quiet"
+                "message": "I love the friendly people there. Everyone's quiet."
             },
             {
                 "date": "2023.5.17",
@@ -35,11 +29,11 @@
                 "date": "2023.5.17",
                 "password": "owen04",
                 "rating": 5,
-                "message": "Good Environment!"
+                "message": "Good Environment with lots of books, giving rise to your soul to study here!"
             }
         ],
         "name": "Asian Library",
-        "rating": "4.7"
+        "rating": "4.8"
     },
     {
         "library": [
@@ -47,47 +41,41 @@
                 "date": "2023.4.25",
                 "password": "owen04",
                 "rating": 5,
-                "message": "Provides sport equipments and great hardware like i-mac! Great learning experience!"
-            },
-            {
-                "date": "2023.4.28",
-                "password": "owen04",
-                "rating": 5,
-                "message": "Hello Owen"
+                "message": "Provides gym equipments and great hardware like IMac! Great learning experience!"
             },
             {
                 "date": "2023.4.30",
                 "password": "owen04",
                 "rating": 5,
-                "message": "Thanks for viewing my project!"
-            },
-            {
-                "date": "2023.5.1",
-                "password": "10",
-                "rating": 3,
-                "message": "qweqwe"
+                "message": "Center of the school! Also 5 star recommended due to the always-extended period before final."
             },
             {
                 "date": "2023.5.2",
                 "password": "10",
                 "rating": 5,
-                "message": "As an Asian, I sometimes got amazed by the view in front of me!"
+                "message": "I always got amazed by the view in front of me when looking outside the window!"
             },
             {
                 "date": "2023.5.5",
                 "password": "Sophia",
-                "rating": 3,
+                "rating": 4,
                 "message": "This is really by far the most popular library! That being said, it is sometimes hard to find seat and I personally found it noisy as you sit near the center area outside the Ridingson!"
             },
             {
                 "date": "2023.5.17",
                 "password": "owen04",
+                "rating": 4,
+                "message": "Takes time to work up there, but overall I recommend sitting in the Ridingson, which is super duper quiet as always!"
+            },
+            {
+                "date": "2023.5.20",
+                "password": "owen04",
                 "rating": 5,
-                "message": "Nice Tall Building!"
+                "message": "Very beautiful at night as the light in the tower is flashing! Perfect to take a walk to release some stress after a long studying session!"
             }
         ],
         "name": "Irving K. Barber Learning Centre",
-        "rating": "4.4"
+        "rating": "4.7"
     },
     {
         "library": [
@@ -108,22 +96,10 @@
                 "password": "owen04",
                 "rating": 5,
                 "message": "Amazing View outside the front door! "
-            },
-            {
-                "date": "2023.5.10",
-                "password": "owen04",
-                "rating": 5,
-                "message": "Hey!"
-            },
-            {
-                "date": "2023.5.20",
-                "password": "owen04",
-                "rating": 5,
-                "message": "It is the best!!"
             }
         ],
         "name": "Koerner Library",
-        "rating": "3.6"
+        "rating": "2.7"
     },
     {
         "library": [
@@ -131,13 +107,13 @@
                 "date": "2023.4.30",
                 "password": "owen04",
                 "rating": 4,
-                "message": "Close to Rose Garden and most of my econ classes held in buchanan."
+                "message": "Is close to Rose Garden and is close to most of my Econ classes, which are held in Buchanan building."
             },
             {
                 "date": "2023.4.30",
                 "password": "owen",
                 "rating": 1,
-                "message": "asdasd"
+                "message": "Too far from main mall! If you take bus, it will be an okay choice"
             },
             {
                 "date": "2023.5.1",
@@ -149,7 +125,7 @@
                 "date": "2023.5.2",
                 "password": "owen04",
                 "rating": 5,
-                "message": "Nice Archetecture! Comfy studying spots!"
+                "message": "Nice Archetecture! Comfy studying spots with sliding chairs and lots of sofas!"
             }
         ],
         "name": "Law Library",
@@ -173,17 +149,11 @@
                 "date": "2023.5.8",
                 "password": "owen04",
                 "rating": 5,
-                "message": "Perfect for Arts students who have classes nearby that area. Also,, it isclose to the bus loop and restaurants in university blvd. Best choice ever!"
-            },
-            {
-                "date": "2023.5.10",
-                "password": "owen04",
-                "rating": 2,
-                "message": "Hello World!"
+                "message": "Perfect for Arts students who have classes nearby that area. Also it's close to the bus loop and restaurants in university blvd. Best choice ever!"
             }
         ],
         "name": "Woodward Library",
-        "rating": "3.2"
+        "rating": "3.7"
     },
     {
         "library": [
@@ -191,22 +161,16 @@
                 "date": "2023.5.10",
                 "password": "owen04",
                 "rating": 4.6,
-                "message": "Very new building, think they are still expanding it. Can' wait to see what it will look like after a couple of years!"
-            },
-            {
-                "date": "2023.5.12",
-                "password": "owen04",
-                "rating": 0,
-                "message": "I hate it"
+                "message": "Very new building, think they are still expanding it. Can' wait to see what it'll look like after a couple of years!"
             },
             {
                 "date": "2023.5.13",
                 "password": "daniel",
-                "rating": 5,
-                "message": "Daniel is the god of the god"
+                "rating": 1,
+                "message": "quiet small and looks like SFU, which has a design of a jail."
             }
         ],
         "name": "Biomedical Branch Library",
-        "rating": "3.2"
+        "rating": "2.8"
     }
 ]}

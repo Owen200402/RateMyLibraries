@@ -86,6 +86,7 @@ public class RemovingWindowGUI implements ActionListener {
     private void setPromptAndRadioButtons() {
         prompt = new JLabel("<html><h2>Removing Comment</h2><html>");
         prompt.setSize(new Dimension(350, 50));
+        prompt.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         prompt.setBackground(Color.BLUE);
         prompt.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(prompt, BorderLayout.NORTH);
