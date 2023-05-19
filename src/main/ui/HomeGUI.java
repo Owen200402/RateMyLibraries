@@ -20,7 +20,8 @@ public class HomeGUI extends SharedResources {
         imageLabel = new JLabel();
         setFrame();
         setHeading();
-        setGrid();
+        setLibrariesGrid();
+        setDescription();
         insertLibraryList();
         setIcon();
         frame.setVisible(true);
@@ -51,7 +52,7 @@ public class HomeGUI extends SharedResources {
         ImageIcon inserted = new ImageIcon(image);
 
         imageLabel.setIcon(inserted);
-        imageLabel.setBounds(200, 20, 30, 30);
+        imageLabel.setBounds(200, 20, 20, 30);
         frame.add(imageLabel, BorderLayout.AFTER_LINE_ENDS);
         imageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -97,12 +98,12 @@ public class HomeGUI extends SharedResources {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets the hand-written heading
+    // EFFECTS: sets the heading with handwritten font
     private void setHeading() {
         heading = new JLabel();
 
         ImageIcon imageIcon = new ImageIcon("image/RateMyLib.png");
-        Image image = imageIcon.getImage().getScaledInstance(500, 130, Image.SCALE_SMOOTH);
+        Image image = imageIcon.getImage().getScaledInstance(500, 120, Image.SCALE_SMOOTH);
 
         ImageIcon inserted = new ImageIcon(image);
 
@@ -113,13 +114,34 @@ public class HomeGUI extends SharedResources {
 
     // MODIFIES: this
     // EFFECTS: sets the layout to GridLayout and adjusts color
-    private void setGrid() {
+    private void setLibrariesGrid() {
         libraryList = new JPanel();
-        libraryList.setPreferredSize(new Dimension(400, 500));
-        libraryList.setBorder(BorderFactory.createEmptyBorder(20, 200, 20, 200));
+        libraryList.setSize(new Dimension(400, 300));
+        libraryList.setBorder(BorderFactory.createEmptyBorder(10, 200, 10, 200));
         libraryList.setLayout(new GridLayout(2, 3, 0, 20));
         libraryList.setBackground(new Color(204, 87, 87));
-        frame.add(libraryList);
+
+        frame.add(libraryList, BorderLayout.CENTER);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the description/purpose of the application
+    private void setDescription() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(new Color(154, 61, 41));
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 150, 0, 150));
+
+        JLabel label = new JLabel("<html><div style=\"text-align: center;\"><b>Our Purposes:</b> New students to UBC would "
+                + "nonetheless worry about their study space, "
+                + "hardware, their distances to each building etc. Therefore we need your voice "
+                + "to help make their transition to UBC smoother!<br><i>@ratemylibraries &copy; Owen Zheng </i></div></html>");
+        label.setHorizontalAlignment(0);
+        label.setForeground(new Color(234, 214, 93));
+        label.setBorder(BorderFactory.createEmptyBorder(0, 5,5, 5));
+        panel.add(label);
+
+        frame.add(panel, BorderLayout.SOUTH);
     }
 
     // EFFECTS: calls the helper createPanelForIndividualLib() and passes in the paths of the pictures
