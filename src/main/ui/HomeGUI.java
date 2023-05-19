@@ -132,10 +132,12 @@ public class HomeGUI extends SharedResources {
         panel.setBackground(new Color(154, 61, 41));
         panel.setBorder(BorderFactory.createEmptyBorder(0, 150, 0, 150));
 
-        JLabel label = new JLabel("<html><div style=\"text-align: center;\"><b>Our Purposes:</b> New students to UBC would "
+        JLabel label = new JLabel("<html><div style=\"text-align: center;\"><b>Our Purposes:</b> "
+                + "New students to UBC would "
                 + "nonetheless worry about their study space, "
                 + "hardware, their distances to each building etc. Therefore we need your voice "
-                + "to help make their transition to UBC smoother!<br><i>@ratemylibraries &copy; Owen Zheng </i></div></html>");
+                + "to help make their transition to UBC smoother!<br><i>@ratemylibraries "
+                + "&copy; Owen Zheng </i></div></html>");
         label.setHorizontalAlignment(0);
         label.setForeground(new Color(234, 214, 93));
         label.setBorder(BorderFactory.createEmptyBorder(0, 5,5, 5));
