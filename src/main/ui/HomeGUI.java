@@ -12,6 +12,7 @@ public class HomeGUI extends SharedResources {
     private static JLabel heading;
     private static JPanel libraryList;
     private static JLabel imageLabel;
+    private static JFrame logOutFrame;
 
     // EFFECTS: constructs and shows the window of Home Page of Rate My Library
     public HomeGUI() {
@@ -57,8 +58,41 @@ public class HomeGUI extends SharedResources {
         imageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                new LoginGUI();
+                if (LoginGUI.loggedIn) {
+                    setLogOutConfirmWindow();
+                } else {
+                    new LoginGUI();
+                }
             }
+        });
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Asking user whether they want to save their changes and direct to Home page
+    private void setLogOutConfirmWindow() {
+        logOutFrame = new JFrame();
+        logOutFrame.setSize(new Dimension(450, 100));
+        logOutFrame.setVisible(true);
+        logOutFrame.setLocationRelativeTo(null);
+
+        JButton button1 = new JButton("Yes");
+        button1.setBounds(10,20, 30, 30);
+        JButton button2 = new JButton("No");
+        button2.setBounds(40,20, 30, 30);
+        JLabel label = new JLabel("<html>Proceed to log out?</html>");
+        label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+
+        logOutFrame.add(button1, BorderLayout.WEST);
+        logOutFrame.add(button2, BorderLayout.EAST);
+        logOutFrame.add(label, BorderLayout.NORTH);
+
+        button1.addActionListener(e -> {
+            LoginGUI.loggedIn = false;
+            new HomeGUI();
+        });
+
+        button2.addActionListener(e -> {
+            logOutFrame.dispose();
         });
     }
 

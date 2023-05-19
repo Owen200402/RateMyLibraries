@@ -116,10 +116,10 @@ public class LoginGUI {
         passwordLabel.setFont(new Font("SansSerif", 0, 14));
 
         textArea1 = new JTextArea();
-        textArea1.setBounds(70, 35, 400 - 70 * 2, TEXTAREA_HEIGHT);
+        textArea1.setBounds(70, 35, 400 - 80 * 2, TEXTAREA_HEIGHT);
 
         textArea2 = new JPasswordField();
-        textArea2.setBounds(70, 95, 400 - 70 * 2, TEXTAREA_HEIGHT);
+        textArea2.setBounds(70, 95, 400 - 80 * 2, TEXTAREA_HEIGHT);
     }
 
     // MODIFIES: this

@@ -27,6 +27,7 @@ public class LibraryGUI extends SharedResources implements ActionListener {
     private static System loadedInfo;
     private static JFrame frame;
     private static JFrame frameClosing;
+    private static JFrame logOutFrame;
     private static AddingWindowGUI addingWindowGUI;
     private static RemovingWindowGUI removingWindowGUI;
     private static JPanel panelL;
@@ -178,6 +179,35 @@ public class LibraryGUI extends SharedResources implements ActionListener {
         button2.addActionListener(e -> {
             noSaveHistory();
             new HomeGUI();
+        });
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Asking user whether they want to save their changes and direct to Home page
+    private void setLogOutConfirmWindow() {
+        logOutFrame = new JFrame();
+        logOutFrame.setSize(new Dimension(450, 100));
+        logOutFrame.setVisible(true);
+        logOutFrame.setLocationRelativeTo(null);
+
+        JButton button1 = new JButton("Yes");
+        button1.setBounds(10,20, 30, 30);
+        JButton button2 = new JButton("No");
+        button2.setBounds(40,20, 30, 30);
+        JLabel label = new JLabel("<html>Proceed to log out?</html>");
+        label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+
+        logOutFrame.add(button1, BorderLayout.WEST);
+        logOutFrame.add(button2, BorderLayout.EAST);
+        logOutFrame.add(label, BorderLayout.NORTH);
+
+        button1.addActionListener(e -> {
+            LoginGUI.loggedIn = false;
+            reload();
+        });
+
+        button2.addActionListener(e -> {
+            logOutFrame.dispose();
         });
     }
 
@@ -372,7 +402,7 @@ public class LibraryGUI extends SharedResources implements ActionListener {
         label.setText(descriptionText);
         label.setPreferredSize(new Dimension(220, 50)); // to avoid overflow
 
-        Font fantasyFont = new Font("Serif", Font.PLAIN, 14);
+        Font fantasyFont = new Font("Serif", Font.PLAIN, 13);
         label.setFont(fantasyFont);
 
         JPanel panelForLibDescription = new JPanel(new BorderLayout());
@@ -400,11 +430,11 @@ public class LibraryGUI extends SharedResources implements ActionListener {
             JLabel libraryTitle = new JLabel(title);
             libraryTitle.setBorder(BorderFactory.createEmptyBorder(13, 0, 0, 0));
             loadedInfo = jsonReader.read();
-            JLabel rating = new JLabel("-- " + loadedInfo.getLibraries().get(libraryNum)
+            JLabel rating = new JLabel("Scored: " + loadedInfo.getLibraries().get(libraryNum)
                     .getRatingDisplayed() + " / 5.0");
             libraryTitle.setSize(new Dimension(550, 40));
             libraryTitle.setHorizontalAlignment(SwingConstants.CENTER);
-            rating.setBounds(450, 60, 100, 20);
+            rating.setBounds(400, 60, 150, 20);
 
             // Set the font to bold
             Font boldFont = new Font(libraryTitle.getFont().getName(), Font.BOLD, 24);
@@ -675,15 +705,31 @@ public class LibraryGUI extends SharedResources implements ActionListener {
         return descriptionText;
     }
 
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override
     public void addWelcomeMessage(Frame frame) {
         JLabel label = new JLabel("User: " + LoginGUI.displayedName);
-        label.setFont(new Font("Palatino", Font.PLAIN, 12));
+        JButton button = new JButton("Logout");
+        button.setPreferredSize(new Dimension(10, 10));
+        button.setForeground(Color.red);
+        label.setFont(new Font("Palatino", Font.PLAIN, 13));
         label.setForeground(Color.DARK_GRAY);
         FontMetrics metrics = label.getFontMetrics(label.getFont());
         int width = metrics.stringWidth(label.getText());
         label.setBounds(5, 3, width + 5, 20);
+
+        button.setBounds(5, 20, width - 25, 15);
         frame.add(label);
+        frame.add(button);
+
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setLogOutConfirmWindow();
+            }
+        });
 
         frame.addComponentListener(new ComponentAdapter() {
             @Override
