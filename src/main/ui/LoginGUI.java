@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-// Separate Window for adding comments linked with password
+// Login your personal account after signed up in SignUpGUI
 public class LoginGUI {
     private static final int VGAP = 10;
     private static JFrame frame;
